@@ -99,3 +99,17 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# Vim
+*.swp
+
+
+# Fairblogs ignore
+venv
+settings/local.py
+migrations/
+static/
+media/
+
+# Filebrowser thumbnails
+_versions
