@@ -1,6 +1,11 @@
 from django.db import models
 from django.utils import timezone
 from django.conf import settings
+import os
+
+def get_post_image(instance, filename):
+    """ Logo of the blog (website) """
+    return os.path.join("static", "img", "bloggers", str(instance.author.blogger.blogname), "posts", filename)
 
 class Post(models.Model):
     def make_url_id(self):
@@ -9,7 +14,8 @@ class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, default=None)
     title = models.CharField(max_length=300)
     blogintro = models.TextField(default=" ", help_text="Write the short introduction of the blog here, it will be displayed in de bloglist")
-    image = models.CharField(max_length=500, default="Add image here", help_text="Write in format: 'filename.png' and put image in static/img/blog folder")
+    image = models.ImageField(upload_to=get_post_image, blank=True, null=True)
+    # models.CharField(max_length=500, default="Add image here", help_text="Write in format: 'filename.png' and put image in static/img/blog folder")
 
     created_date = models.DateTimeField(
             default=timezone.now)

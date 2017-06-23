@@ -147,8 +147,8 @@
                <div class='widget LinkList' data-version='1' id='LinkList100'>
                   <div class='widget-content'>
                      <ul id='nav' itemscope='' itemtype='http://schema.org/SiteNavigationElement'>
-                        <li itemprop='name'><a href='#' itemprop='url'>Home</a></li>
-                        <li itemprop='name'><a href='#' itemprop='url'>About us</a></li>
+                        <li itemprop='name'><a href='{% url "index" %}' itemprop='url'>Home</a></li>
+                        <li itemprop='name'><a href='{% url "about" %}' itemprop='url'>About us</a></li>
                         <li itemprop='name'><a href='#' itemprop='url'>Submit</a></li>
                         <li itemprop='name'><a href='#' itemprop='url'>Login</a></li>
                         <li itemprop='name'><a href='#' itemprop='url'>Contact</a></li>
@@ -182,9 +182,9 @@
                               <center><img src="{% static 'img/Fair.png' %}" alt="Fairblogs" class="roundlogo" /></center>
                            </div>
                            <div style="text-align: justify">Munere veritus fierent cu sed, congue altera mea te, ex clita eripuit evertitur duo. Legendos tractatos honestatis ad mel. Legendos tractatos honestatis ad mel.
-                              , <a href="#" style="
+                              , <a href="{% url "about" %}" style="
                                  text-decoration: underline;
-                                 ">click here &#8594;</a>
+                                 ">Meer &#8594;</a>
                            </div>
                            <style>
                               .about-widget-image {

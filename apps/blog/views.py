@@ -9,3 +9,8 @@ def index(request):
     blogs = Post.objects.all()
 
     return render(request, 'blog/index.html', {'blogs': blogs})
+
+def about(request):
+    #  Return about us content from admin
+
+    return render(request, 'blog/aboutus.html')
