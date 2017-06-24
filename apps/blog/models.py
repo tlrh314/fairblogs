@@ -63,8 +63,8 @@ class Post(models.Model):
     date_created = models.DateTimeField(_("Date Created"), auto_now_add=True)
     date_updated = models.DateTimeField(_("Date Published"), auto_now=True, blank=True, null=True)
 
-    tags = models.ManyToManyField(Tag, help_text="Tags", blank=True, null=True)
-    categories = models.ManyToManyField(Category, help_text="Categories", blank=True, null=True)
+    tags = models.ManyToManyField(Tag, help_text="Tags", blank=True)
+    categories = models.ManyToManyField(Category, help_text="Categories", blank=True)
 
     featured = models.BooleanField(default=False,
         help_text="Should this post be shown in the featured list?")
