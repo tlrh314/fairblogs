@@ -1,51 +1,83 @@
-from django.db import models
-from django.utils import timezone
-from django.conf import settings
 import os
+
+from django.db import models
+from django.conf import settings
+from django.utils import timezone
+from django.template.defaultfilters import slugify
+from django.utils.translation import ugettext_lazy as _
+from django.utils.encoding import python_2_unicode_compatible
+
+from tinymce.models import HTMLField
+
 
 def get_post_image(instance, filename):
     """ Logo of the blog (website) """
     return os.path.join("static", "img", "bloggers", str(instance.author.blogger.blogname), "posts", filename)
 
-class Post(models.Model):
-    def make_url_id(self):
-        return self.title.replace(" ", "-")
 
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, default=None)
-    title = models.CharField(max_length=300)
-    blogintro = models.TextField(default=" ", help_text="Write the short introduction of the blog here, it will be displayed in de bloglist")
-    image = models.ImageField(upload_to=get_post_image, blank=True, null=True)
-    # models.CharField(max_length=500, default="Add image here", help_text="Write in format: 'filename.png' and put image in static/img/blog folder")
+@python_2_unicode_compatible
+class Tag(models.Model):
+    tag_name = models.CharField(max_length=200)
 
-    created_date = models.DateTimeField(
-            default=timezone.now)
-    published_date = models.DateTimeField(
-            default=timezone.now, blank=True, null=True)
-
-
-    tag = models.CharField(max_length=300) # models.ForeignKey(Category, help_text='Category', default=1)
-
-    featured = models.BooleanField(default=False,
-            help_text="Should this post be shown in the featured list?")
-
-    def publish(self):
-        self.published_date = timezone.now()
-        self.save()
+    last_updated_by = models.ForeignKey(settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL, blank=True, null=True,
+        related_name="category_changed_by", )
+    date_created = models.DateTimeField(_("Date Created"), auto_now_add=True)
+    date_updated = models.DateTimeField(_("Date Last Changed"), auto_now=True)
 
     class Meta:
-        ordering = ['-published_date',]
+        verbose_name = _("Tag")
+        verbose_name_plural = _("Tags")
 
-    def post_ID(self):
-        '''
-        Returns url-ID for blog posts: the title with only alphanumeric
-        charachters and the words seperated by -. For example:
-        'Example, title of a post 1.' becomes 'example-title-of-a-post-1'.
-        '''
-        a = self.title
-        a = pattern.sub('-', a)
-        if a.endswith('-'):
-            a = a[:-1]
-        return a.lower()
+    def __str__(self):
+        return self.category_name
+
+
+@python_2_unicode_compatible
+class Category(models.Model):
+    category_name = models.CharField(max_length=200)
+
+    last_updated_by  = models.ForeignKey(settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL, blank=True, null=True,
+        related_name="tags_changed_by", )
+    date_created = models.DateTimeField(_("Date Created"), auto_now_add=True)
+    date_updated = models.DateTimeField(_("Date Last Changed"), auto_now=True)
+
+    class Meta:
+        verbose_name = _("Category")
+        verbose_name_plural = _("Categories")
+
+    def __str__(self):
+        return self.category_name
+
+
+@python_2_unicode_compatible
+class Post(models.Model):
+    author = models.ForeignKey(settings.AUTH_USER_MODEL,
+        related_name="post_changed_by", default=None)
+    title = models.CharField(max_length=300)
+    slug = models.SlugField(_("slug"), unique=True)
+    teaser = HTMLField(_("Teaser"), blank=True, default="")
+    image = models.ImageField(_("Teaser Photo"), upload_to=get_post_image, blank=True, null=True)
+
+    date_created = models.DateTimeField(_("Date Created"), auto_now_add=True)
+    date_updated = models.DateTimeField(_("Date Published"), auto_now=True, blank=True, null=True)
+
+    tags = models.ManyToManyField(Tag, help_text="Tags", blank=True, null=True)
+    categories = models.ManyToManyField(Category, help_text="Categories", blank=True, null=True)
+
+    featured = models.BooleanField(default=False,
+        help_text="Should this post be shown in the featured list?")
+
+    class Meta:
+        ordering = ["-date_updated",]
+
+    def publish(self):
+        self.date_updated = timezone.now()
+        self.save()
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
 
     def __str__(self):
         return self.title

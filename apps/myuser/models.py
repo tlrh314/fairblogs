@@ -6,8 +6,10 @@ from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.models import BaseUserManager
 from django.utils.translation import ugettext_lazy as _
+from django.utils.encoding import python_2_unicode_compatible
 
 from .managers import BloggerManager
+
 
 def get_blog_logo(instance, filename):
     """ Logo of the blog (website) """
@@ -18,16 +20,22 @@ def get_blogger_logo(instance, filename):
     return os.path.join("static", "img", "bloggers", instance.user.blog.name, filename)
 
 
+@python_2_unicode_compatible
 class AffiliatedBlog(models.Model):
     blogname = models.CharField(max_length=200)
     url = models.URLField()
     logo = models.ImageField(upload_to=get_blog_logo, blank=True, null=True)
     email = models.EmailField()
 
-    def __unicode__(self):
+    class Meta:
+        verbose_name = _("Affiliated Blog")
+        verbose_name_plural = _("Affiliated Blogs")
+
+    def __str__(self):
         return self.blogname
 
 
+@python_2_unicode_compatible
 class Blogger(AbstractBaseUser, PermissionsMixin):
     """ When referencing users, use: 'settings.AUTH_USER_MODEL' or 'get_user_model()' """
     email = models.EmailField(_("email address"), unique=True)

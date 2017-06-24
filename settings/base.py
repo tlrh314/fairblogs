@@ -30,14 +30,22 @@ DEBUG = TEMPLATE_DEBUG = False
 
 
 INSTALLED_APPS = [
+    #Filebrowser should be listed before django.contrib.admin
+    "tinymce",
+    "ajax_select",
+    "filebrowser",
+
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
     "apps.myuser",
     "apps.blog",
+
+    # "bootstrap",
 ]
 
 MIDDLEWARE = [
@@ -55,7 +63,7 @@ ROOT_URLCONF = "settings.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(BASE_DIR, "templates")],  # Additional directory for base templates
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

@@ -13,11 +13,40 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+
+import sys
+
 from django.conf.urls import url
 from django.contrib import admin
 from django.conf.urls import include, url
+from django.conf import settings
+import django.views.static
+
+import filebrowser.sites
+from ajax_select import urls as ajax_select_urls
+
+# TODO: set handler404/500
+# handler404 = "main.views.page_not_found"
+# handler500 = "main.views.page_not_found"
 
 urlpatterns = [
+    url(r'^admin/filebrowser/', include(filebrowser.sites.site.urls)),
+    url(r'^tinymce/', include('tinymce.urls')),
+    url(r'^ajax_select/', include(ajax_select_urls)),
     url(r'^admin/', admin.site.urls),
     url(r'', include('apps.blog.urls')),
 ]
+
+if "runserver" in sys.argv:
+    urlpatterns += [
+        url(r"^static/(?P<path>.*)$",
+            django.views.static.serve,
+            {"document_root": settings.STATIC_ROOT}),
+        url(r"^media/(?P<path>.*)$",
+            django.views.static.serve,
+            {"document_root": settings.MEDIA_ROOT}),
+        url(r"^(?P<path>robots.txt)$",
+            django.views.static.serve,
+            {"document_root": settings.MEDIA_ROOT}),
+    ]
+

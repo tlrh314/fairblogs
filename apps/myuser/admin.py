@@ -1,10 +1,19 @@
 from django.contrib import admin
+from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin
 
 from django.utils.translation import ugettext_lazy as _
 
 from .models import Blogger
 from .models import AffiliatedBlog
+
+
+@admin.register(AffiliatedBlog)
+class AffiliatedBlogAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.unregister(Group)
 
 
 @admin.register(Blogger)

@@ -1,5 +1,5 @@
 # https://www.tinymce.com/docs/demo/full-featured/
-TINYMCE_DEFAULT_CONFIG = {
+TINYMCE_FULL_CONFIG = {
   'selector': 'textarea',
   'height': 500,
   'theme': 'modern',
@@ -25,7 +25,7 @@ TINYMCE_DEFAULT_CONFIG = {
 # TINYMCE_SPELLCHECKER = True
 TINYMCE_COMPRESSOR = True
 TINYMCE_FILEBROWSER = True
-TINYMCE_MINIMAL_CONFIG = {
+TINYMCE_DEFAULT_CONFIG = {
     'selector': 'textarea',
     'height': 80,
     'width': 500,
