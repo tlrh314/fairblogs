@@ -9,7 +9,14 @@ def add_tag(context, tagname):
 
 	# Current url
 	url = URLObject(context.request.get_full_path())
-	url = url.add_query_param('tag', tagname)
+
+	# Dictionary of tags in current url
+	tagdict = url.query.multi_dict
+	tagvalues = tagdict.get('tag', [])
+
+	# Prevent adding same value more than once
+	if tagname not in tagvalues:
+		url = url.add_query_param('tag', tagname)
 
 	return url
 
@@ -21,14 +28,10 @@ def remove_tag(context, tagname):
 
 	# Dictionary of tags in current url
 	tagdict = url.query.multi_dict
-	tagvalues = tagdict['tag']
-	print(tagdict)
-	print(tagvalues)
-
+	tagvalues = tagdict.get('tag', [])
 
 	# Remove the value of to be removed tagname
 	tagvalues.remove(tagname)
-	print(tagvalues)
 
 	# Make clean url
 	url = url.del_query_param('tag')
