@@ -1,0 +1,89 @@
+{% load staticfiles %}
+{% load template_extras %}
+
+<!--          <div class='top-bar'>
+            <div class='top-bar-wrapper row'>
+               <div class='top-bar-menu'>
+                  <div class='top-menu'>
+                     <div class='top-menu section' id='top-menu'>
+                        <div class='widget LinkList' data-version='1' id='LinkList940'>
+                           <div class='widget-content'>
+                              <ul id='nav1' itemscope='' itemtype='http://schema.org/SiteNavigationElement'>
+                                 <li itemprop='name'><a href='#' itemprop='url'><i class="fa fa-home"></i> Home</a></li>
+                                 <li itemprop='name'><a href='#' itemprop='url'><i class="fa fa-envelope"></i> Contact</a></li>
+                                 <li itemprop='name'><a href='#' itemprop='url'><i class="fa fa-user"></i> About</a></li>
+                                 <li itemprop='name'><a href='#' itemprop='url'><i class="fa fa-life-ring"></i> 404</a></li>
+                              </ul>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class='top-bar-search'>
+                  <div class='header-search'>
+                     <li>
+                        <a class='search'>
+                           <form action='/search/max-results=7' method='get'>
+                              <input id='s' name='q' placeholder='Type and hit enter...' type='text'/>
+                           </form>
+                        </a>
+                     </li>
+                  </div>
+               </div>
+            </div>
+         </div> -->
+         <!-- <div style='clear: both;'></div> -->
+<!--          <div id='header-wrapper'>
+            <div class='header section' id='header'>
+               <div class='widget Header' data-version='1' id='Header1'>
+                  <div id='header-inner'>
+                     <a href='http://impreza-soratemplates.blogspot.nl/' style='display: block'>
+                        <h1 style='display:none;'></h1>
+                        <img alt='Impreza' height='120px; ' id='Header1_headerimg' src='http://2.bp.blogspot.com/-tRPIRp2Jhag/V_xfo3dIypI/AAAAAAAABFU/K9XY80H9ZlQHgyrCseAM1cY79BRYydw_ACK4B/s1600/Impreza%2BLogo.png' style='display: block' width='341px; '/>
+                     </a>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div style='clear: both;'></div> -->
+         <div id='ads-blog'>
+            <div class='home-ad-top section' id='ads-home-top' name='Top ADS'>
+               <div class='widget HTML' data-version='1' id='HTML119'>
+                  <div class='widget-content'>
+                     <center><img alt="Home Ads" src="http://1.bp.blogspot.com/-_9J307jHHmI/V3fKeyp8VXI/AAAAAAAAAh8/MthlbQFvW-ckJmg2dCcxopzoD-fq0RUDgCK4B/s1600/728x90ads.png" /></center>
+                  </div>
+                  <div class='clear'></div>
+                  <span class='widget-item-control'>
+                  <span class='item-control blog-admin'>
+                  <a class='quickedit' href='//www.blogger.com/rearrange?blogID=1732086749609322382&widgetType=HTML&widgetId=HTML119&action=editWidget&sectionId=ads-home-top' onclick='return _WidgetManager._PopupConfig(document.getElementById("HTML119"));' target='configHTML119' title='Edit'>
+                  <img alt='' height='18' src='https://resources.blogblog.com/img/icon18_wrench_allbkg.png' width='18'/>
+                  </a>
+                  </span>
+                  </span>
+                  <div class='clear'></div>
+               </div>
+            </div>
+         </div>
+         <div style='clear: both;'></div>
+         <div class='navi-menu'>
+            <div class='nav-menu row section' id='Navigation Menu' name='Navigation Menu'>
+               <div class='widget LinkList' data-version='1' id='LinkList100'>
+                  <div class='widget-content'>
+                     <ul id='nav' itemscope='' itemtype='http://schema.org/SiteNavigationElement'>
+                        <li itemprop='name'><a href='{% url "index" %}' itemprop='url'>Home</a></li>
+                        <li itemprop='name'><a href='{% url "about" %}' itemprop='url'>About us</a></li>
+                        <li itemprop='name'><a href='#' itemprop='url'>Submit</a></li>
+                        <li itemprop='name'><a href='#' itemprop='url'>Login</a></li>
+                        <li itemprop='name'><a href='#' itemprop='url'>Contact</a></li>
+                     </ul>
+                     <script type='text/javascript'> 
+                        //<![CDATA[
+                        $("#LinkList100").each(function(){var e="<ul id='nav'><li><ul id='sub-menu'>";$("#LinkList100 li").each(function(){var t=$(this).text(),n=t.substr(0,1),r=t.substr(1);"_"==n?(n=$(this).find("a").attr("href"),e+='<li><a href="'+n+'">'+r+"</a></li>"):(n=$(this).find("a").attr("href"),e+='</ul></li><li><a href="'+n+'">'+t+"</a><ul id='sub-menu'>")});e+="</ul></li></ul>";$(this).html(e);$("#LinkList100 ul").each(function(){var e=$(this);if(e.html().replace(/\s|&nbsp;/g,"").length==0)e.remove()});$("#LinkList100 li").each(function(){var e=$(this);if(e.html().replace(/\s|&nbsp;/g,"").length==0)e.remove()})});
+                        
+                        //]]>
+                     </script>
+                  </div>
+                  <a href='#' id='pull'>Menu</a>
+               </div>
+            </div>
+         </div>

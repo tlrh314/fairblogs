@@ -339,7 +339,7 @@ padding: 0;
 }
 .index .post-outer {
 padding: 0 0 20px 0;
-width: 49%;
+width: 100%;
 margin-right: 10px;
 float: left;
 }
@@ -361,10 +361,10 @@ text-transform: uppercase;
 }
 .post h2 a {
 color: #000;
-letter-spacing: 2px;
+letter-spacing: 1px;
 }
 .post h2 {
-margin: 0 0 10px;
+margin: 0 0 6px;
 padding: 0;
 }
 .retitle h2 {
@@ -419,9 +419,10 @@ font-size: 14px;
 line-height: 26px;
 }
 .block-image {
-float: none;
-width: 100%;
+float: left;
+width: 35%;
 height: auto;
+margin-right: 15px;
 }
 .block-image .thumb {
 width: 100%;
@@ -478,12 +479,19 @@ padding-left: 2px;
 margin-top: 10px;
 color: #919191;
 }
+.resumo span > p {
+	margin: 0px;
+	overflow-y: hidden;
+	}
+
 .resumo span {
 display: block;
 margin-bottom: 8px;
 font-size: 14px;
 line-height: 31px;
 text-align: justify;
+max-height: 400px;
+overflow-y: hidden;
 }
 .post img {
 max-width: 100%;
@@ -1101,7 +1109,7 @@ margin-top: 15px;
 display: inline-block;
 text-align: left;
 }
-.cloud-label-widget-content .label-size {
+.label-size {
 display: inline-block;
 float: left;
 font-size: 10px;
@@ -1109,7 +1117,7 @@ line-height: normal;
 margin: 0 5px 5px 0;
 opacity: 1
 }
-.cloud-label-widget-content .label-size a {
+.label-size a {
 background: #fff;
 color: #878787;
 float: left;
@@ -1121,15 +1129,16 @@ padding: 7px 8px;
 text-transform: capitalize;
 transition: all .6s;
 }
-.cloud-label-widget-content .label-size a:hover {
+.label-size a:hover {
 color: #000;
 }
-.cloud-label-widget-content .label-size a:hover,
-.cloud-label-widget-content .label-size a:active {
+
+.label-size a:hover,
+.label-size a:active {
 background: #fff;
 color: #F86E7D;
 }
-.cloud-label-widget-content .label-size .label-count {
+.label-size .label-count {
 background: #F86E7D;
 color: #fff;
 white-space: nowrap;

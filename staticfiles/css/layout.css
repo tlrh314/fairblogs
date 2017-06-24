@@ -95,6 +95,12 @@ background-color: #233648;
 	padding: 5px;
 }
 
+.blogthumb {
+	float: left;
+	max-height: 100px;
+	max-width: 100px;
+}
+
 .icons-social li {
 display: inline;
 padding: 0;
@@ -112,7 +118,7 @@ font-size: 20px;
 }
 .icons-social #social a:before {
 display: inline-block;
-font: normal normal normal 22px/1 FontAwesome;
+font: normal normal normal 22px FontAwesome;
 font-size: inherit;
 font-style: normal;
 font-weight: 400;

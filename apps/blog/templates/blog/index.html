@@ -1,108 +1,69 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load template_extras %}
 {% block content %}
 
 <div id='main-wrapper'>
    <div class='main section' id='main'>
+   {% if current_tags %}
+   <div style="height: 50px; vertical-align: middle;">
+      <h2 style="float:left; line-height: 50px; margin-right: 10px;"> Blogs with tag:  </h2>
+      {% for tagname in current_tags %}
+         <span class='label-size label-size-4' style='font-size: 18px; float: none; margin-top: 1%;'>
+            <a dir='ltr' href='{% remove_tag tagname %}'><i class="fa fa-times" aria-hidden="true"></i> {{ tagname }}</a>
+         </span>
+      {% endfor %}
+   </div>
+   {% endif %}
       <div class='widget Blog' data-version='1' id='Blog1'>
          <div class='blog-posts hfeed'>
             <div class="date-outer">
                <h2 class='date-header'><span>Saturday, 5 December 2015</span></h2>
                <div class="date-posts">
+
+               {% for blog in blogs %}
                   <div class='post-outer'>
                      <div class='post hentry'>
+                        <!-- To do: Put labels at better place --> 
                         <span class='post-labels'>
-                        <i class='fa fa-folder-open-o'></i>
-                        <a href='http://impreza-soratemplates.blogspot.nl/search/label/Magazine' rel='tag'>Magazine</a>
+                        {% for tag in blog.tags.all %}                       
+                           <i class='fa fa-folder-open-o'></i>                        
+                           <a href='#' rel='tag' style="margin-right:5px;">{{ tag }}</a>
+                        {% endfor %}
                         </span>
                         <div class='block-image'>
                            <div class='thumb'>
-                              <a href='http://impreza-soratemplates.blogspot.nl/2015/12/celebrated-am-announcing-delightful_5.html' style='background:url(https://2.bp.blogspot.com/-LW7gy1Agfr4/VmPhMD-k5FI/AAAAAAAACRM/LAuVq2IZ4yQ/s72-c/33.jpg) no-repeat center center;background-size:cover'></a>
+                              <a href='{{ blog.url }}' target='_blank' style='background:url(/{{ blog.image.url }}) no-repeat center center;background-size:cover'></a>
                            </div>
                         </div>
                         <div class='post-header'></div>
                         <article>
                            <font class='retitle'>
                               <h2 class='post-title entry-title'>
-                                 <a href='http://impreza-soratemplates.blogspot.nl/2015/12/celebrated-am-announcing-delightful_5.html'>
-                                 Celebrated am announcing delightful remarkably we
+                                 <a href='{{ blog.url }}' target='_blank'>
+                                 {{ blog.title }}
                                  </a>
                               </h2>
                            </font>
                            <div class='date-header'>
                               <div id='meta-post'>
                                  <i class='fa fa-user'></i>
-                                 <a class='g-profile' href='https://plus.google.com/104219125408123734587' rel='author' title='Sora Templates'>
-                                 <span itemprop='name'>Sora Templates</span></a>
+                                 <a class='g-profile' href='{{ blog.author.affiliation.first.url }}' target='_blank' rel='author' title='{{ blog.author.affiliation.first }}'>
+                                 <span itemprop='name'>{{ blog.author.affiliation.first }}</span></a>
                                  <i class='fa fa-calendar-o'></i>
-                                 <abbr class='published timeago' title='2015-12-05T23:18:00-08:00'>December 05, 2015</abbr>
+                                 <abbr class='published timeago' title='{{ blog.date_created }}'>{{ blog.date_created }}</abbr>
                               </div>
-                              <div class='resumo'><span>It bachelor cheerful of mistaken. Tore has sons put upon wife use bred seen. Its dissimilar invitation ten has discretion unreserved. Had yo...</span></div>
+                              <div class='resumo'><span>{% autoescape off %}{{ blog.teaser }}{% endautoescape %} 
+                              
+                              <a href='{{ blog.author.affiliation.first.url }}' class='blogthumb' target='_blank'><img src='/{{ blog.author.affiliation.first.logo.url}}'/></a>
+                              <a href='{{ blog.url }}' target='_blank' style="float: right;"><strong>Lees verder</strong></a> </span></div>
                               <div style='clear: both;'></div>
                            </div>
-                           <div class='second-meta'>
-                              <a class='read-more anchor-hover' href='http://impreza-soratemplates.blogspot.nl/2015/12/celebrated-am-announcing-delightful_5.html'>Read more <i class='fa fa-chevron-right'></i></a>
-                              <span class='post-comment-link'>
-                              <i class='fa fa-comment'></i>
-                              <a class='comment-link' href='http://impreza-soratemplates.blogspot.nl/2015/12/celebrated-am-announcing-delightful_5.html#comment-form' onclick=''>
-                              4 comments:
-                              </a>
-                              </span>
-                           </div>
                         </article>
-                        <div class='post-footer'>
-                           <div class='post-footer-line post-footer-line-1'>
-                              <span class='post-author vcard'>
-                                 Posted by
-                                 <span class='fn' itemprop='author' itemscope='itemscope' itemtype='http://schema.org/Person'>
-                                    <meta content='https://plus.google.com/104219125408123734587' itemprop='url'/>
-                                    <a class='g-profile' href='https://plus.google.com/104219125408123734587' rel='author' title='author profile'>
-                                    <span itemprop='name'>Sora Templates</span>
-                                    </a>
-                                 </span>
-                              </span>
-                              <span class='post-timestamp'>
-                                 at
-                                 <meta content='http://impreza-soratemplates.blogspot.com/2015/12/celebrated-am-announcing-delightful_5.html' itemprop='url'/>
-                                 <a class='timestamp-link' href='http://impreza-soratemplates.blogspot.nl/2015/12/celebrated-am-announcing-delightful_5.html' rel='bookmark' title='permanent link'><abbr class='published' itemprop='datePublished' title='2015-12-05T23:18:00-08:00'>December 05, 2015</abbr></a>
-                              </span>
-                              <span class='reaction-buttons'>
-                              </span>
-                              <span class='post-comment-link'>
-                              <a class='comment-link' href='http://impreza-soratemplates.blogspot.nl/2015/12/celebrated-am-announcing-delightful_5.html#comment-form' onclick=''>
-                              4 comments:
-                              </a>
-                              </span>
-                              <span class='post-backlinks post-comment-link'>
-                              </span>
-                              <span class='post-icons'>
-                              <span class='item-control blog-admin pid-985165616'>
-                              <a href='https://www.blogger.com/post-edit.g?blogID=1732086749609322382&postID=4964167992577876123&from=pencil' title='Edit Post'>
-                              <img alt='Edit' class='icon-action' height='18' src='https://resources.blogblog.com/img/icon18_edit_allbkg.gif' width='18'/>
-                              </a>
-                              </span>
-                              </span>
-                              <div class='post-share-buttons goog-inline-block'>
-                                 <a class='goog-inline-block share-button sb-email' href='https://www.blogger.com/share-post.g?blogID=1732086749609322382&postID=4964167992577876123&target=email' target='_blank' title='Email This'><span class='share-button-link-text'>Email This</span></a><a class='goog-inline-block share-button sb-blog' href='https://www.blogger.com/share-post.g?blogID=1732086749609322382&postID=4964167992577876123&target=blog' onclick='window.open(this.href, "_blank", "height=270,width=475"); return false;' target='_blank' title='BlogThis!'><span class='share-button-link-text'>BlogThis!</span></a><a class='goog-inline-block share-button sb-twitter' href='https://www.blogger.com/share-post.g?blogID=1732086749609322382&postID=4964167992577876123&target=twitter' target='_blank' title='Share to Twitter'><span class='share-button-link-text'>Share to Twitter</span></a><a class='goog-inline-block share-button sb-facebook' href='https://www.blogger.com/share-post.g?blogID=1732086749609322382&postID=4964167992577876123&target=facebook' onclick='window.open(this.href, "_blank", "height=430,width=640"); return false;' target='_blank' title='Share to Facebook'><span class='share-button-link-text'>Share to Facebook</span></a><a class='goog-inline-block share-button sb-pinterest' href='https://www.blogger.com/share-post.g?blogID=1732086749609322382&postID=4964167992577876123&target=pinterest' target='_blank' title='Share to Pinterest'><span class='share-button-link-text'>Share to Pinterest</span></a>
-                                 <div class='goog-inline-block google-plus-share-container'>
-                                    <g:plusone source='blogger:blog:plusone' href='http://impreza-soratemplates.blogspot.com/2015/12/celebrated-am-announcing-delightful_5.html' size='medium' width='300' annotation='inline'/>
-                                 </div>
-                              </div>
-                           </div>
-                           <div class='post-footer-line post-footer-line-2'>
-                              <span class='post-labels'>
-                              Labels:
-                              <a href='http://impreza-soratemplates.blogspot.nl/search/label/Culture' rel='tag'>Culture</a>,
-                              <a href='http://impreza-soratemplates.blogspot.nl/search/label/Magazine' rel='tag'>Magazine</a>
-                              </span>
-                           </div>
-                           <div class='post-footer-line post-footer-line-3'>
-                              <span class='post-location'>
-                              </span>
-                           </div>
-                        </div>
                      </div>
                   </div>
+
+                  {% endfor %}
                   <div class='post-outer'>
                      <div class='post hentry'>
                         <span class='post-labels'>
@@ -197,578 +158,28 @@
                         </div>
                      </div>
                   </div>
-                  <div class='post-outer'>
-                     <div class='post hentry'>
-                        <span class='post-labels'>
-                        <i class='fa fa-folder-open-o'></i>
-                        <a href='http://impreza-soratemplates.blogspot.nl/search/label/Technology' rel='tag'>Technology</a>
-                        </span>
-                        <div class='block-image'>
-                           <div class='thumb'>
-                              <a href='http://impreza-soratemplates.blogspot.nl/2015/12/she-alteration-everything-sympathize_7.html' style='background:url(https://4.bp.blogspot.com/-TNy9XZfULog/VmPgZcwxhwI/AAAAAAAACQ4/yxALiZnGPBs/s72-c/32.jpg) no-repeat center center;background-size:cover'></a>
-                           </div>
-                        </div>
-                        <div class='post-header'></div>
-                        <article>
-                           <font class='retitle'>
-                              <h2 class='post-title entry-title'>
-                                 <a href='http://impreza-soratemplates.blogspot.nl/2015/12/she-alteration-everything-sympathize_7.html'>
-                                 She Alteration Everything Sympathize Impossible
-                                 </a>
-                              </h2>
-                           </font>
-                           <div class='date-header'>
-                              <div id='meta-post'>
-                                 <i class='fa fa-user'></i>
-                                 <a class='g-profile' href='https://plus.google.com/104219125408123734587' rel='author' title='Sora Templates'>
-                                 <span itemprop='name'>Sora Templates</span></a>
-                                 <i class='fa fa-calendar-o'></i>
-                                 <abbr class='published timeago' title='2015-12-05T23:14:00-08:00'>December 05, 2015</abbr>
-                              </div>
-                              <div class='resumo'><span>It bachelor cheerful of mistaken. Tore has sons put upon wife use bred seen. Its dissimilar invitation ten has discretion unreserved. Had yo...</span></div>
-                              <div style='clear: both;'></div>
-                           </div>
-                           <div class='second-meta'>
-                              <a class='read-more anchor-hover' href='http://impreza-soratemplates.blogspot.nl/2015/12/she-alteration-everything-sympathize_7.html'>Read more <i class='fa fa-chevron-right'></i></a>
-                              <span class='post-comment-link'>
-                              <i class='fa fa-comment'></i>
-                              <a class='comment-link' href='http://impreza-soratemplates.blogspot.nl/2015/12/she-alteration-everything-sympathize_7.html#comment-form' onclick=''>
-                              No comments:
-                              </a>
-                              </span>
-                           </div>
-                        </article>
-                        <div class='post-footer'>
-                           <div class='post-footer-line post-footer-line-1'>
-                              <span class='post-author vcard'>
-                                 Posted by
-                                 <span class='fn' itemprop='author' itemscope='itemscope' itemtype='http://schema.org/Person'>
-                                    <meta content='https://plus.google.com/104219125408123734587' itemprop='url'/>
-                                    <a class='g-profile' href='https://plus.google.com/104219125408123734587' rel='author' title='author profile'>
-                                    <span itemprop='name'>Sora Templates</span>
-                                    </a>
-                                 </span>
-                              </span>
-                              <span class='post-timestamp'>
-                                 at
-                                 <meta content='http://impreza-soratemplates.blogspot.com/2015/12/she-alteration-everything-sympathize_7.html' itemprop='url'/>
-                                 <a class='timestamp-link' href='http://impreza-soratemplates.blogspot.nl/2015/12/she-alteration-everything-sympathize_7.html' rel='bookmark' title='permanent link'><abbr class='published' itemprop='datePublished' title='2015-12-05T23:14:00-08:00'>December 05, 2015</abbr></a>
-                              </span>
-                              <span class='reaction-buttons'>
-                              </span>
-                              <span class='post-comment-link'>
-                              <a class='comment-link' href='http://impreza-soratemplates.blogspot.nl/2015/12/she-alteration-everything-sympathize_7.html#comment-form' onclick=''>
-                              No comments:
-                              </a>
-                              </span>
-                              <span class='post-backlinks post-comment-link'>
-                              </span>
-                              <span class='post-icons'>
-                              <span class='item-control blog-admin pid-985165616'>
-                              <a href='https://www.blogger.com/post-edit.g?blogID=1732086749609322382&postID=4561727461221557385&from=pencil' title='Edit Post'>
-                              <img alt='Edit' class='icon-action' height='18' src='https://resources.blogblog.com/img/icon18_edit_allbkg.gif' width='18'/>
-                              </a>
-                              </span>
-                              </span>
-                              <div class='post-share-buttons goog-inline-block'>
-                                 <a class='goog-inline-block share-button sb-email' href='https://www.blogger.com/share-post.g?blogID=1732086749609322382&postID=4561727461221557385&target=email' target='_blank' title='Email This'><span class='share-button-link-text'>Email This</span></a><a class='goog-inline-block share-button sb-blog' href='https://www.blogger.com/share-post.g?blogID=1732086749609322382&postID=4561727461221557385&target=blog' onclick='window.open(this.href, "_blank", "height=270,width=475"); return false;' target='_blank' title='BlogThis!'><span class='share-button-link-text'>BlogThis!</span></a><a class='goog-inline-block share-button sb-twitter' href='https://www.blogger.com/share-post.g?blogID=1732086749609322382&postID=4561727461221557385&target=twitter' target='_blank' title='Share to Twitter'><span class='share-button-link-text'>Share to Twitter</span></a><a class='goog-inline-block share-button sb-facebook' href='https://www.blogger.com/share-post.g?blogID=1732086749609322382&postID=4561727461221557385&target=facebook' onclick='window.open(this.href, "_blank", "height=430,width=640"); return false;' target='_blank' title='Share to Facebook'><span class='share-button-link-text'>Share to Facebook</span></a><a class='goog-inline-block share-button sb-pinterest' href='https://www.blogger.com/share-post.g?blogID=1732086749609322382&postID=4561727461221557385&target=pinterest' target='_blank' title='Share to Pinterest'><span class='share-button-link-text'>Share to Pinterest</span></a>
-                                 <div class='goog-inline-block google-plus-share-container'>
-                                    <g:plusone source='blogger:blog:plusone' href='http://impreza-soratemplates.blogspot.com/2015/12/she-alteration-everything-sympathize_7.html' size='medium' width='300' annotation='inline'/>
-                                 </div>
-                              </div>
-                           </div>
-                           <div class='post-footer-line post-footer-line-2'>
-                              <span class='post-labels'>
-                              Labels:
-                              <a href='http://impreza-soratemplates.blogspot.nl/search/label/Beauty' rel='tag'>Beauty</a>,
-                              <a href='http://impreza-soratemplates.blogspot.nl/search/label/Technology' rel='tag'>Technology</a>
-                              </span>
-                           </div>
-                           <div class='post-footer-line post-footer-line-3'>
-                              <span class='post-location'>
-                              </span>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class='post-outer'>
-                     <div class='post hentry'>
-                        <span class='post-labels'>
-                        <i class='fa fa-folder-open-o'></i>
-                        <a href='http://impreza-soratemplates.blogspot.nl/search/label/Magazine' rel='tag'>Magazine</a>
-                        </span>
-                        <div class='block-image'>
-                           <div class='thumb'>
-                              <a href='http://impreza-soratemplates.blogspot.nl/2015/12/whether-article-spirits-belongs-to_5.html' style='background:url(https://2.bp.blogspot.com/-upU6GUtOQUs/VmPgE85QoYI/AAAAAAAACQw/zOrWY6Nmq9k/s72-c/85.jpg) no-repeat center center;background-size:cover'></a>
-                           </div>
-                        </div>
-                        <div class='post-header'></div>
-                        <article>
-                           <font class='retitle'>
-                              <h2 class='post-title entry-title'>
-                                 <a href='http://impreza-soratemplates.blogspot.nl/2015/12/whether-article-spirits-belongs-to_5.html'>
-                                 Whether Article Spirits belongs to everybody
-                                 </a>
-                              </h2>
-                           </font>
-                           <div class='date-header'>
-                              <div id='meta-post'>
-                                 <i class='fa fa-user'></i>
-                                 <a class='g-profile' href='https://plus.google.com/104219125408123734587' rel='author' title='Sora Templates'>
-                                 <span itemprop='name'>Sora Templates</span></a>
-                                 <i class='fa fa-calendar-o'></i>
-                                 <abbr class='published timeago' title='2015-12-05T23:13:00-08:00'>December 05, 2015</abbr>
-                              </div>
-                              <div class='resumo'><span>It bachelor cheerful of mistaken. Tore has sons put upon wife use bred seen. Its dissimilar invitation ten has discretion unreserved. Had yo...</span></div>
-                              <div style='clear: both;'></div>
-                           </div>
-                           <div class='second-meta'>
-                              <a class='read-more anchor-hover' href='http://impreza-soratemplates.blogspot.nl/2015/12/whether-article-spirits-belongs-to_5.html'>Read more <i class='fa fa-chevron-right'></i></a>
-                              <span class='post-comment-link'>
-                              <i class='fa fa-comment'></i>
-                              <a class='comment-link' href='http://impreza-soratemplates.blogspot.nl/2015/12/whether-article-spirits-belongs-to_5.html#comment-form' onclick=''>
-                              No comments:
-                              </a>
-                              </span>
-                           </div>
-                        </article>
-                        <div class='post-footer'>
-                           <div class='post-footer-line post-footer-line-1'>
-                              <span class='post-author vcard'>
-                                 Posted by
-                                 <span class='fn' itemprop='author' itemscope='itemscope' itemtype='http://schema.org/Person'>
-                                    <meta content='https://plus.google.com/104219125408123734587' itemprop='url'/>
-                                    <a class='g-profile' href='https://plus.google.com/104219125408123734587' rel='author' title='author profile'>
-                                    <span itemprop='name'>Sora Templates</span>
-                                    </a>
-                                 </span>
-                              </span>
-                              <span class='post-timestamp'>
-                                 at
-                                 <meta content='http://impreza-soratemplates.blogspot.com/2015/12/whether-article-spirits-belongs-to_5.html' itemprop='url'/>
-                                 <a class='timestamp-link' href='http://impreza-soratemplates.blogspot.nl/2015/12/whether-article-spirits-belongs-to_5.html' rel='bookmark' title='permanent link'><abbr class='published' itemprop='datePublished' title='2015-12-05T23:13:00-08:00'>December 05, 2015</abbr></a>
-                              </span>
-                              <span class='reaction-buttons'>
-                              </span>
-                              <span class='post-comment-link'>
-                              <a class='comment-link' href='http://impreza-soratemplates.blogspot.nl/2015/12/whether-article-spirits-belongs-to_5.html#comment-form' onclick=''>
-                              No comments:
-                              </a>
-                              </span>
-                              <span class='post-backlinks post-comment-link'>
-                              </span>
-                              <span class='post-icons'>
-                              <span class='item-control blog-admin pid-985165616'>
-                              <a href='https://www.blogger.com/post-edit.g?blogID=1732086749609322382&postID=7117316899560808012&from=pencil' title='Edit Post'>
-                              <img alt='Edit' class='icon-action' height='18' src='https://resources.blogblog.com/img/icon18_edit_allbkg.gif' width='18'/>
-                              </a>
-                              </span>
-                              </span>
-                              <div class='post-share-buttons goog-inline-block'>
-                                 <a class='goog-inline-block share-button sb-email' href='https://www.blogger.com/share-post.g?blogID=1732086749609322382&postID=7117316899560808012&target=email' target='_blank' title='Email This'><span class='share-button-link-text'>Email This</span></a><a class='goog-inline-block share-button sb-blog' href='https://www.blogger.com/share-post.g?blogID=1732086749609322382&postID=7117316899560808012&target=blog' onclick='window.open(this.href, "_blank", "height=270,width=475"); return false;' target='_blank' title='BlogThis!'><span class='share-button-link-text'>BlogThis!</span></a><a class='goog-inline-block share-button sb-twitter' href='https://www.blogger.com/share-post.g?blogID=1732086749609322382&postID=7117316899560808012&target=twitter' target='_blank' title='Share to Twitter'><span class='share-button-link-text'>Share to Twitter</span></a><a class='goog-inline-block share-button sb-facebook' href='https://www.blogger.com/share-post.g?blogID=1732086749609322382&postID=7117316899560808012&target=facebook' onclick='window.open(this.href, "_blank", "height=430,width=640"); return false;' target='_blank' title='Share to Facebook'><span class='share-button-link-text'>Share to Facebook</span></a><a class='goog-inline-block share-button sb-pinterest' href='https://www.blogger.com/share-post.g?blogID=1732086749609322382&postID=7117316899560808012&target=pinterest' target='_blank' title='Share to Pinterest'><span class='share-button-link-text'>Share to Pinterest</span></a>
-                                 <div class='goog-inline-block google-plus-share-container'>
-                                    <g:plusone source='blogger:blog:plusone' href='http://impreza-soratemplates.blogspot.com/2015/12/whether-article-spirits-belongs-to_5.html' size='medium' width='300' annotation='inline'/>
-                                 </div>
-                              </div>
-                           </div>
-                           <div class='post-footer-line post-footer-line-2'>
-                              <span class='post-labels'>
-                              Labels:
-                              <a href='http://impreza-soratemplates.blogspot.nl/search/label/Beauty' rel='tag'>Beauty</a>,
-                              <a href='http://impreza-soratemplates.blogspot.nl/search/label/Culture' rel='tag'>Culture</a>,
-                              <a href='http://impreza-soratemplates.blogspot.nl/search/label/Magazine' rel='tag'>Magazine</a>
-                              </span>
-                           </div>
-                           <div class='post-footer-line post-footer-line-3'>
-                              <span class='post-location'>
-                              </span>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class='post-outer'>
-                     <div class='post hentry'>
-                        <span class='post-labels'>
-                        <i class='fa fa-folder-open-o'></i>
-                        <a href='http://impreza-soratemplates.blogspot.nl/search/label/Fashion' rel='tag'>Fashion</a>
-                        </span>
-                        <div class='block-image'>
-                           <div class='thumb'>
-                              <a href='http://impreza-soratemplates.blogspot.nl/2015/12/she-alteration-everything-sympathize_92.html' style='background:url(http://1.bp.blogspot.com/-aT_hSLgsTDQ/VmPfvJ9S9LI/AAAAAAAACQo/E30_foX95qA/s72-c/11.jpg) no-repeat center center;background-size:cover'></a>
-                           </div>
-                        </div>
-                        <div class='post-header'></div>
-                        <article>
-                           <font class='retitle'>
-                              <h2 class='post-title entry-title'>
-                                 <a href='http://impreza-soratemplates.blogspot.nl/2015/12/she-alteration-everything-sympathize_92.html'>
-                                 She Alteration Everything Sympathize Impossible
-                                 </a>
-                              </h2>
-                           </font>
-                           <div class='date-header'>
-                              <div id='meta-post'>
-                                 <i class='fa fa-user'></i>
-                                 <a class='g-profile' href='https://plus.google.com/104219125408123734587' rel='author' title='Sora Templates'>
-                                 <span itemprop='name'>Sora Templates</span></a>
-                                 <i class='fa fa-calendar-o'></i>
-                                 <abbr class='published timeago' title='2015-12-05T23:12:00-08:00'>December 05, 2015</abbr>
-                              </div>
-                              <div class='resumo'><span>It bachelor cheerful of mistaken. Tore has sons put upon wife use bred seen. Its dissimilar invitation ten has discretion unreserved. Had yo...</span></div>
-                              <div style='clear: both;'></div>
-                           </div>
-                           <div class='second-meta'>
-                              <a class='read-more anchor-hover' href='http://impreza-soratemplates.blogspot.nl/2015/12/she-alteration-everything-sympathize_92.html'>Read more <i class='fa fa-chevron-right'></i></a>
-                              <span class='post-comment-link'>
-                              <i class='fa fa-comment'></i>
-                              <a class='comment-link' href='http://impreza-soratemplates.blogspot.nl/2015/12/she-alteration-everything-sympathize_92.html#comment-form' onclick=''>
-                              No comments:
-                              </a>
-                              </span>
-                           </div>
-                        </article>
-                        <div class='post-footer'>
-                           <div class='post-footer-line post-footer-line-1'>
-                              <span class='post-author vcard'>
-                                 Posted by
-                                 <span class='fn' itemprop='author' itemscope='itemscope' itemtype='http://schema.org/Person'>
-                                    <meta content='https://plus.google.com/104219125408123734587' itemprop='url'/>
-                                    <a class='g-profile' href='https://plus.google.com/104219125408123734587' rel='author' title='author profile'>
-                                    <span itemprop='name'>Sora Templates</span>
-                                    </a>
-                                 </span>
-                              </span>
-                              <span class='post-timestamp'>
-                                 at
-                                 <meta content='http://impreza-soratemplates.blogspot.com/2015/12/she-alteration-everything-sympathize_92.html' itemprop='url'/>
-                                 <a class='timestamp-link' href='http://impreza-soratemplates.blogspot.nl/2015/12/she-alteration-everything-sympathize_92.html' rel='bookmark' title='permanent link'><abbr class='published' itemprop='datePublished' title='2015-12-05T23:12:00-08:00'>December 05, 2015</abbr></a>
-                              </span>
-                              <span class='reaction-buttons'>
-                              </span>
-                              <span class='post-comment-link'>
-                              <a class='comment-link' href='http://impreza-soratemplates.blogspot.nl/2015/12/she-alteration-everything-sympathize_92.html#comment-form' onclick=''>
-                              No comments:
-                              </a>
-                              </span>
-                              <span class='post-backlinks post-comment-link'>
-                              </span>
-                              <span class='post-icons'>
-                              <span class='item-control blog-admin pid-985165616'>
-                              <a href='https://www.blogger.com/post-edit.g?blogID=1732086749609322382&postID=5494874907569531193&from=pencil' title='Edit Post'>
-                              <img alt='Edit' class='icon-action' height='18' src='https://resources.blogblog.com/img/icon18_edit_allbkg.gif' width='18'/>
-                              </a>
-                              </span>
-                              </span>
-                              <div class='post-share-buttons goog-inline-block'>
-                                 <a class='goog-inline-block share-button sb-email' href='https://www.blogger.com/share-post.g?blogID=1732086749609322382&postID=5494874907569531193&target=email' target='_blank' title='Email This'><span class='share-button-link-text'>Email This</span></a><a class='goog-inline-block share-button sb-blog' href='https://www.blogger.com/share-post.g?blogID=1732086749609322382&postID=5494874907569531193&target=blog' onclick='window.open(this.href, "_blank", "height=270,width=475"); return false;' target='_blank' title='BlogThis!'><span class='share-button-link-text'>BlogThis!</span></a><a class='goog-inline-block share-button sb-twitter' href='https://www.blogger.com/share-post.g?blogID=1732086749609322382&postID=5494874907569531193&target=twitter' target='_blank' title='Share to Twitter'><span class='share-button-link-text'>Share to Twitter</span></a><a class='goog-inline-block share-button sb-facebook' href='https://www.blogger.com/share-post.g?blogID=1732086749609322382&postID=5494874907569531193&target=facebook' onclick='window.open(this.href, "_blank", "height=430,width=640"); return false;' target='_blank' title='Share to Facebook'><span class='share-button-link-text'>Share to Facebook</span></a><a class='goog-inline-block share-button sb-pinterest' href='https://www.blogger.com/share-post.g?blogID=1732086749609322382&postID=5494874907569531193&target=pinterest' target='_blank' title='Share to Pinterest'><span class='share-button-link-text'>Share to Pinterest</span></a>
-                                 <div class='goog-inline-block google-plus-share-container'>
-                                    <g:plusone source='blogger:blog:plusone' href='http://impreza-soratemplates.blogspot.com/2015/12/she-alteration-everything-sympathize_92.html' size='medium' width='300' annotation='inline'/>
-                                 </div>
-                              </div>
-                           </div>
-                           <div class='post-footer-line post-footer-line-2'>
-                              <span class='post-labels'>
-                              Labels:
-                              <a href='http://impreza-soratemplates.blogspot.nl/search/label/Beauty' rel='tag'>Beauty</a>,
-                              <a href='http://impreza-soratemplates.blogspot.nl/search/label/Fashion' rel='tag'>Fashion</a>
-                              </span>
-                           </div>
-                           <div class='post-footer-line post-footer-line-3'>
-                              <span class='post-location'>
-                              </span>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class='post-outer'>
-                     <div class='post hentry'>
-                        <span class='post-labels'>
-                        <i class='fa fa-folder-open-o'></i>
-                        <a href='http://impreza-soratemplates.blogspot.nl/search/label/Magazine' rel='tag'>Magazine</a>
-                        </span>
-                        <div class='block-image'>
-                           <div class='thumb'>
-                              <a href='http://impreza-soratemplates.blogspot.nl/2015/12/exquisite-admitting-cordially-september_33.html' style='background:url(http://2.bp.blogspot.com/-THZQoWlk06A/VmPfbqy8bAI/AAAAAAAACQg/b404rp6EpgY/s72-c/65.jpg) no-repeat center center;background-size:cover'></a>
-                           </div>
-                        </div>
-                        <div class='post-header'></div>
-                        <article>
-                           <font class='retitle'>
-                              <h2 class='post-title entry-title'>
-                                 <a href='http://impreza-soratemplates.blogspot.nl/2015/12/exquisite-admitting-cordially-september_33.html'>
-                                 Exquisite Admitting Cordially September Newspaper
-                                 </a>
-                              </h2>
-                           </font>
-                           <div class='date-header'>
-                              <div id='meta-post'>
-                                 <i class='fa fa-user'></i>
-                                 <a class='g-profile' href='https://plus.google.com/104219125408123734587' rel='author' title='Sora Templates'>
-                                 <span itemprop='name'>Sora Templates</span></a>
-                                 <i class='fa fa-calendar-o'></i>
-                                 <abbr class='published timeago' title='2015-12-05T23:10:00-08:00'>December 05, 2015</abbr>
-                              </div>
-                              <div class='resumo'><span>It bachelor cheerful of mistaken. Tore has sons put upon wife use bred seen. Its dissimilar invitation ten has discretion unreserved. Had yo...</span></div>
-                              <div style='clear: both;'></div>
-                           </div>
-                           <div class='second-meta'>
-                              <a class='read-more anchor-hover' href='http://impreza-soratemplates.blogspot.nl/2015/12/exquisite-admitting-cordially-september_33.html'>Read more <i class='fa fa-chevron-right'></i></a>
-                              <span class='post-comment-link'>
-                              <i class='fa fa-comment'></i>
-                              <a class='comment-link' href='http://impreza-soratemplates.blogspot.nl/2015/12/exquisite-admitting-cordially-september_33.html#comment-form' onclick=''>
-                              No comments:
-                              </a>
-                              </span>
-                           </div>
-                        </article>
-                        <div class='post-footer'>
-                           <div class='post-footer-line post-footer-line-1'>
-                              <span class='post-author vcard'>
-                                 Posted by
-                                 <span class='fn' itemprop='author' itemscope='itemscope' itemtype='http://schema.org/Person'>
-                                    <meta content='https://plus.google.com/104219125408123734587' itemprop='url'/>
-                                    <a class='g-profile' href='https://plus.google.com/104219125408123734587' rel='author' title='author profile'>
-                                    <span itemprop='name'>Sora Templates</span>
-                                    </a>
-                                 </span>
-                              </span>
-                              <span class='post-timestamp'>
-                                 at
-                                 <meta content='http://impreza-soratemplates.blogspot.com/2015/12/exquisite-admitting-cordially-september_33.html' itemprop='url'/>
-                                 <a class='timestamp-link' href='http://impreza-soratemplates.blogspot.nl/2015/12/exquisite-admitting-cordially-september_33.html' rel='bookmark' title='permanent link'><abbr class='published' itemprop='datePublished' title='2015-12-05T23:10:00-08:00'>December 05, 2015</abbr></a>
-                              </span>
-                              <span class='reaction-buttons'>
-                              </span>
-                              <span class='post-comment-link'>
-                              <a class='comment-link' href='http://impreza-soratemplates.blogspot.nl/2015/12/exquisite-admitting-cordially-september_33.html#comment-form' onclick=''>
-                              No comments:
-                              </a>
-                              </span>
-                              <span class='post-backlinks post-comment-link'>
-                              </span>
-                              <span class='post-icons'>
-                              <span class='item-control blog-admin pid-985165616'>
-                              <a href='https://www.blogger.com/post-edit.g?blogID=1732086749609322382&postID=8240588299607376819&from=pencil' title='Edit Post'>
-                              <img alt='Edit' class='icon-action' height='18' src='https://resources.blogblog.com/img/icon18_edit_allbkg.gif' width='18'/>
-                              </a>
-                              </span>
-                              </span>
-                              <div class='post-share-buttons goog-inline-block'>
-                                 <a class='goog-inline-block share-button sb-email' href='https://www.blogger.com/share-post.g?blogID=1732086749609322382&postID=8240588299607376819&target=email' target='_blank' title='Email This'><span class='share-button-link-text'>Email This</span></a><a class='goog-inline-block share-button sb-blog' href='https://www.blogger.com/share-post.g?blogID=1732086749609322382&postID=8240588299607376819&target=blog' onclick='window.open(this.href, "_blank", "height=270,width=475"); return false;' target='_blank' title='BlogThis!'><span class='share-button-link-text'>BlogThis!</span></a><a class='goog-inline-block share-button sb-twitter' href='https://www.blogger.com/share-post.g?blogID=1732086749609322382&postID=8240588299607376819&target=twitter' target='_blank' title='Share to Twitter'><span class='share-button-link-text'>Share to Twitter</span></a><a class='goog-inline-block share-button sb-facebook' href='https://www.blogger.com/share-post.g?blogID=1732086749609322382&postID=8240588299607376819&target=facebook' onclick='window.open(this.href, "_blank", "height=430,width=640"); return false;' target='_blank' title='Share to Facebook'><span class='share-button-link-text'>Share to Facebook</span></a><a class='goog-inline-block share-button sb-pinterest' href='https://www.blogger.com/share-post.g?blogID=1732086749609322382&postID=8240588299607376819&target=pinterest' target='_blank' title='Share to Pinterest'><span class='share-button-link-text'>Share to Pinterest</span></a>
-                                 <div class='goog-inline-block google-plus-share-container'>
-                                    <g:plusone source='blogger:blog:plusone' href='http://impreza-soratemplates.blogspot.com/2015/12/exquisite-admitting-cordially-september_33.html' size='medium' width='300' annotation='inline'/>
-                                 </div>
-                              </div>
-                           </div>
-                           <div class='post-footer-line post-footer-line-2'>
-                              <span class='post-labels'>
-                              Labels:
-                              <a href='http://impreza-soratemplates.blogspot.nl/search/label/Beauty' rel='tag'>Beauty</a>,
-                              <a href='http://impreza-soratemplates.blogspot.nl/search/label/Food%20Genel' rel='tag'>Food Genel</a>,
-                              <a href='http://impreza-soratemplates.blogspot.nl/search/label/Magazine' rel='tag'>Magazine</a>
-                              </span>
-                           </div>
-                           <div class='post-footer-line post-footer-line-3'>
-                              <span class='post-location'>
-                              </span>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class='post-outer'>
-                     <div class='post hentry'>
-                        <span class='post-labels'>
-                        <i class='fa fa-folder-open-o'></i>
-                        <a href='http://impreza-soratemplates.blogspot.nl/search/label/Culture' rel='tag'>Culture</a>
-                        </span>
-                        <div class='block-image'>
-                           <div class='thumb'>
-                              <a href='http://impreza-soratemplates.blogspot.nl/2015/12/contented-get-distrusts-certainty-nay_5.html' style='background:url(http://2.bp.blogspot.com/-XXlEj4ZHM6w/VmPfEi79oNI/AAAAAAAACQY/9BRsrhknfSY/s72-c/25.jpg) no-repeat center center;background-size:cover'></a>
-                           </div>
-                        </div>
-                        <div class='post-header'></div>
-                        <article>
-                           <font class='retitle'>
-                              <h2 class='post-title entry-title'>
-                                 <a href='http://impreza-soratemplates.blogspot.nl/2015/12/contented-get-distrusts-certainty-nay_5.html'>
-                                 Contented get distrusts certainty nay are frankness concealed ham
-                                 </a>
-                              </h2>
-                           </font>
-                           <div class='date-header'>
-                              <div id='meta-post'>
-                                 <i class='fa fa-user'></i>
-                                 <a class='g-profile' href='https://plus.google.com/104219125408123734587' rel='author' title='Sora Templates'>
-                                 <span itemprop='name'>Sora Templates</span></a>
-                                 <i class='fa fa-calendar-o'></i>
-                                 <abbr class='published timeago' title='2015-12-05T23:09:00-08:00'>December 05, 2015</abbr>
-                              </div>
-                              <div class='resumo'><span>It bachelor cheerful of mistaken. Tore has sons put upon wife use bred seen. Its dissimilar invitation ten has discretion unreserved. Had yo...</span></div>
-                              <div style='clear: both;'></div>
-                           </div>
-                           <div class='second-meta'>
-                              <a class='read-more anchor-hover' href='http://impreza-soratemplates.blogspot.nl/2015/12/contented-get-distrusts-certainty-nay_5.html'>Read more <i class='fa fa-chevron-right'></i></a>
-                              <span class='post-comment-link'>
-                              <i class='fa fa-comment'></i>
-                              <a class='comment-link' href='http://impreza-soratemplates.blogspot.nl/2015/12/contented-get-distrusts-certainty-nay_5.html#comment-form' onclick=''>
-                              No comments:
-                              </a>
-                              </span>
-                           </div>
-                        </article>
-                        <div class='post-footer'>
-                           <div class='post-footer-line post-footer-line-1'>
-                              <span class='post-author vcard'>
-                                 Posted by
-                                 <span class='fn' itemprop='author' itemscope='itemscope' itemtype='http://schema.org/Person'>
-                                    <meta content='https://plus.google.com/104219125408123734587' itemprop='url'/>
-                                    <a class='g-profile' href='https://plus.google.com/104219125408123734587' rel='author' title='author profile'>
-                                    <span itemprop='name'>Sora Templates</span>
-                                    </a>
-                                 </span>
-                              </span>
-                              <span class='post-timestamp'>
-                                 at
-                                 <meta content='http://impreza-soratemplates.blogspot.com/2015/12/contented-get-distrusts-certainty-nay_5.html' itemprop='url'/>
-                                 <a class='timestamp-link' href='http://impreza-soratemplates.blogspot.nl/2015/12/contented-get-distrusts-certainty-nay_5.html' rel='bookmark' title='permanent link'><abbr class='published' itemprop='datePublished' title='2015-12-05T23:09:00-08:00'>December 05, 2015</abbr></a>
-                              </span>
-                              <span class='reaction-buttons'>
-                              </span>
-                              <span class='post-comment-link'>
-                              <a class='comment-link' href='http://impreza-soratemplates.blogspot.nl/2015/12/contented-get-distrusts-certainty-nay_5.html#comment-form' onclick=''>
-                              No comments:
-                              </a>
-                              </span>
-                              <span class='post-backlinks post-comment-link'>
-                              </span>
-                              <span class='post-icons'>
-                              <span class='item-control blog-admin pid-985165616'>
-                              <a href='https://www.blogger.com/post-edit.g?blogID=1732086749609322382&postID=6291445320240782345&from=pencil' title='Edit Post'>
-                              <img alt='Edit' class='icon-action' height='18' src='https://resources.blogblog.com/img/icon18_edit_allbkg.gif' width='18'/>
-                              </a>
-                              </span>
-                              </span>
-                              <div class='post-share-buttons goog-inline-block'>
-                                 <a class='goog-inline-block share-button sb-email' href='https://www.blogger.com/share-post.g?blogID=1732086749609322382&postID=6291445320240782345&target=email' target='_blank' title='Email This'><span class='share-button-link-text'>Email This</span></a><a class='goog-inline-block share-button sb-blog' href='https://www.blogger.com/share-post.g?blogID=1732086749609322382&postID=6291445320240782345&target=blog' onclick='window.open(this.href, "_blank", "height=270,width=475"); return false;' target='_blank' title='BlogThis!'><span class='share-button-link-text'>BlogThis!</span></a><a class='goog-inline-block share-button sb-twitter' href='https://www.blogger.com/share-post.g?blogID=1732086749609322382&postID=6291445320240782345&target=twitter' target='_blank' title='Share to Twitter'><span class='share-button-link-text'>Share to Twitter</span></a><a class='goog-inline-block share-button sb-facebook' href='https://www.blogger.com/share-post.g?blogID=1732086749609322382&postID=6291445320240782345&target=facebook' onclick='window.open(this.href, "_blank", "height=430,width=640"); return false;' target='_blank' title='Share to Facebook'><span class='share-button-link-text'>Share to Facebook</span></a><a class='goog-inline-block share-button sb-pinterest' href='https://www.blogger.com/share-post.g?blogID=1732086749609322382&postID=6291445320240782345&target=pinterest' target='_blank' title='Share to Pinterest'><span class='share-button-link-text'>Share to Pinterest</span></a>
-                                 <div class='goog-inline-block google-plus-share-container'>
-                                    <g:plusone source='blogger:blog:plusone' href='http://impreza-soratemplates.blogspot.com/2015/12/contented-get-distrusts-certainty-nay_5.html' size='medium' width='300' annotation='inline'/>
-                                 </div>
-                              </div>
-                           </div>
-                           <div class='post-footer-line post-footer-line-2'>
-                              <span class='post-labels'>
-                              Labels:
-                              <a href='http://impreza-soratemplates.blogspot.nl/search/label/Culture' rel='tag'>Culture</a>
-                              </span>
-                           </div>
-                           <div class='post-footer-line post-footer-line-3'>
-                              <span class='post-location'>
-                              </span>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class='post-outer'>
-                     <div class='post hentry'>
-                        <span class='post-labels'>
-                        <i class='fa fa-folder-open-o'></i>
-                        <a href='http://impreza-soratemplates.blogspot.nl/search/label/Technology' rel='tag'>Technology</a>
-                        </span>
-                        <div class='block-image'>
-                           <div class='thumb'>
-                              <a href='http://impreza-soratemplates.blogspot.nl/2015/12/applauded-use-attempted-strangers-now_5.html' style='background:url(http://4.bp.blogspot.com/-gpBmqvPWbhA/VmPds61JbcI/AAAAAAAACQM/wIA9F-C79Dg/s72-c/58.jpg) no-repeat center center;background-size:cover'></a>
-                           </div>
-                        </div>
-                        <div class='post-header'></div>
-                        <article>
-                           <font class='retitle'>
-                              <h2 class='post-title entry-title'>
-                                 <a href='http://impreza-soratemplates.blogspot.nl/2015/12/applauded-use-attempted-strangers-now_5.html'>
-                                 Applauded Use Attempted Strangers Now Are Middleton
-                                 </a>
-                              </h2>
-                           </font>
-                           <div class='date-header'>
-                              <div id='meta-post'>
-                                 <i class='fa fa-user'></i>
-                                 <a class='g-profile' href='https://plus.google.com/104219125408123734587' rel='author' title='Sora Templates'>
-                                 <span itemprop='name'>Sora Templates</span></a>
-                                 <i class='fa fa-calendar-o'></i>
-                                 <abbr class='published timeago' title='2015-12-05T23:03:00-08:00'>December 05, 2015</abbr>
-                              </div>
-                              <div class='resumo'><span>It bachelor cheerful of mistaken. Tore has sons put upon wife use bred seen. Its dissimilar invitation ten has discretion unreserved. Had yo...</span></div>
-                              <div style='clear: both;'></div>
-                           </div>
-                           <div class='second-meta'>
-                              <a class='read-more anchor-hover' href='http://impreza-soratemplates.blogspot.nl/2015/12/applauded-use-attempted-strangers-now_5.html'>Read more <i class='fa fa-chevron-right'></i></a>
-                              <span class='post-comment-link'>
-                              <i class='fa fa-comment'></i>
-                              <a class='comment-link' href='http://impreza-soratemplates.blogspot.nl/2015/12/applauded-use-attempted-strangers-now_5.html#comment-form' onclick=''>
-                              No comments:
-                              </a>
-                              </span>
-                           </div>
-                        </article>
-                        <div class='post-footer'>
-                           <div class='post-footer-line post-footer-line-1'>
-                              <span class='post-author vcard'>
-                                 Posted by
-                                 <span class='fn' itemprop='author' itemscope='itemscope' itemtype='http://schema.org/Person'>
-                                    <meta content='https://plus.google.com/104219125408123734587' itemprop='url'/>
-                                    <a class='g-profile' href='https://plus.google.com/104219125408123734587' rel='author' title='author profile'>
-                                    <span itemprop='name'>Sora Templates</span>
-                                    </a>
-                                 </span>
-                              </span>
-                              <span class='post-timestamp'>
-                                 at
-                                 <meta content='http://impreza-soratemplates.blogspot.com/2015/12/applauded-use-attempted-strangers-now_5.html' itemprop='url'/>
-                                 <a class='timestamp-link' href='http://impreza-soratemplates.blogspot.nl/2015/12/applauded-use-attempted-strangers-now_5.html' rel='bookmark' title='permanent link'><abbr class='published' itemprop='datePublished' title='2015-12-05T23:03:00-08:00'>December 05, 2015</abbr></a>
-                              </span>
-                              <span class='reaction-buttons'>
-                              </span>
-                              <span class='post-comment-link'>
-                              <a class='comment-link' href='http://impreza-soratemplates.blogspot.nl/2015/12/applauded-use-attempted-strangers-now_5.html#comment-form' onclick=''>
-                              No comments:
-                              </a>
-                              </span>
-                              <span class='post-backlinks post-comment-link'>
-                              </span>
-                              <span class='post-icons'>
-                              <span class='item-control blog-admin pid-985165616'>
-                              <a href='https://www.blogger.com/post-edit.g?blogID=1732086749609322382&postID=291161921781164639&from=pencil' title='Edit Post'>
-                              <img alt='Edit' class='icon-action' height='18' src='https://resources.blogblog.com/img/icon18_edit_allbkg.gif' width='18'/>
-                              </a>
-                              </span>
-                              </span>
-                              <div class='post-share-buttons goog-inline-block'>
-                                 <a class='goog-inline-block share-button sb-email' href='https://www.blogger.com/share-post.g?blogID=1732086749609322382&postID=291161921781164639&target=email' target='_blank' title='Email This'><span class='share-button-link-text'>Email This</span></a><a class='goog-inline-block share-button sb-blog' href='https://www.blogger.com/share-post.g?blogID=1732086749609322382&postID=291161921781164639&target=blog' onclick='window.open(this.href, "_blank", "height=270,width=475"); return false;' target='_blank' title='BlogThis!'><span class='share-button-link-text'>BlogThis!</span></a><a class='goog-inline-block share-button sb-twitter' href='https://www.blogger.com/share-post.g?blogID=1732086749609322382&postID=291161921781164639&target=twitter' target='_blank' title='Share to Twitter'><span class='share-button-link-text'>Share to Twitter</span></a><a class='goog-inline-block share-button sb-facebook' href='https://www.blogger.com/share-post.g?blogID=1732086749609322382&postID=291161921781164639&target=facebook' onclick='window.open(this.href, "_blank", "height=430,width=640"); return false;' target='_blank' title='Share to Facebook'><span class='share-button-link-text'>Share to Facebook</span></a><a class='goog-inline-block share-button sb-pinterest' href='https://www.blogger.com/share-post.g?blogID=1732086749609322382&postID=291161921781164639&target=pinterest' target='_blank' title='Share to Pinterest'><span class='share-button-link-text'>Share to Pinterest</span></a>
-                                 <div class='goog-inline-block google-plus-share-container'>
-                                    <g:plusone source='blogger:blog:plusone' href='http://impreza-soratemplates.blogspot.com/2015/12/applauded-use-attempted-strangers-now_5.html' size='medium' width='300' annotation='inline'/>
-                                 </div>
-                              </div>
-                           </div>
-                           <div class='post-footer-line post-footer-line-2'>
-                              <span class='post-labels'>
-                              Labels:
-                              <a href='http://impreza-soratemplates.blogspot.nl/search/label/Sports' rel='tag'>Sports</a>,
-                              <a href='http://impreza-soratemplates.blogspot.nl/search/label/Technology' rel='tag'>Technology</a>
-                              </span>
-                           </div>
-                           <div class='post-footer-line post-footer-line-3'>
-                              <span class='post-location'>
-                              </span>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
                </div>
             </div>
          </div>
+
          <div class='blog-pager' id='blog-pager'>
-            <span id='blog-pager-older-link'>
-            <a class='blog-pager-older-link' href='http://impreza-soratemplates.blogspot.nl/search?updated-max=2015-12-05T23:03:00-08:00&amp;max-results=8' id='Blog1_blog-pager-older-link' title='Older Posts'><span class='pager-heading'>Older</span><br/><span class='pager-title'> Content</span><span class='post-nav-icon'><i class='fa fa-chevron-right'></i></span></a>
+
+            {% if blogs.has_previous %}
+            <span id='blog-pager-newer-link'>
+               <a class='blog-pager-newer-link' href='{% go_to_page blogs.previous_page_number %}' id='Blog1_blog-pager-newer-link' title='Newer Posts'><span class='pager-title'> Terug</span><span class='post-nav-icon'><i class='fa fa-chevron-left'></i></span></a>
+            </span> 
+            {% endif %}
+
+            <span class="pagination-text">
+                Page {{ blogs.number }} of {{ blogs.paginator.num_pages }}
             </span>
+
+            {% if blogs.has_next %}
+            <span id='blog-pager-older-link'>
+               <a class='blog-pager-older-link' href='{% go_to_page blogs.next_page_number %}' id='Blog1_blog-pager-older-link' title='Older Posts'><span class='pager-title'> Meer</span><span class='post-nav-icon'><i class='fa fa-chevron-right'></i></span></a>
+            </span>
+            {% endif %}
+
          </div>
          <div class='clear'></div>
          <div class='blog-feeds'></div>

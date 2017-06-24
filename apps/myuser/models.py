@@ -9,11 +9,12 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import python_2_unicode_compatible
 
 from .managers import BloggerManager
+import os
 
 
 def get_blog_logo(instance, filename):
     """ Logo of the blog (website) """
-    return os.path.join("static", "img", "bloggers", instance.user.blog.name, filename)
+    return os.path.join("static", "img", "bloggers", instance.blogname, filename)
 
 def get_blogger_logo(instance, filename):
     """ Logo of the blogger (person) """
@@ -82,3 +83,6 @@ class Blogger(AbstractBaseUser, PermissionsMixin):
         Sends an email to this User.
         """
         send_mail(subject, message, from_email, [self.email], **kwargs)
+
+    def __str__(self):
+        return self.first_name
