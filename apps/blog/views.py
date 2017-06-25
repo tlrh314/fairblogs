@@ -7,6 +7,7 @@ from django.core.paginator import EmptyPage
 from django.core.paginator import PageNotAnInteger
 
 from .models import Post
+from .models import Tag
 
 # Create your views here.
 register = template.Library()
