@@ -15,7 +15,7 @@
     }
     }
 
-.form-style-2 input {
+.form-style-2 input, select, textarea {
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -29,12 +29,13 @@
     padding: 7px;
     outline: none;
     width: 80%;
+    display: block;
 }
-.form-style-2 input:focus {
+.form-style-2 input:focus,select:focus,textarea:focus {
     border: 1px solid #d5d5f6;
 }
 
-.form-style-2 label {
+.form-style-2 label, textarea {
     color: #2e2e2e;
     font-family: 'Lato', sans-serif;
     font-size: 14px;
@@ -59,6 +60,7 @@
 .form-style-2 input[type=button]:hover{
     background: #EA7B00;
     color: #fff;
+
 }
 
 .form-style-button {
@@ -105,4 +107,9 @@
 
 .first-col {
     width: 150px;
+}
+
+.checkbox input, label {
+    display: inline-block !important;
+    width: inherit !important;
 }
