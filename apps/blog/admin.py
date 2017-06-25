@@ -11,6 +11,17 @@ from .models import Post
 class TagAdmin(admin.ModelAdmin):
     readonly_fields = ( "date_created", "date_updated", "last_updated_by" )
 
+    fieldsets = [
+        ( "Tags", {
+                "fields": [ "tag_name" ]
+            }
+        ), ( "Meta", {
+                "classes": ["collapse"],
+                "fields": ["date_created", "date_updated", "last_updated_by"]
+            }
+        ),
+    ]
+
     def save_model(self, request, obj, form, change):
         obj.last_updated_by = request.user
         obj.save()
@@ -19,7 +30,18 @@ class TagAdmin(admin.ModelAdmin):
 # @admin.register(Category)
 # class CategoryAdmin(admin.ModelAdmin):
 #     readonly_fields = ( "date_created", "date_updated", "last_updated_by" )
-
+#
+#    fieldsets = [
+#        ( "Categories", {
+#                "fields": [ "category_name" ]
+#            }
+#        ), ( "Meta", {
+#                "classes": ["collapse"],
+#                "fields": ["date_created", "date_updated", "last_updated_by"]
+#            }
+#        ),
+#    ]
+#
 #    def save_model(self, request, obj, form, change):
 #        obj.last_updated_by = request.user
 #        obj.save()
@@ -27,12 +49,26 @@ class TagAdmin(admin.ModelAdmin):
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    readonly_fields = ("date_created", "date_updated",)
+    readonly_fields = ( "date_created", "date_updated", "last_updated_by" )
     list_display = ("title", "author", "get_affiliation", "date_updated" )
     search_fields = ("title", "author", "teaser")
     list_filter = ("is_published",)
     filter_horizontal = ("tags",)
     actions = ("publish", "unpublish" )
+
+    fieldsets = [
+        ( "Blog Info", {
+                "fields": [ "author", "title", "url", "teaser", "image"]
+            }
+        ), ( "Publication Status", {
+                "fields": [ "is_published", "featured", "tags"]
+            }
+        ), ( "Meta", {
+                "classes": ["collapse"],
+                "fields": ["date_created", "date_updated", "last_updated_by"]
+            }
+        ),
+    ]
 
     def save_model(self, request, obj, form, change):
         obj.last_updated_by = request.user
