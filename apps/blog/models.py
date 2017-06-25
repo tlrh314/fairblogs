@@ -61,8 +61,9 @@ class Post(models.Model):
     image = models.ImageField(_("Teaser Photo"), upload_to=get_post_image, blank=True, null=True)
     url = models.CharField(max_length=300, default="#")
 
+    is_published = models.BooleanField(default=False)
     date_created = models.DateTimeField(_("Date Created"), auto_now_add=True)
-    date_updated = models.DateTimeField(_("Date Published"), auto_now=True, blank=True, null=True)
+    date_updated = models.DateTimeField(_("Date Published"), blank=True, null=True)
 
     tags = models.ManyToManyField(Tag, help_text="Tags", blank=True)
     # categories = models.ManyToManyField(Category, help_text="Categories", blank=True)
@@ -75,6 +76,12 @@ class Post(models.Model):
 
     def publish(self):
         self.date_updated = timezone.now()
+        self.is_published = True
+        self.save()
+
+    def unpublish(self):
+        self.date_updated = None
+        self.is_published = False
         self.save()
 
     # def save(self, *args, **kwargs):

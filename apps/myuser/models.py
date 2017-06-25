@@ -40,10 +40,10 @@ class AffiliatedBlog(models.Model):
 class Blogger(AbstractBaseUser, PermissionsMixin):
     """ When referencing users, use: 'settings.AUTH_USER_MODEL' or 'get_user_model()' """
     email = models.EmailField(_("email address"), unique=True)
-    first_name = models.CharField(_("first name"), max_length=30, blank=True)
-    last_name = models.CharField(_("last name"), max_length=30, blank=True)
+    first_name = models.CharField(_("first name"), max_length=30)
+    last_name = models.CharField(_("last name"), max_length=30)
 
-    affiliation = models.ManyToManyField(AffiliatedBlog, related_name="blogger")
+    affiliation = models.ForeignKey(AffiliatedBlog, related_name="blogger")
     avatar = models.ImageField(upload_to="avatars/", null=True, blank=True)
 
     is_active = models.BooleanField(_("active"), default=True,
@@ -69,7 +69,7 @@ class Blogger(AbstractBaseUser, PermissionsMixin):
         """
         Returns the first_name plus the last_name, with a space in between.
         """
-        full_name = "%s %s" % (self.first_name, self.last_name)
+        full_name = "{0} {1}".format(self.first_name, self.last_name)
         return full_name.strip()
 
     def get_short_name(self):
@@ -85,4 +85,4 @@ class Blogger(AbstractBaseUser, PermissionsMixin):
         send_mail(subject, message, from_email, [self.email], **kwargs)
 
     def __str__(self):
-        return self.first_name
+        return self.get_full_name()
