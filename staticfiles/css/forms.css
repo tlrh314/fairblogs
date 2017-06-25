@@ -1,0 +1,108 @@
+.form-style-2{
+    max-width: 1000px;
+    padding: 20px 12px 10px 20px;
+    font: 13px Arial, Helvetica, sans-serif;
+}
+
+.form-style-2 label{
+    display: block;
+    margin: 0px 0px 15px 0px;
+}
+
+@media only screen and (max-width: 768px) {
+    .form-style-2 input {
+        width: 100%;
+    }
+    }
+
+.form-style-2 input {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    border: 1px solid #C2C2C2;
+    box-shadow: 1px 1px 4px #EBEBEB;
+    -moz-box-shadow: 1px 1px 4px #EBEBEB;
+    -webkit-box-shadow: 1px 1px 4px #EBEBEB;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    padding: 7px;
+    outline: none;
+    width: 80%;
+}
+.form-style-2 input:focus {
+    border: 1px solid #d5d5f6;
+}
+
+.form-style-2 label {
+    color: #2e2e2e;
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 21px;
+}
+
+.form-style-2 input[type=submit],
+.form-style-2 input[type=button]{
+    border: none;
+    padding: 8px 15px 8px 15px;
+    background: #FF8500;
+    color: #fff;
+    box-shadow: 1px 1px 4px #DADADA;
+    -moz-box-shadow: 1px 1px 4px #DADADA;
+    -webkit-box-shadow: 1px 1px 4px #DADADA;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+}
+.form-style-2 input[type=submit]:hover,
+.form-style-2 input[type=button]:hover{
+    background: #EA7B00;
+    color: #fff;
+}
+
+.form-style-button {
+    border: none;
+    padding: 8px 15px 8px 15px;
+    background: #000000;
+    color: #fff;
+    box-shadow: 1px 1px 4px #DADADA;
+    -moz-box-shadow: 1px 1px 4px #DADADA;
+    -webkit-box-shadow: 1px 1px 4px #DADADA;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    width: 350px;
+    margin-left: 20px;
+}
+
+.login-button {
+    width: 300px;
+    margin-left: 0px !important;
+}
+
+.margin20 {
+    margin-left: 20px;
+}
+.login {
+    width: 300px !important;
+    margin: 0px !important;
+}
+
+.form-style-button:hover {
+    background: #404040;
+    color: #fff;    
+}
+
+.form-text {
+    color: #2e2e2e;
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 21px; 
+    margin: 0px 20px;   
+}
+
+.first-col {
+    width: 150px;
+}

@@ -1,15 +1,17 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 
-{% block stylesheets %}{{ block.super }} {% endblock %}
+{% block stylesheets %}{{ block.super }} 
+<link href="{% static 'css/forms.css' %}" type="text/css" rel="stylesheet" />
+{% endblock %}
 
 {% block title %} FairBlogs Login {% endblock title %}
 
 {% block content %}
 
-<div class="main-content" role="main" >
+<div id="main-wrapper" class="main-content" role="main">
 
-    <h1 class="text-center"> FairBlogs Login </h1>
+    <h1 class="text-center"> FairBlogs Login </h1> <br>
 
     <div id="contact-form-wrapper" class="text-justify col-xs-12 col-sm-8 col-sm-offset-2 ">
         {% if form.errors %}
@@ -20,44 +22,45 @@
 
         <form class="form-horizontal col-sm-12" role="form" action="" method="post"> {% csrf_token %}
             {% if form.errors %} 
-            <div class="form-group has-error has-feedback">
+            <div class="form-style-2 form-group has-error has-feedback">
             {% else %}
-            <div class="form-group">
+            <div class="form-style-2 form-group">
             {% endif %}
-                <label for="id_username">Email Address:</label>
-                <input class="form-control" type="text" name="username" required="" id="id_username">
+                <label for="id_username" class="login">Emailadres:</label>
+                <input class="form-control login" type="text" name="username" required="" id="id_username">
                 {% if form.errors %} 
                     <i class="glyphicon glyphicon-remove form-control-feedback"></i>
                 {% endif %}
             </div>
 
             {% if form.errors %} 
-            <div class="form-group has-error has-feedback">
+            <div class="form-style-2 form-group has-error has-feedback">
             {% else %}
-            <div class="form-group">
+            <div class="form-style-2 form-group">
             {% endif %}
-                <label for="id_password">Password:</label>
-                <input class="form-control" type="password" name="password" required="" id="id_password">
+                <label for="id_password" class="login">Wachtwoord:</label>
+                <input class="form-control login" type="password" name="password" required="" id="id_password">
                 {% if form.errors %} 
                     <i class="glyphicon glyphicon-remove form-control-feedback"></i>
                 {% endif %}
             </div>
 
-            <div class="form-group">
-                <button type="submit" class="btn btn-success center-block"> Log In </button>
+            <div class="form-style-2 form-group">
+                <button type="submit" class="login-button form-style-button btn btn-success center-block"> Log In </button>
             </div>
 
             <div class="text-center">
                 {% url 'site_password_reset' as password_reset_url %}
                 {% if password_reset_url %}
-                    <a href="{{ password_reset_url }}"> 
-                        Forgotten your password or username? 
+                    <a href="{{ password_reset_url }}" class="margin20"> 
+                        Wachtwoord of gebruikersnaam vergeten? 
                     </a> 
                 {% endif %}
 
             </div>
         </form>
     </form>
-
 </div>
+</div>
+
 {% endblock %}

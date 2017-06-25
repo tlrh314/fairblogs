@@ -3,20 +3,29 @@
 
 {% block stylesheets %} {{ block.super }}
 <link href="/tinymce/css/" type="text/css" media="all" rel="stylesheet" />
+<link href="{% static 'css/forms.css' %}" type="text/css" rel="stylesheet" />
 <script>function djangoFileBrowser(field_name, url, type, win) { return false;}</script>
 <script type="text/javascript" src="{% static 'tinymce/js/tinymce/tinymce.min.js' %}"></script>
 {% endblock stylesheets %}
 
-{% block title %} FairBlogs - Submit Blogpost{% endblock title %}
+{% block title %} FairBlogs - Submit Blogpost {% endblock title %}
 
 {% block content %}
-
-<div class="main-content" role="main" >
-    <h1 class="text-center"> Submit Blogpost </h1>
+<div id="main-wrapper" class="main-content" role="main" >
+    <h1 class="text-center"> Voeg blogpost toe </h1><br>
     <form class="form-horizontal" role="form" action="." method="post" enctype="multipart/form-data"> {% csrf_token %}
-        Author: {{ request.user.email }}
+        <table class="form-text">
+          <tr>
+            <th class="first-col">Auteur: </th>
+            <th>{{ request.user.first_name }} {{ request.user.last_name }}</th>
+          </tr>
+          <tr>
+            <th class="first-col">Blog: </th>
+            <th>{{ request.user.affiliation }}</th>
+          </tr>
+        </table>
         {% for field in form %}
-        <div class="fieldWrapper">
+        <div class="fieldWrapper form-style-2">
             {{ field.errors }}
             {{ field.label_tag }} {{ field }}
             {% if field.help_text %}
@@ -24,7 +33,7 @@
             {% endif %}
         </div>
         {% endfor %}
-        <input type="submit" value="Submit"/> 
+        <input type="submit" class="form-style-button" value="Toevoegen"/> 
     </form>
 </div>
 {% endblock %}
