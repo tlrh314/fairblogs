@@ -57,11 +57,11 @@ class Tag(models.Model):
 class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
         related_name="post_written_by", default=None)
-    title = models.CharField(max_length=300)
-    slug = models.SlugField(_("slug"), unique=True)
+    title = models.CharField(max_length=200)
+    slug = models.SlugField(_("slug"), max_length=255, unique=True)
     teaser = HTMLField(_("Teaser"), blank=True, default="")
     image = models.ImageField(_("Teaser Photo"), upload_to=get_post_image, blank=True, null=True)
-    url = models.URLField()
+    url = models.URLField(max_length=300)
 
     is_published = models.BooleanField(default=False)
     featured = models.BooleanField(default=False,

@@ -68,7 +68,7 @@ def submit(request):
             post.author = request.user
             post.title = form.cleaned_data["title"]
             post.teaser = form.cleaned_data["teaser"]
-            post.url = form.cleaned_data["teaser"]
+            post.url = form.cleaned_data["url"]
             post.image = form.cleaned_data["image"]
             post.publish()  # publish implies save
             return HttpResponseRedirect(reverse("post_detail", kwargs={"slug": post.slug}))
