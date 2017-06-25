@@ -15,11 +15,13 @@ import os
 
 def get_blog_logo(instance, filename):
     """ Logo of the blog (website) """
-    return os.path.join("static", "img", "bloggers", instance.blogname, filename)
+    return os.path.join("static", "img",
+        instance.blogname.replace(" ", ""), filename)
 
 def get_blogger_logo(instance, filename):
     """ Logo of the blogger (person) """
-    return os.path.join("static", "img", "bloggers", instance.user.blog.name, filename)
+    return os.path.join("static", "img",
+        instance.affiliation.blogname.replace(" ", ""), filename)
 
 
 @python_2_unicode_compatible
@@ -51,7 +53,7 @@ class Blogger(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(_("last name"), max_length=30)
 
     affiliation = models.ForeignKey(AffiliatedBlog, related_name="blogger")
-    avatar = models.ImageField(upload_to="avatars/", null=True, blank=True)
+    avatar = models.ImageField(upload_to=get_blogger_logo, null=True, blank=True)
 
     is_active = models.BooleanField(_("active"), default=True,
         help_text=_("Designates whether this user should be treated as "
