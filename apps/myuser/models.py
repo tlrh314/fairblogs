@@ -52,7 +52,7 @@ class Blogger(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(_("first name"), max_length=30)
     last_name = models.CharField(_("last name"), max_length=30)
 
-    affiliation = models.ForeignKey(AffiliatedBlog, related_name="blogger")
+    affiliation = models.ForeignKey(AffiliatedBlog, related_name="blogger", null=True)
     avatar = models.ImageField(upload_to=get_blogger_logo, null=True, blank=True)
 
     is_active = models.BooleanField(_("active"), default=True,
