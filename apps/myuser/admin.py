@@ -28,9 +28,6 @@ class BloggerAdmin(UserAdmin):
     ordering = ("email",)
     readonly_fields = ("last_login", "date_joined",)
 
-    # form = BloggerChangeForm
-    # add_form = BloggerCreationForm
-
     fieldsets = (
         (None, {"fields": ("email", "password")}),
         (_("Personal info"), {"fields": ("first_name", "last_name", "avatar")}),
@@ -42,7 +39,7 @@ class BloggerAdmin(UserAdmin):
     add_fieldsets = (
         (None, {
             "classes": ("wide",),
-            "fields": ("email", "password1", "password2")}
+            "fields": ("email", "first_name", "last_name", "affiliation", "avatar", "password1", "password2")}
         ),
     )
 
