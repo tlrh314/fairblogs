@@ -21,7 +21,7 @@ class Tag(models.Model):
 
     last_updated_by = models.ForeignKey(settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL, blank=True, null=True,
-        related_name="category_changed_by", )
+        related_name="tag_changed_by", )
     date_created = models.DateTimeField(_("Date Created"), auto_now_add=True)
     date_updated = models.DateTimeField(_("Date Last Changed"), auto_now=True)
 
@@ -39,7 +39,7 @@ class Tag(models.Model):
 
 #     last_updated_by  = models.ForeignKey(settings.AUTH_USER_MODEL,
 #         on_delete=models.SET_NULL, blank=True, null=True,
-#         related_name="tags_changed_by", )
+#         related_name="category_changed_by", )
 #     date_created = models.DateTimeField(_("Date Created"), auto_now_add=True)
 #     date_updated = models.DateTimeField(_("Date Last Changed"), auto_now=True)
 

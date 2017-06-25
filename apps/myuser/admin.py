@@ -13,6 +13,10 @@ class AffiliatedBlogAdmin(admin.ModelAdmin):
     list_display = ("blogname", "email", "url" )
     search_fields = ("blogname", "email", "url" )
 
+    def save_model(self, request, obj, form, change):
+        obj.last_updated_by = request.user
+        obj.save()
+
 admin.site.unregister(Group)
 
 
@@ -41,3 +45,7 @@ class BloggerAdmin(UserAdmin):
             "fields": ("email", "password1", "password2")}
         ),
     )
+
+    def save_model(self, request, obj, form, change):
+        obj.last_updated_by = request.user
+        obj.save()
