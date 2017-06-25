@@ -70,7 +70,6 @@ class Blogger(AbstractBaseUser, PermissionsMixin):
     date_created = models.DateTimeField(_("Date Created"), auto_now_add=True)
     date_updated = models.DateTimeField(_("Date Last Changed"), auto_now=True)
 
-
     objects = BloggerManager()
 
     USERNAME_FIELD = "email"
