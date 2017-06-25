@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.conf import settings
 from django.core.mail import send_mail
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
@@ -28,6 +29,12 @@ class AffiliatedBlog(models.Model):
     logo = models.ImageField(upload_to=get_blog_logo, blank=True, null=True)
     email = models.EmailField()
 
+    last_updated_by = models.ForeignKey(settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL, blank=True, null=True,
+        related_name="affilations_changed_by", )
+    date_created = models.DateTimeField(_("Date Created"), auto_now_add=True)
+    date_updated = models.DateTimeField(_("Date Last Changed"), auto_now=True)
+
     class Meta:
         verbose_name = _("Affiliated Blog")
         verbose_name_plural = _("Affiliated Blogs")
@@ -40,10 +47,10 @@ class AffiliatedBlog(models.Model):
 class Blogger(AbstractBaseUser, PermissionsMixin):
     """ When referencing users, use: 'settings.AUTH_USER_MODEL' or 'get_user_model()' """
     email = models.EmailField(_("email address"), unique=True)
-    first_name = models.CharField(_("first name"), max_length=30, blank=True)
-    last_name = models.CharField(_("last name"), max_length=30, blank=True)
+    first_name = models.CharField(_("first name"), max_length=30)
+    last_name = models.CharField(_("last name"), max_length=30)
 
-    affiliation = models.ManyToManyField(AffiliatedBlog, related_name="blogger")
+    affiliation = models.ForeignKey(AffiliatedBlog, related_name="blogger")
     avatar = models.ImageField(upload_to="avatars/", null=True, blank=True)
 
     is_active = models.BooleanField(_("active"), default=True,
@@ -54,6 +61,12 @@ class Blogger(AbstractBaseUser, PermissionsMixin):
     is_superuser = models.BooleanField(_("superuser"), default=False)
 
     date_joined = models.DateTimeField(_("date joined"), auto_now_add=True)
+
+    last_updated_by = models.ForeignKey(settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL, blank=True, null=True,
+        related_name="blogger_changed_by", )
+    date_created = models.DateTimeField(_("Date Created"), auto_now_add=True)
+    date_updated = models.DateTimeField(_("Date Last Changed"), auto_now=True)
 
 
     objects = BloggerManager()
@@ -69,7 +82,7 @@ class Blogger(AbstractBaseUser, PermissionsMixin):
         """
         Returns the first_name plus the last_name, with a space in between.
         """
-        full_name = "%s %s" % (self.first_name, self.last_name)
+        full_name = "{0} {1}".format(self.first_name, self.last_name)
         return full_name.strip()
 
     def get_short_name(self):
@@ -85,4 +98,4 @@ class Blogger(AbstractBaseUser, PermissionsMixin):
         send_mail(subject, message, from_email, [self.email], **kwargs)
 
     def __str__(self):
-        return self.first_name
+        return self.get_full_name()

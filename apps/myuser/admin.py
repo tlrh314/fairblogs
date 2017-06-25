@@ -10,8 +10,12 @@ from .models import AffiliatedBlog
 
 @admin.register(AffiliatedBlog)
 class AffiliatedBlogAdmin(admin.ModelAdmin):
-    pass
+    list_display = ("blogname", "email", "url" )
+    search_fields = ("blogname", "email", "url" )
 
+    def save_model(self, request, obj, form, change):
+        obj.last_updated_by = request.user
+        obj.save()
 
 admin.site.unregister(Group)
 
@@ -23,7 +27,6 @@ class BloggerAdmin(UserAdmin):
     search_fields = ("email", "first_name", "last_name")
     ordering = ("email",)
     readonly_fields = ("last_login", "date_joined",)
-    filter_horizontal = ("affiliation",)
 
     # form = BloggerChangeForm
     # add_form = BloggerCreationForm
@@ -42,3 +45,7 @@ class BloggerAdmin(UserAdmin):
             "fields": ("email", "password1", "password2")}
         ),
     )
+
+    def save_model(self, request, obj, form, change):
+        obj.last_updated_by = request.user
+        obj.save()
