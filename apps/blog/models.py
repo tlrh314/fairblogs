@@ -56,7 +56,7 @@ class Tag(models.Model):
 @python_2_unicode_compatible
 class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
-        related_name="post_changed_by", default=None)
+        related_name="post_written_by", default=None)
     title = models.CharField(max_length=300)
     # slug = models.SlugField(_("slug"), unique=True)
     teaser = HTMLField(_("Teaser"), blank=True, default="")
@@ -64,14 +64,18 @@ class Post(models.Model):
     url = models.CharField(max_length=300, default="#")
 
     is_published = models.BooleanField(default=False)
-    date_created = models.DateTimeField(_("Date Created"), auto_now_add=True)
-    date_updated = models.DateTimeField(_("Date Published"), blank=True, null=True)
+    featured = models.BooleanField(default=False,
+        help_text="Should this post be shown in the featured list?")
 
     tags = models.ManyToManyField(Tag, help_text="Tags", blank=True)
     # categories = models.ManyToManyField(Category, help_text="Categories", blank=True)
 
-    featured = models.BooleanField(default=False,
-        help_text="Should this post be shown in the featured list?")
+    last_updated_by = models.ForeignKey(settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL, blank=True, null=True,
+        related_name="post_changed_by", )
+    date_created = models.DateTimeField(_("Date Created"), auto_now_add=True)
+    date_updated = models.DateTimeField(_("Date Published"), blank=True, null=True)
+
 
     class Meta:
         ordering = ["-date_updated",]
