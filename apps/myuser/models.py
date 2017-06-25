@@ -63,6 +63,7 @@ class Blogger(AbstractBaseUser, PermissionsMixin):
     is_superuser = models.BooleanField(_("superuser"), default=False)
 
     date_joined = models.DateTimeField(_("date joined"), auto_now_add=True)
+    email_confirmed = models.BooleanField(default=False)
 
     last_updated_by = models.ForeignKey(settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL, blank=True, null=True,

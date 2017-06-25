@@ -26,7 +26,7 @@ def about(request):
         about = about[0]
     else:
         raise Http404
-    return render(request, 'pages/aboutus.html',  {"info": about })
+    return render(request, "pages/aboutus.html",  {"info": about })
 
 
 def contact(request):
@@ -74,7 +74,7 @@ def contact(request):
                 bcc=["timohalbesma@gmail.com", ], #"marcellawijngaarden@hotmail.com" ],
                 # Caution, reply_to header is already set by Postfix!
                 # reply_to=list(send_to),
-                # headers={'Message-ID': 'foo'},
+                # headers={"Message-ID": "foo"},
             )
             email.send(fail_silently=False)
             return HttpResponseRedirect(reverse("contact_success"))
@@ -86,6 +86,7 @@ def contact(request):
 
 def contact_success(request):
     return render(request, "pages/contact_success.html")
+
 
 def privacy_policy(request):
     pp = PrivacyPolicy.objects.all()

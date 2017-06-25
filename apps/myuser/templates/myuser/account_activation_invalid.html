@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %} FairBlogs - Invalid Token {% endblock title %}
+
+{% block content %}
+
+<div class="main-content" role="main" >
+    <h1 class="text-center"> Invalid Token </h1>
+
+    <div id="contact-form-wrapper" class="text-justify col-xs-12 col-sm-8 col-sm-offset-2 ">
+        <div>
+            The registration token is invalid. Please <a href="{% url 'contact' %}">contact us</a>.
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+

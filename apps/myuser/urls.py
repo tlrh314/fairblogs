@@ -5,6 +5,9 @@ from django.urls import reverse_lazy
 from django.contrib.auth import views as auth_views
 
 from context_processors import contactinfo
+from .views import signup
+from .views import activate
+from .views import activation_sent
 
 urlpatterns = [
     url(r"^login/$", auth_views.LoginView.as_view(
@@ -57,4 +60,9 @@ urlpatterns = [
         template_name="myuser/password_reset_complete.html"
         ), name="site_password_reset_complete"
     ),
+
+    url(r"^signup/$", signup, name="signup"),
+    url(r"^activation_sent/$", activation_sent, name="activation_sent"),
+    url(r"^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$",
+        activate, name="activate"),
 ]
