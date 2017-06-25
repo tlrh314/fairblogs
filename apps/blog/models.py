@@ -12,7 +12,9 @@ from tinymce.models import HTMLField
 
 def get_post_image(instance, filename):
     """ Logo of the blog (website) """
-    return os.path.join("static", "img", "bloggers", str(instance.author), "posts", filename)
+    return os.path.join("static", "img",
+        instance.author.affiliation.blogname.replace(" ", ""),
+        "posts", str(instance.author).replace(" ", ""), filename)
 
 
 @python_2_unicode_compatible

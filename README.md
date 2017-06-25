@@ -19,3 +19,10 @@ Site code structure:
   - Install required packages: `pip install -r requirements.txt`
   - Setup local_settings: `mv settings/local.py.example settings/local.py`
   - Edit `settings/local.py` to tailor to your machine.
+
+- ** Production **
+  - `mkdir -p static/img static/_versions`
+  - `setfacl -R -d -m u::rwx,u:www-data:rwx,g::rwx,o:rx static`
+  - `setfacl -R -d -m u::rwx,u:fairblogs:rwx,g::rwx,o:rx static`
+  - `setfacl -R -m u::rwx,u:www-data:rwx,g::rwx,o:rx static`
+  - `setfacl -R -m u::rwx,u:fairblogs:rwx,g::rwx,o:rx static`
