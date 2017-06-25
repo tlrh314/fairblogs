@@ -9,8 +9,6 @@ from django.utils.encoding import python_2_unicode_compatible
 
 from tinymce.models import HTMLField
 
-# from .storage import OverwriteStorage
-
 
 def get_post_image(instance, filename):
     """ Logo of the blog (website) """
@@ -62,7 +60,7 @@ class Post(models.Model):
     title = models.CharField(max_length=300)
     slug = models.SlugField(_("slug"), unique=True)
     teaser = HTMLField(_("Teaser"), blank=True, default="")
-    image = models.ImageField(_("Teaser Photo"), upload_to=get_post_image, blank=True, null=True)  #, storage=OverwriteStorage())
+    image = models.ImageField(_("Teaser Photo"), upload_to=get_post_image, blank=True, null=True)
     url = models.URLField()
 
     is_published = models.BooleanField(default=False)

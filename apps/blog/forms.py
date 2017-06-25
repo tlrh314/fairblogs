@@ -1,4 +1,5 @@
 from django import forms
+from django.forms.utils import ErrorList
 
 from tinymce.widgets import TinyMCE
 
@@ -32,3 +33,8 @@ class SubmitBlogpostForm(forms.ModelForm):
         widget=TinyMCE(mce_attrs=TINYMCE_LOCAL_CONFIG)
     )
 
+    def clean(self):
+        image = self.cleaned_data.get("image")
+        if not image:
+            self._errors["image"] = ErrorList()
+            self._errors["image"].append("Please upload an image")
