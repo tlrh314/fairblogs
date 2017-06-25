@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block stylesheets %} {{ block.super }}
+<link href="/tinymce/css/" type="text/css" media="all" rel="stylesheet" />
+<script>function djangoFileBrowser(field_name, url, type, win) { return false;}</script>
+<script type="text/javascript" src="{% static 'tinymce/js/tinymce/tinymce.min.js' %}"></script>
+{% endblock stylesheets %}
+
+{% block title %} FairBlogs - Submit Blogpost{% endblock title %}
+
+{% block content %}
+
+<div class="main-content" role="main" >
+    <h1 class="text-center"> Submit Blogpost </h1>
+    <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data"> {% csrf_token %}
+        Author: {{ request.user.email }}
+        {% for field in form %}
+        <div class="fieldWrapper">
+            {{ field.errors }}
+            {{ field.label_tag }} {{ field }}
+            {% if field.help_text %}
+            <p class="help">{{ field.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-success center-block"> Post </button>
+    </form>
+</div>
+{% endblock %}

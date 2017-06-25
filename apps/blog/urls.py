@@ -1,8 +1,13 @@
 from django.conf.urls import url
-from . import views
+
+from .views import index
+from .views import submit
+from .views import post_detail
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
-    url(r'^index/$', views.index, name='index'),
-    url(r'^/(?P<tag>.*)', views.index, name='index'),
+    url(r'^submit/$', submit, name='submit'),
+    url(r'^/post/(?P<slug>.*)', post_detail, name='post_detail'),
+    url(r'^/(?P<tag>.*)', index, name='index'),
+    url(r'^index/$', index, name='index'),
+    url(r'^$', index, name='index'),
 ]

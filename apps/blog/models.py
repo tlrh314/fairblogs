@@ -9,6 +9,8 @@ from django.utils.encoding import python_2_unicode_compatible
 
 from tinymce.models import HTMLField
 
+# from .storage import OverwriteStorage
+
 
 def get_post_image(instance, filename):
     """ Logo of the blog (website) """
@@ -58,10 +60,10 @@ class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
         related_name="post_written_by", default=None)
     title = models.CharField(max_length=300)
-    # slug = models.SlugField(_("slug"), unique=True)
+    slug = models.SlugField(_("slug"), unique=True)
     teaser = HTMLField(_("Teaser"), blank=True, default="")
-    image = models.ImageField(_("Teaser Photo"), upload_to=get_post_image, blank=True, null=True)
-    url = models.CharField(max_length=300, default="#")
+    image = models.ImageField(_("Teaser Photo"), upload_to=get_post_image, blank=True, null=True)  #, storage=OverwriteStorage())
+    url = models.URLField()
 
     is_published = models.BooleanField(default=False)
     featured = models.BooleanField(default=False,
@@ -90,9 +92,9 @@ class Post(models.Model):
         self.is_published = False
         self.save()
 
-    # def save(self, *args, **kwargs):
-    #     self.slug = slugify(self.title)
-    #     super(Post, self).save(*args, **kwargs)
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super(Post, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.title

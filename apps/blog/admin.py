@@ -65,7 +65,7 @@ class PostAdmin(admin.ModelAdmin):
             }
         ), ( "Meta", {
                 "classes": ["collapse"],
-                "fields": ["date_created", "date_updated", "last_updated_by"]
+                "fields": ["slug", "date_created", "date_updated", "last_updated_by"]
             }
         ),
     ]

@@ -9,11 +9,11 @@ from context_processors import contactinfo
 urlpatterns = [
     url(r"^login/$", auth_views.LoginView.as_view(
         template_name="myuser/login.html"
-        ), name="site_login"
+        ), name="login"
     ),
     url(r"^logout/$", auth_views.LogoutView.as_view(
         template_name="myuser/logged_out.html"
-        ), name="site_logout"
+        ), name="logout"
     ),
 
     url(r"^password_change/$", auth_views.PasswordChangeView.as_view(
