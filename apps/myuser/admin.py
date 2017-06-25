@@ -25,7 +25,7 @@ admin.site.unregister(Group)
 class BloggerAdmin(UserAdmin):
     list_display = ("email", "first_name", "last_name", "affiliation", "is_active", "is_staff", "is_superuser")
     list_filter = ("affiliation", "is_active", "is_staff", "is_superuser")
-    search_fields = ("email", "first_name", "last_name", "affiliation")
+    search_fields = ("email", "first_name", "last_name", "affiliation__blogname")
     ordering = ("email",)
     readonly_fields = ("last_login", "date_joined",)
 
