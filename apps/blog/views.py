@@ -1,9 +1,12 @@
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.shortcuts import get_object_or_404
-from django.shortcuts import render
-from django.db.models import Q
 from django import template
-from .models import *
+from django.db.models import Q
+from django.shortcuts import render
+from django.shortcuts import get_object_or_404
+from django.core.paginator import Paginator
+from django.core.paginator import EmptyPage
+from django.core.paginator import PageNotAnInteger
+
+from .models import Post
 
 # Create your views here.
 register = template.Library()
@@ -11,7 +14,7 @@ register = template.Library()
 def index(request):
     blogs = Post.objects.all()
 
-    tags = request.GET.getlist('tag', None)
+    tags = request.GET.getlist("tag", None)
 
     # Filter by tag
     if tags:
@@ -25,7 +28,7 @@ def index(request):
 
     # Make list a paginator object to handle number of products shown
     # per page
-    products_per_page = request.GET.get('limit', '15')
+    products_per_page = request.GET.get("limit", "15")
 
 
     blogs_per_page = 10     # Temporarily always max 10
@@ -34,7 +37,7 @@ def index(request):
     #     blogs_per_page = 10
 
     paginator = Paginator(blogs, blogs_per_page)
-    page = request.GET.get('page', 1)
+    page = request.GET.get("page", 1)
 
     try:
         blogs = paginator.page(page)
@@ -45,5 +48,5 @@ def index(request):
         # If page is out of range (e.g. 9999), deliver last page of results.
         blogs = paginator.page(paginator.num_pages)
 
-    return render(request, 'blog/index.html', {'blogs': blogs,
-                                                'current_tags': tags})
+    return render(request, "blog/index.html", {"blogs": blogs,
+                                                "current_tags": tags})

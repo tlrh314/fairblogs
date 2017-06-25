@@ -16,6 +16,7 @@ from .models import PrivacyPolicy
 from .models import AboutUs
 from .forms import ContactForm
 from ..blog.models import Post
+from context_processors import contactinfo
 
 def about(request):
     about = AboutUs.objects.all()
@@ -98,4 +99,5 @@ def privacy_policy(request):
         {"privacy_policy": policy, "privacy_policy_last_update": last_updated })
 
 def page_not_found(request):
-    return render(request, "404.html")
+    # Info from context_processors seems unavailable. So we pass contactinfo.
+    return render(request, "404.html", contactinfo(request))
