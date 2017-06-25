@@ -49,13 +49,13 @@
                               <div id='meta-post'>
                                  <i class='fa fa-user'></i>
                                  <a class='g-profile' href='{{ blog.author.affiliation.first.url }}' target='_blank' rel='author' title='{{ blog.author.affiliation.first }}'>
-                                 <span itemprop='name'>{{ blog.author.affiliation.first }}</span></a>
+                                 <span itemprop='name'>{{ blog.author.affiliation }}</span></a>
                                  <i class='fa fa-calendar-o'></i>
                                  <abbr class='published timeago' title='{{ blog.date_created }}'>{{ blog.date_created }}</abbr>
                               </div>
                               <div class='resumo'><span>{% autoescape off %}{{ blog.teaser }}{% endautoescape %} 
                               
-                              <a href='{{ blog.author.affiliation.first.url }}' class='blogthumb' target='_blank'><img src='/{{ blog.author.affiliation.first.logo.url}}'/></a>
+                              <a href='{{ blog.author.affiliation.first.url }}' class='blogthumb' target='_blank'><img src='{{ blog.author.affiliation.logo.url}}'/></a>
                               <a href='{{ blog.url }}' target='_blank' style="float: right;"><strong>Lees verder</strong></a> </span></div>
                               <div style='clear: both;'></div>
                            </div>
