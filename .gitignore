@@ -110,6 +110,7 @@ settings/local.py
 migrations/
 static/
 media/
+piwik/
 
 # Filebrowser thumbnails
 _versions
