@@ -11,6 +11,9 @@ from tinymce.models import HTMLField
 def place_welcome_photo(instance, filename):
     return os.path.join("uploads", filename)
 
+def get_company_logo(instance, filename):
+    """ Logo of the owner websites (website) """
+    return os.path.join("static", "img", "logos", filename)
 
 def validate_only_one_instance(obj):
     """ Allow only one instance of a model to be created, in this case WelcomeMessage and ContactInfo """
@@ -37,7 +40,19 @@ class PrivacyPolicy(models.Model):
 
 
 class AboutUs(models.Model):
-    about = HTMLField(verbose_name=_("About Us"), blank=True)
+    about = HTMLField(verbose_name=_("About Us"), blank=True, help_text='Introduction about Fairblogs for on the About Us page')
+
+    about_fairfrog = HTMLField(verbose_name=_("About Fairfrog"), blank=True)   
+    url_fairfrog = models.URLField(help_text='Website url', blank=True)
+    logo_fairfrog = models.ImageField(upload_to=get_company_logo, blank=True, null=True)
+
+    about_sociii = HTMLField(verbose_name=_("About Sociii"), blank=True)
+    url_sociii = models.URLField(help_text='Website url', blank=True)
+    logo_sociii = models.ImageField(upload_to=get_company_logo, blank=True, null=True)
+
+    about_projectcece = HTMLField(verbose_name=_("About Project Cece"), blank=True)
+    url_projectcece = models.URLField(help_text='Website url', blank=True)
+    logo_projectcece = models.ImageField(upload_to=get_company_logo, blank=True, null=True)
 
     last_updated_by = models.ForeignKey(settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL, blank=True, null=True,

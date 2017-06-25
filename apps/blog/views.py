@@ -47,8 +47,3 @@ def index(request):
 
     return render(request, 'blog/index.html', {'blogs': blogs,
                                                 'current_tags': tags})
-
-def about(request):
-    #  Return about us content from admin
-
-    return render(request, 'blog/aboutus.html')

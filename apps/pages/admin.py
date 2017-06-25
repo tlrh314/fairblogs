@@ -15,7 +15,16 @@ class AboutUsAdmin(admin.ModelAdmin):
     fieldsets = [
         ( "About Us", {
                 "fields": [ "about" ]
-            }
+            }),
+         ("About Fairfrog", {
+                "fields": [ "about_fairfrog", "url_fairfrog", "logo_fairfrog" ]
+            }),
+         ("About Socii", {
+                "fields": [ "about_sociii", "url_sociii", "logo_sociii" ]
+            }),
+         ("About Project Cece", {
+                "fields": [ "about_projectcece", "url_projectcece", "logo_projectcece" ]
+            }         
         ), ( "Meta", {
                 "classes": ["collapse"],
                 "fields": ["date_created", "date_updated", "last_updated_by"]

@@ -35,6 +35,7 @@ urlpatterns = [
     url(r'^ajax_select/', include(ajax_select_urls)),
     url(r'^admin/', admin.site.urls),
     url(r'', include('apps.blog.urls')),
+    url(r'', include('apps.pages.urls')),
 ]
 
 if "runserver" in sys.argv:
