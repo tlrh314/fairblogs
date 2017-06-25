@@ -88,9 +88,9 @@ def contact_success(request):
 
 def privacy_policy(request):
     pp = PrivacyPolicy.objects.all()
-    if pp:
+    if len(pp) == 1:
         policy = pp[0].policy
-        last_updated = pp[0].last_updated
+        last_updated = pp[0].date_updated
     else:
         policy = "Our privacy policy is still work in progress."
         last_updated = None
