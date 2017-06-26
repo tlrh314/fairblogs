@@ -70,6 +70,7 @@ def submit(request):
             post.teaser = form.cleaned_data["teaser"]
             post.url = form.cleaned_data["url"]
             post.image = form.cleaned_data["image"]
+            post.date_created = form.cleaned_data["date_created"]
             post.publish()  # publish implies save
             return HttpResponseRedirect(reverse("post_detail", kwargs={"slug": post.slug}))
     else:

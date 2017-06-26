@@ -62,6 +62,9 @@ class Post(models.Model):
     teaser = HTMLField(_("Teaser"), blank=True, default="Inleiding/teaser voor je blogpost van max. 500 woorden")
     image = models.ImageField(_("Teaser foto"), upload_to=get_post_image, blank=True, null=True)
     url = models.URLField(max_length=300)
+    date_created = models.DateTimeField(_("Post is gepubliceerd op"),
+        default=timezone.now)
+
 
     is_published = models.BooleanField(default=False)
     featured = models.BooleanField(default=False,
@@ -73,12 +76,13 @@ class Post(models.Model):
     last_updated_by = models.ForeignKey(settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL, blank=True, null=True,
         related_name="post_changed_by", )
-    date_created = models.DateTimeField(_("Date Created"), auto_now_add=True)
+    # date_created = models.DateTimeField(_("Date Created"), auto_now_add=True)
+
     date_updated = models.DateTimeField(_("Date Published"), blank=True, null=True)
 
 
     class Meta:
-        ordering = ["-date_updated",]
+        ordering = ["-date_created",]
 
     def publish(self):
         self.date_updated = timezone.now()
