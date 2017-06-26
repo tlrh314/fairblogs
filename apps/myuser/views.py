@@ -1,5 +1,6 @@
 from django.contrib.auth import login
 from django.contrib import messages
+from django.core.mail import EmailMessage
 from django.shortcuts import render, redirect
 from django.utils.encoding import force_bytes
 from django.utils.encoding import force_text
@@ -13,6 +14,7 @@ from django.contrib.admin.models import ADDITION, CHANGE, DELETION, LogEntry
 from .forms import SignUpForm
 from .models import Blogger
 from .tokens import account_activation_token
+from context_processors import contactinfo
 
 def signup(request):
     if request.method == "POST":
@@ -22,15 +24,24 @@ def signup(request):
             user.is_active = False
             user.save()
             current_site = get_current_site(request)
-            subject = "Activate Your Account at {0}".format(current_site.name)
+            subject = "Activate your account at {0}".format(current_site.name)
             message = render_to_string("myuser/account_activation_email.html", {
                 "user": user,
+                "protocol": request.scheme,
                 "domain": current_site.domain,
                 "uid": urlsafe_base64_encode(force_bytes(user.pk)),
                 "token": account_activation_token.make_token(user),
             })
             user.email_user(subject, message, from_email="no-reply@fairblogs.nl")
 
+            # Add record to LogEntry
+            content_type_pk = ContentType.objects.get_for_model(Blogger).pk
+            LogEntry.objects.log_action(
+                request.user.pk, content_type_pk, user.pk, str(user), CHANGE,
+                change_message="User signed up."
+            )
+
+            # Redirect user to template
             return redirect("activation_sent")
     else:
         form = SignUpForm()
@@ -39,6 +50,9 @@ def signup(request):
 
 def activation_sent(request):
     return render(request, "myuser/activation_sent.html")
+
+def email_validated(request):
+    return render(request, "myuser/email_validated.html")
 
 
 def activate(request, uidb64, token):
@@ -49,16 +63,39 @@ def activate(request, uidb64, token):
         user = None
 
     if user is not None and account_activation_token.check_token(user, token):
-        user.is_active = True
+        # Only confirm email and inform user via message
         user.email_confirmed = True
+        # user.is_active = True
+        # login(request, user)
+        # messages.success(request, "Your account has succesfully been activated.")
         user.save()
+
+        # Add record to LogEntry
         content_type_pk = ContentType.objects.get_for_model(Blogger).pk
         LogEntry.objects.log_action(
             request.user.pk, content_type_pk, user.pk, str(user), CHANGE,
-            change_message="Account activated by user."
+            change_message="Email address confirmed by user."
         )
-        login(request, user)
-        messages.success(request, "Your account has succesfully been activated.")
-        return redirect("index")
+
+        # Inform site management that account now needs to be activated
+        current_site = get_current_site(request)
+        message = render_to_string("myuser/admin_activation_email.html", {
+            "user": user,
+            "user_email": user.email,
+            "protocol": request.scheme,
+            "domain": current_site.domain,
+        })
+        email = EmailMessage(
+            subject="Activate new user account at {0}".format(current_site.name),
+            body=message,
+            # Caution, from_email must contain domain name!
+            from_email="no-reply@fairblogs.nl",
+            to=list().append(contactinfo(None)["contactinfo"].webmaster_email),
+            bcc=["timohalbesma@gmail.com", ]
+        )
+        email.send(fail_silently=False)
+
+        # return redirect("blogs:index")
+        return redirect("email_validated")
     else:
         return render(request, "myuser/account_activation_invalid.html")

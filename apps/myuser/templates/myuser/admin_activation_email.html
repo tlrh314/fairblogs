@@ -1,0 +1,11 @@
+{% autoescape off %}Dear admin,
+
+A new user signed up for FairBlogs: {{ user_email }} ({{ user }}).
+
+Please confirm this user at {{ protocol }}://{{ domain }}{% url 'admin:myuser_blogger_changelist' %}.
+Select the user, then select the action 'Confirm new user' and press 'Go'.
+
+Kind regards,
+The FairBlogs Team
+
+[this is a machine generated mail]{% endautoescape %}

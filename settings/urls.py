@@ -48,8 +48,8 @@ urlpatterns = [
         # }
     ), name="password_reset"),
     url(r"^accounts/", include("apps.myuser.urls")),
-    url(r"", include("apps.blog.urls")),
-    url(r"", include("apps.pages.urls")),
+    url(r"", include("apps.blog.urls", namespace="blogs")),
+    url(r"", include("apps.pages.urls", namespace="pages")),
 ]
 
 if "runserver" in sys.argv:

@@ -4,13 +4,11 @@ You are receiving this email because somebody, probably you, signed up for FairB
 
 As a first step, please click on the link below to confirm your registration:
 
-https://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+{{ protocol }}://{{ domain }}{% url 'activate' uidb64=uid token=token %}
 
 The second step is that we check and verify your account. You will receive a second confirmation email once your account is ready to be used!
 
 Kind regards,
-
 The FairBlogs Team
-{{ site }}
-{{ contact_email }}
-{% endautoescape %}
+
+[this is a machine generated mail]{% endautoescape %}

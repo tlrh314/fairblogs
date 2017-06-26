@@ -71,11 +71,11 @@
                   <div class='widget-content'>
                      <ul id='nav' itemscope='' itemtype='http://schema.org/SiteNavigationElement'>
                         <li itemprop='name'><a href='/' itemprop='url'>Home</a></li>
-                        <li itemprop='name'><a href='{% url "about" %}' itemprop='url'>About us</a></li>
-                        <li itemprop='name'><a href='{% url "submit" %}' itemprop='url'>Submit</a></li>
+                        <li itemprop='name'><a href='{% url "pages:about" %}' itemprop='url'>About us</a></li>
+                        <li itemprop='name'><a href='{% url "blogs:submit" %}' itemprop='url'>Submit</a></li>
                         <li itemprop='name'><a href='{% url "login" %}' itemprop='url'>Login</a></li>
                         <li itemprop='name'><a href='{% url "signup" %}' itemprop='url'>Sign Up</a></li>
-                        <li itemprop='name'><a href='{% url "contact" %}' itemprop='url'>Contact</a></li>
+                        <li itemprop='name'><a href='{% url "pages:contact" %}' itemprop='url'>Contact</a></li>
                      </ul>
                      <script type='text/javascript'> 
                         //<![CDATA[

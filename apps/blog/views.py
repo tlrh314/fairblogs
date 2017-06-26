@@ -72,7 +72,7 @@ def submit(request):
             post.image = form.cleaned_data["image"]
             post.date_created = form.cleaned_data["date_created"]
             post.publish()  # publish implies save
-            return HttpResponseRedirect(reverse("post_detail", kwargs={"slug": post.slug}))
+            return HttpResponseRedirect(reverse("blogs:post_detail", kwargs={"slug": post.slug}))
     else:
         form = SubmitBlogpostForm()
 
