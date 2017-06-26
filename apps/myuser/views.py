@@ -1,4 +1,5 @@
 from django.contrib.auth import login
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.utils.encoding import force_bytes
 from django.utils.encoding import force_text
@@ -6,6 +7,8 @@ from django.utils.http import urlsafe_base64_encode
 from django.utils.http import urlsafe_base64_decode
 from django.template.loader import render_to_string
 from django.contrib.sites.shortcuts import get_current_site
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.admin.models import ADDITION, CHANGE, DELETION, LogEntry
 
 from .forms import SignUpForm
 from .models import Blogger
@@ -49,7 +52,13 @@ def activate(request, uidb64, token):
         user.is_active = True
         user.email_confirmed = True
         user.save()
+        content_type_pk = ContentType.objects.get_for_model(Blogger).pk
+        LogEntry.objects.log_action(
+            request.user.pk, content_type_pk, user.pk, str(user), CHANGE,
+            change_message="Account activated by user."
+        )
         login(request, user)
+        messages.success(request, "Your account has succesfully been activated.")
         return redirect("index")
     else:
         return render(request, "myuser/account_activation_invalid.html")

@@ -97,6 +97,10 @@ window.cookieconsent_options = {"message":"We use temporary cookies to improve f
          <div class='row' id='content-wrapper'>
             
             <!-- Load specific page content here --> 
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+
             {% block content %}
             {% endblock %}
 
