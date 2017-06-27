@@ -6,6 +6,7 @@ from django.contrib.auth import views as auth_views
 
 from context_processors import contactinfo
 from .views import signup
+from .views import new_affiliation
 from .views import activate
 from .views import activation_sent
 from .views import email_validated
@@ -63,6 +64,7 @@ urlpatterns = [
     ),
 
     url(r"^signup/$", signup, name="signup"),
+    url(r"^new_affiliation/$", new_affiliation, name="new_affiliation"),
     url(r"^activation_sent/$", activation_sent, name="activation_sent"),
     url(r"^email_validated/$", email_validated, name="email_validated"),
     url(r"^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$",

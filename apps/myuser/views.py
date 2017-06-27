@@ -1,7 +1,7 @@
 from django.contrib.auth import login
 from django.contrib import messages
 from django.core.mail import EmailMessage
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.encoding import force_bytes
 from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_encode
@@ -12,7 +12,9 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.admin.models import ADDITION, CHANGE, DELETION, LogEntry
 
 from .forms import SignUpForm
+from .forms import CreateAffiliationForm
 from .models import Blogger
+from .models import AffiliatedBlog
 from .tokens import account_activation_token
 from context_processors import contactinfo
 
@@ -42,10 +44,42 @@ def signup(request):
             )
 
             # Redirect user to template
-            return redirect("activation_sent")
+            if form.cleaned_data["affiliation"]:
+                return redirect("activation_sent")
+            else:
+                request.session["new_user_pk"] = user.pk
+                return redirect("new_affiliation")
     else:
         form = SignUpForm()
     return render(request, "myuser/signup.html", {"form": form})
+
+
+def new_affiliation(request):
+    if request.method == "POST":
+        user = get_object_or_404(Blogger, pk=request.session["new_user_pk"])
+        form = CreateAffiliationForm(data=request.POST, files=request.FILES)
+        if form.is_valid():
+            affiliation = form.save(commit=False)
+            affiliation.save()
+            print(affiliation.pk)
+
+            # Add record to LogEntry
+            content_type_pk = ContentType.objects.get_for_model(AffiliatedBlog).pk
+            LogEntry.objects.log_action(
+                user.pk, content_type_pk, affiliation.pk, str(affiliation), CHANGE,
+                change_message="New affiliation created via signup form."
+            )
+
+            content_type_pk = ContentType.objects.get_for_model(Blogger).pk
+            LogEntry.objects.log_action(
+                user.pk, content_type_pk, user.pk, str(user), CHANGE,
+                change_message="Added new affiliation: {0}.".format(affiliation)
+            )
+
+            return redirect("activation_sent")
+    else:
+        form = CreateAffiliationForm()
+    return render(request, "myuser/new_affiliation.html", {"form": form})
 
 
 def activation_sent(request):

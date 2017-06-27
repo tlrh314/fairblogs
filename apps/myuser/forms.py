@@ -10,8 +10,14 @@ class SignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=True)
     last_name = forms.CharField(max_length=30, required=True)
     affiliation = forms.ModelChoiceField(queryset=AffiliatedBlog.objects.all(),
-        required=False, help_text="Which blog? Leave blank if you're new!")
+        required=False, help_text="Welke blog? Laat leeg als jouw blog er niet tussen staat!")
 
     class Meta:
         model = Blogger
         fields = ("email", "first_name", "last_name", "affiliation", "password1", "password2", )
+
+
+class CreateAffiliationForm(forms.ModelForm):
+    class Meta:
+        model = AffiliatedBlog
+        fields = ("blogname", "url", "logo", "email")
