@@ -126,7 +126,7 @@ def activate(request, uidb64, token):
             body=message,
             # Caution, from_email must contain domain name!
             from_email="no-reply@fairblogs.nl",
-            to=list().append(contactinfo(None)["contactinfo"].webmaster_email),
+            to=[ contactinfo(None)["contactinfo"].webmaster_email, ],
             bcc=["timohalbesma@gmail.com", ]
         )
         email.send(fail_silently=False)
