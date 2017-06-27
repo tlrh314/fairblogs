@@ -77,7 +77,7 @@ def contact(request):
                 # headers={"Message-ID": "foo"},
             )
             email.send(fail_silently=False)
-            return HttpResponseRedirect(reverse("contact_success"))
+            return HttpResponseRedirect(reverse("pages:contact_success"))
     else:
         form = ContactForm()
 
