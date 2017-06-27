@@ -61,7 +61,9 @@ def new_affiliation(request):
         if form.is_valid():
             affiliation = form.save(commit=False)
             affiliation.save()
-            print(affiliation.pk)
+
+            user.affiliation = affiliation
+            user.save()
 
             # Add record to LogEntry
             content_type_pk = ContentType.objects.get_for_model(AffiliatedBlog).pk
