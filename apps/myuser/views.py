@@ -109,7 +109,7 @@ def activate(request, uidb64, token):
         # Add record to LogEntry
         content_type_pk = ContentType.objects.get_for_model(Blogger).pk
         LogEntry.objects.log_action(
-            request.user.pk, content_type_pk, user.pk, str(user), CHANGE,
+            user.pk, content_type_pk, user.pk, str(user), CHANGE,
             change_message="Email address confirmed by user."
         )
 
