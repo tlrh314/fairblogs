@@ -119,7 +119,7 @@ LOGIN_REDIRECT_URL = '/'
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-LANGUAGE_CODE = "en-gb"
+LANGUAGE_CODE = "nl-nl"
 
 TIME_ZONE = "Europe/Amsterdam"
 
