@@ -26,7 +26,16 @@ TINYMCE_LOCAL_CONFIG= {
 class SubmitBlogpostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ("title", "url", "image", "date_created")
+        fields = ("title", "url", "date_created", "tags", "image", "teaser" )
+
+    # tags = forms.ModelMultipleChoiceField(
+    #         widget=forms.CheckboxSelectMultiple(),
+    #         queryset=Tag.objects.all(),
+    #         required=True)
+
+    tags = forms.ModelMultipleChoiceField(queryset=Tag.objects.all())
+
+    date_created = forms.DateTimeField(label="Post is gepubliceerd op")
 
     teaser = forms.CharField(
         required=True,
@@ -34,12 +43,6 @@ class SubmitBlogpostForm(forms.ModelForm):
         widget=TinyMCE(mce_attrs=TINYMCE_LOCAL_CONFIG)
     )
 
-    # date_created = forms.DateTimeField(input_formats=['%Y-%m-%d %H:%M'],required=True) #, default=timezone.now)
-
-    # def __init__(self, *args, **kwargs):
-    #     super(SubmitBlogpostForm, self).__init__(*args, **kwargs)
-    #     self.fields['date_created'].widget = widgets.AdminSplitDateTime()
-        # self.fields['sale_end_time'].widget = widgets.AdminSplitDateTime()
 
     def clean(self):
         image = self.cleaned_data.get("image")

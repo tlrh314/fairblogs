@@ -4,9 +4,24 @@
 {% block stylesheets %} {{ block.super }}
 <link href="/tinymce/css/" type="text/css" media="all" rel="stylesheet" />
 <link href="{% static 'css/forms.css' %}" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">
+<link rel="stylesheet" href="{% static 'css/jquery-ui-timepicker-addon.css' %}">
+{% endblock stylesheets %}
+
+
+{% block topscripts %} {{ block.super }}
 <script>function djangoFileBrowser(field_name, url, type, win) { return false;}</script>
 <script type="text/javascript" src="{% static 'tinymce/js/tinymce/tinymce.min.js' %}"></script>
-{% endblock stylesheets %}
+
+<script type="text/javascript" src="{% static 'js/jquery-1.12.4.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery-ui.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery-ui-timepicker-addon.js' %}"></script>
+<script>
+$( function() {
+    $( "#id_date_created" ).datetimepicker();
+} );
+</script>
+{% endblock topscripts %}
 
 {% block title %} FairBlogs - Submit Blogpost {% endblock title %}
 
