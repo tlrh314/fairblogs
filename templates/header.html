@@ -1,7 +1,7 @@
 {% load staticfiles %}
 {% load template_extras %}
 
-<!--          <div class='top-bar'>
+         <div class='top-bar'>
             <div class='top-bar-wrapper row'>
                <div class='top-bar-menu'>
                   <div class='top-menu'>
@@ -9,10 +9,11 @@
                         <div class='widget LinkList' data-version='1' id='LinkList940'>
                            <div class='widget-content'>
                               <ul id='nav1' itemscope='' itemtype='http://schema.org/SiteNavigationElement'>
-                                 <li itemprop='name'><a href='#' itemprop='url'><i class="fa fa-home"></i> Home</a></li>
-                                 <li itemprop='name'><a href='#' itemprop='url'><i class="fa fa-envelope"></i> Contact</a></li>
-                                 <li itemprop='name'><a href='#' itemprop='url'><i class="fa fa-user"></i> About</a></li>
-                                 <li itemprop='name'><a href='#' itemprop='url'><i class="fa fa-life-ring"></i> 404</a></li>
+                                 <li itemprop='name'><a href='/' itemprop='url'><i class="fa fa-home"></i> Home</a></li>
+                                 <li itemprop='name'><a href='{% url "pages:contact" %}'  itemprop='url'><i class="fa fa-envelope"></i> Contact</a></li>
+                                 <li itemprop='name'><a href='{% url "login" %}' itemprop='url'><i class="fa fa-user"></i> Login</a></li>
+                                 <li itemprop='name'><a href='{% url "signup" %}' itemprop='url'><i class="fa fa-sign-in"></i> Aanmelden</a></li>
+                                 <li itemprop='name'><a href='{% url "blogs:submit" %}' itemprop='url'><i class="fa fa-newspaper-o"></i> Voeg blogpost toe</a></li>
                               </ul>
                            </div>
                         </div>
@@ -24,14 +25,14 @@
                      <li>
                         <a class='search'>
                            <form action='/search/max-results=7' method='get'>
-                              <input id='s' name='q' placeholder='Type and hit enter...' type='text'/>
+                              <input id='s' name='q' placeholder='Zoeken...' type='text'/>
                            </form>
                         </a>
                      </li>
                   </div>
                </div>
             </div>
-         </div> -->
+         </div>
          <!-- <div style='clear: both;'></div> -->
 <!--          <div id='header-wrapper'>
             <div class='header section' id='header'>
@@ -71,10 +72,10 @@
                   <div class='widget-content'>
                      <ul id='nav' itemscope='' itemtype='http://schema.org/SiteNavigationElement'>
                         <li itemprop='name'><a href='/' itemprop='url'>Home</a></li>
-                        <li itemprop='name'><a href='{% url "pages:about" %}' itemprop='url'>About us</a></li>
+                        <li itemprop='name'><a href='{% url "pages:about" %}' itemprop='url'>Over ons</a></li>
                         <li itemprop='name'><a href='{% url "blogs:submit" %}' itemprop='url'>Submit</a></li>
                         <li itemprop='name'><a href='{% url "login" %}' itemprop='url'>Login</a></li>
-                        <li itemprop='name'><a href='{% url "signup" %}' itemprop='url'>Sign Up</a></li>
+                        <li itemprop='name'><a href='{% url "signup" %}' itemprop='url'>Aanmelden</a></li>
                         <li itemprop='name'><a href='{% url "pages:contact" %}' itemprop='url'>Contact</a></li>
                      </ul>
                      <script type='text/javascript'> 

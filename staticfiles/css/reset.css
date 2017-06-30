@@ -31,6 +31,7 @@ code{    font-family: 'Courier New', Courier, monospace;    font-size:12px;    c
 ::-o-selection {background:transparent; text-shadow:#000 0 0 2px;}
 a img{	border: none;}
 .widget img{max-width:100%}
+.fairblog-logo {max-width: 55% !important;}
 ol, ul { padding:0;  margin:0;  text-align: left;  }
 ol li { list-style-type: decimal;  padding:0 0 5px;  }
 ul li { list-style-type: disc;  padding: 0 0 5px;  }
@@ -1094,6 +1095,14 @@ float:right;
 color: #f4f4f4;
 }
 /* ######## Custom Widget Css ######################### */
+.width-100 {
+	width: 100%;
+}
+
+.center-social {
+	width: 170px;
+	margin: 0 auto !important;
+}
 #ads-blog .widget {
 width: 728px;
 max-height: 90px;
@@ -1112,7 +1121,7 @@ text-align: left;
 .label-size {
 display: inline-block;
 float: left;
-font-size: 10px;
+font-size: 14px;
 line-height: normal;
 margin: 0 5px 5px 0;
 opacity: 1
@@ -1253,6 +1262,9 @@ margin: 30px 0;
 }
 .overlay h3 {
 float: left;
+}
+.fairblog-logo {
+	max-width:75%
 }
 }
 @media screen and (max-width: 880px) {
