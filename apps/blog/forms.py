@@ -35,7 +35,10 @@ class SubmitBlogpostForm(forms.ModelForm):
 
     tags = forms.ModelMultipleChoiceField(queryset=Tag.objects.all())
 
-    date_created = forms.DateTimeField(label="Post is gepubliceerd op")
+    # TODO: @MarcellaJP the format is not yet accepted and raises a validationerror
+    date_created = forms.DateTimeField(
+            input_formats="%m/%d/%Y %H:%M",
+            label="Post is gepubliceerd op")
 
     teaser = forms.CharField(
         required=True,
@@ -48,4 +51,10 @@ class SubmitBlogpostForm(forms.ModelForm):
         image = self.cleaned_data.get("image")
         if not image:
             self._errors["image"] = ErrorList()
-            self._errors["image"].append("Please upload an image")
+            self._errors["image"].append("Uploaden van een plaatje is verplicht.")
+
+        print(self.cleaned_data.get("tags").count())
+
+        if self.cleaned_data.get("tags").count() > 5:
+            self._errors["tags"] = ErrorList()
+            self._errors["tags"].append("Er mogen maxiaal 5 tags gekozen worden.")
