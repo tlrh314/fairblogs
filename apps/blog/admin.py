@@ -49,7 +49,7 @@ class TagAdmin(admin.ModelAdmin):
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    readonly_fields = ( "slug", "date_updated", "last_updated_by" )
+    readonly_fields = ( "slug", "date_updated", "last_updated_by", "popularity" )
     list_display = ("title", "author", "get_affiliation", "date_updated" )
     search_fields = ("title", "author", "teaser")
     list_filter = ("is_published",)
@@ -65,7 +65,7 @@ class PostAdmin(admin.ModelAdmin):
             }
         ), ( "Meta", {
                 "classes": ["collapse"],
-                "fields": ["slug", "date_updated", "last_updated_by"]
+                "fields": ["slug", "date_updated", "last_updated_by", "popularity"]
             }
         ),
     ]

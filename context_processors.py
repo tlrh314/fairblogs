@@ -2,6 +2,7 @@ from __future__ import unicode_literals, absolute_import, division
 
 from apps.pages.models import ContactInfo
 from apps.blog.models import Tag
+from apps.blog.models import Post
 
 from django.db.utils import OperationalError
 
@@ -38,4 +39,10 @@ def base(request):
     """
     View that is inherited everywhere (for base template)
     """
-    return {"tags": Tag.objects.all()}
+    all_posts = Post.objects.all()
+    popular_posts = all_posts.order_by('popularity')
+    if len(all_posts) >= 6:
+        popular_posts = popular_posts[:6]
+
+    return {'tags': Tag.objects.all(), 
+            'popular_posts': popular_posts}

@@ -1,6 +1,7 @@
 from django import template
 from urlobject import URLObject
 from apps.blog.models import Tag
+from apps.blog.models import Post
 
 register = template.Library()
 

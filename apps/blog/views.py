@@ -82,3 +82,9 @@ def submit(request):
 def post_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
     return render(request, "blog/detail.html", { "post": post })
+
+def update_post_counter(request, slug):
+    post = Post.objects.get_object_or_404(slug=slug.replace('/', ''))
+    post.popularity += 1
+    post.save()
+    return HttpResponseRedirect(request.GET.get('next'))

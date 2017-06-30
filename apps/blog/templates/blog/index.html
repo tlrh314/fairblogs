@@ -3,6 +3,9 @@
 {% load template_extras %}
 {% block content %}
 
+<script>
+function updateCount(object) {
+</script>
 <div id='main-wrapper'>
    <div class='main section' id='main'>
    {% if current_tags %}
@@ -26,7 +29,7 @@
                      <div class='post hentry'>
                         <div class='block-image'>
                            <div class='thumb'>
-                              <a href='{{ blog.url }}' target='_blank' class="block-image-a" style='background:url(/{{ blog.image.url }}) no-repeat center center;background-size:cover'></a>
+                              <a href='/viewpost/{{blog.slug}}/?next={{ blog.url }}' target='_blank' class="block-image-a" style='background:url(/{{ blog.image.url }}) no-repeat center center;background-size:cover'></a>
                            </div>
 
                            <div class='labels-post resumo'>
@@ -42,7 +45,7 @@
                         <article>
                            <font class='retitle'>
                               <h2 class='post-title entry-title'>
-                                 <a href='{{ blog.url }}' target='_blank'>
+                                 <a href='/viewpost/{{blog.slug}}/?next={{ blog.url }}' target='_blank'>
                                  {{ blog.title }}
                                  </a>
                               </h2>
@@ -58,7 +61,7 @@
                               <div class='resumo'><span>{% autoescape off %}{{ blog.teaser }}{% endautoescape %} 
                               
                               <a href='{{ blog.author.affiliation.first.url }}' class='blogthumb' target='_blank'><img src='{{ blog.author.affiliation.logo.url}}'/></a>
-                              <a href='{{ blog.url }}' target='_blank' style="float: right;"><strong>Lees verder</strong></a> </span></div>
+                              <a href='/viewpost/{{blog.slug}}/?next={{ blog.url }}' target='_blank' style="float: right;"><strong>Lees verder</strong></a> </span></div>
                               <div style='clear: both;'></div>
                            </div>
                         </article>

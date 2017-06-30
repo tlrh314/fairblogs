@@ -79,6 +79,7 @@ class Post(models.Model):
     # date_created = models.DateTimeField(_("Date Created"), auto_now_add=True)
 
     date_updated = models.DateTimeField(_("Date Published"), blank=True, null=True)
+    popularity = models.IntegerField(default=0)
 
 
     class Meta:
