@@ -126,50 +126,19 @@
          <h2>Populaire Posts</h2>
          <div class='widget-content popular-posts'>
             <ul>
+               {% for top_post in popular_posts %}
                <li>
                   <div class='item-thumbnail-only'>
                      <div class='item-thumbnail'>
-                        <a href='http://impreza-soratemplates.blogspot.nl/2015/12/celebrated-am-announcing-delightful_5.html' target='_blank'>
-                        <img alt='Celebrated am announcing delightful remarkably we' border='0' src='https://2.bp.blogspot.com/-LW7gy1Agfr4/VmPhMD-k5FI/AAAAAAAACRM/LAuVq2IZ4yQ/w72-h72-p-k-no-nu/33.jpg'/>
+                        <a href='/viewpost/{{top_post.slug}}/?next={{ top_post.url }}' target='_blank'>
+                        <img alt='{{ top_post.title }}' border='0' src='/{{ top_post.image.url }}'/>
                         </a>
                      </div>
-                     <div class='item-title'><a href='http://impreza-soratemplates.blogspot.nl/2015/12/celebrated-am-announcing-delightful_5.html'>Celebrated am announcing delightful remarkably we</a></div>
+                     <div class='item-title'><a href='/viewpost/{{top_post.slug}}/?next={{ top_post.url }}''>{{ top_post.title }}</a></div>
                   </div>
                   <div style='clear: both;'></div>
                </li>
-               <li>
-                  <div class='item-thumbnail-only'>
-                     <div class='item-thumbnail'>
-                        <a href='http://impreza-soratemplates.blogspot.nl/2015/12/melancholy-middletons-yet-understood_5.html' target='_blank'>
-                        <img alt='Melancholy Middletons Yet Understood Decisively' border='0' src='http://2.bp.blogspot.com/-sem8_gRfOLM/VmPgvHMjF3I/AAAAAAAACRA/ONmswZltaLQ/w72-h72-p-k-no-nu/45.jpg'/>
-                        </a>
-                     </div>
-                     <div class='item-title'><a href='http://impreza-soratemplates.blogspot.nl/2015/12/melancholy-middletons-yet-understood_5.html'>Melancholy Middletons Yet Understood Decisively</a></div>
-                  </div>
-                  <div style='clear: both;'></div>
-               </li>
-               <li>
-                  <div class='item-thumbnail-only'>
-                     <div class='item-thumbnail'>
-                        <a href='http://impreza-soratemplates.blogspot.nl/2015/12/applauded-use-attempted-strangers-now_5.html' target='_blank'>
-                        <img alt='Applauded Use Attempted Strangers Now Are Middleton' border='0' src='http://4.bp.blogspot.com/-gpBmqvPWbhA/VmPds61JbcI/AAAAAAAACQM/wIA9F-C79Dg/w72-h72-p-k-no-nu/58.jpg'/>
-                        </a>
-                     </div>
-                     <div class='item-title'><a href='http://impreza-soratemplates.blogspot.nl/2015/12/applauded-use-attempted-strangers-now_5.html'>Applauded Use Attempted Strangers Now Are Middleton</a></div>
-                  </div>
-                  <div style='clear: both;'></div>
-               </li>
-               <li>
-                  <div class='item-thumbnail-only'>
-                     <div class='item-thumbnail'>
-                        <a href='http://impreza-soratemplates.blogspot.nl/2015/12/whether-article-spirits-belongs-to_5.html' target='_blank'>
-                        <img alt='Whether Article Spirits belongs to everybody' border='0' src='https://2.bp.blogspot.com/-upU6GUtOQUs/VmPgE85QoYI/AAAAAAAACQw/zOrWY6Nmq9k/w72-h72-p-k-no-nu/85.jpg'/>
-                        </a>
-                     </div>
-                     <div class='item-title'><a href='http://impreza-soratemplates.blogspot.nl/2015/12/whether-article-spirits-belongs-to_5.html'>Whether Article Spirits belongs to everybody</a></div>
-                  </div>
-                  <div style='clear: both;'></div>
-               </li>
+               {% endfor %}
                <li>
                   <div class='item-thumbnail-only'>
                      <div class='item-thumbnail'>
