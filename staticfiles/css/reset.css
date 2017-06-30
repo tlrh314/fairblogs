@@ -432,7 +432,7 @@ position: relative;
 display: block;
 overflow: hidden;
 }
-.block-image a {
+.block-image-a {
 width: 100%;
 height: 230px;
 display: block;
@@ -451,6 +451,9 @@ color: #bdbdbd;
 }
 .post-header {
 padding: 10px 0;
+}
+.labels-post {
+	margin-top: 5px;
 }
 #meta-post .fa-calendar-o {
 margin-left: 8px;

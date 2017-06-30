@@ -18,22 +18,22 @@
       <div class='widget Blog' data-version='1' id='Blog1'>
          <div class='blog-posts hfeed'>
             <div class="date-outer">
-               <h2 class='date-header'><span>Saturday, 5 December 2015</span></h2>
+               <h2 class='date-header'><span>Sunday, 23 July 2017</span></h2>
                <div class="date-posts">
 
                {% for blog in blogs %}
                   <div class='post-outer'>
                      <div class='post hentry'>
-                        <!-- To do: Put labels at better place --> 
-                        <span class='post-labels'>
-                        {% for tag in blog.tags.all %}                       
-                           <i class='fa fa-folder-open-o'></i>                        
-                           <a href='#' rel='tag' style="margin-right:5px;">{{ tag }}</a>
-                        {% endfor %}
-                        </span>
                         <div class='block-image'>
                            <div class='thumb'>
                               <a href='{{ blog.url }}' target='_blank' style='background:url(/{{ blog.image.url }}) no-repeat center center;background-size:cover'></a>
+                           </div>
+
+                           <div class='labels-post resumo'>
+                              {% for tag in blog.tags.all %}                       
+                                 <i class='fa fa-hashtag'></i>                        
+                                 <a href='#' class='resumo' rel='tag' style="margin-right:5px;">{{ tag }}</a>
+                              {% endfor %}
                            </div>
                         </div>
                         <div class='post-header'></div>
@@ -66,15 +66,23 @@
                   {% endfor %}
                   <div class='post-outer'>
                      <div class='post hentry'>
-                        <span class='post-labels'>
-                        <i class='fa fa-folder-open-o'></i>
-                        <a href='http://impreza-soratemplates.blogspot.nl/search/label/Fashion' rel='tag'>Fashion</a>
-                        </span>
                         <div class='block-image'>
                            <div class='thumb'>
-                              <a href='http://impreza-soratemplates.blogspot.nl/2015/12/melancholy-middletons-yet-understood_5.html' style='background:url(http://2.bp.blogspot.com/-sem8_gRfOLM/VmPgvHMjF3I/AAAAAAAACRA/ONmswZltaLQ/s72-c/45.jpg) no-repeat center center;background-size:cover'></a>
+                              <a href='http://impreza-soratemplates.blogspot.nl/2015/12/melancholy-middletons-yet-understood_5.html' class="block-image-a" style='background:url(http://2.bp.blogspot.com/-sem8_gRfOLM/VmPgvHMjF3I/AAAAAAAACRA/ONmswZltaLQ/s72-c/45.jpg) no-repeat center center;background-size:cover'></a>
+                           </div>
+                           <div class='labels-post resumo'>
+                              <i class='fa fa-hashtag'></i>
+                              <a href='http://impreza-soratemplates.blogspot.nl/search/label/Fashion' class='resumo' rel='tag'>Fashion </a>
+
+                              <i class='fa fa-hashtag'></i>
+                              <a href='http://impreza-soratemplates.blogspot.nl/search/label/Fashion' class='resumo' rel='tag'>Vegan </a>
                            </div>
                         </div>
+<!--                         <span class='' style="float: left;">
+                           <i class='fa fa-hashtag'></i>
+                           <a href='http://impreza-soratemplates.blogspot.nl/search/label/Fashion' rel='tag'>Fashion</a>
+                           <a href='http://impreza-soratemplates.blogspot.nl/search/label/Fashion' rel='tag'>Vegan</a>
+                           </span> -->
                         <div class='post-header'></div>
                         <article>
                            <font class='retitle'>
