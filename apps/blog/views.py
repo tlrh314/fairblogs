@@ -37,7 +37,7 @@ def index(request):
     products_per_page = request.GET.get("limit", "15")
 
 
-    blogs_per_page = 10     # Temporarily always max 10
+    blogs_per_page = 6     # Temporarily always max 6
     # Validate input (protection agains hacking..)
     # if not blogs_per_page.isdigit():
     #     blogs_per_page = 10
@@ -59,6 +59,7 @@ def index(request):
 
 @login_required
 def submit(request):
+
     if request.method == "POST":
         form = SubmitBlogpostForm(data=request.POST, files=request.FILES)
         if form.is_valid():
