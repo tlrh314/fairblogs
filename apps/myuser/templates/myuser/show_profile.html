@@ -14,7 +14,7 @@
     </div>
 
 
-    {% if request.user.avatar.url %}
+    {% if request.user.avatar %}
     <img style="margin-bottom: 50px;" src="/{{ request.user.avatar.url }}" width="200px"></img>
     {% endif %}
 
