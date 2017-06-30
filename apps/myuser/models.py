@@ -55,6 +55,10 @@ class Blogger(AbstractBaseUser, PermissionsMixin):
     affiliation = models.ForeignKey(AffiliatedBlog, related_name="blogger", null=True)
     avatar = models.ImageField(upload_to=get_blogger_logo, null=True, blank=True)
 
+    facebook = models.URLField(_("Facebook"), null=True, blank=True)
+    twitter = models.URLField(_("Twitter"), null=True, blank=True)
+    instagram = models.URLField(_("Instagram"), null=True, blank=True)
+
     is_active = models.BooleanField(_("active"), default=True,
         help_text=_("Designates whether this user should be treated as "
         "active. Unselect this instead of deleting accounts."))

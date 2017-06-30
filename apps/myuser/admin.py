@@ -38,6 +38,7 @@ class BloggerAdmin(UserAdmin):
         (None, {"fields": ("email", "password")}),
         (_("Personal info"), {"fields": ("first_name", "last_name", "avatar")}),
         (_("Blog Name"), {"fields": ("affiliation",)}),
+        (_("Social Media"), {"fields": ("facebook", "twitter", "instagram")}),
         (_("Permissions"), {"fields": ("is_active", "is_staff", "is_superuser",
                                        "groups", "user_permissions")}),
         (_("Important dates"), {"fields": ("last_login", "date_joined")}),
