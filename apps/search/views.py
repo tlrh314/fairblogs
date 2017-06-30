@@ -76,7 +76,8 @@ def search(request):
         )
 
         bloggers_filter = (bloggers_filter |
-            Q(first_name__icontains=term) | Q(last_name__icontains=term)
+            Q(first_name__icontains=term) | Q(last_name__icontains=term) |
+            Q(affiliation__blogname__icontains=term)
         )
 
         affiliated_blogs_filter = (affiliated_blogs_filter |

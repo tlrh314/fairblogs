@@ -32,7 +32,7 @@
     <div class="search-results">
         <h2> Bloggers ({% if bloggers %} {{ bloggers.count }} {% else %} 0 {% endif %}) </h2>
         {% for blogger in bloggers %}
-            {{ blogger }} <br>
+        <strong>{{ blogger.affiliation.blogname }}</strong>: {{ blogger }} ({{ blogger.email }}) <br>
         {% endfor %}
     </div>
 
