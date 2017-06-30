@@ -12,10 +12,42 @@
   Maak een account aan om ook blogs toe te voegen aan FairBlogs. <br>
   <br>
   Na het aanmaken van een persoonlijk account verifieren wij de account en daarna
-  kun je jouw blogsposts direct uploaden op FairBlogs!
+  kun je thumbnails voor je blogsposts direct uploaden op FairBlogs!
   <form method="post" class="form-style-2">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ form.non_field_errors.help_text }}
+    
+    <p><label for="id_email">Emailadres:</label> {{ form.email }} </p>
+    <p><label for="id_first_name">Voornaam:</label> {{ form.first_name }} </p>
+    <p><label for="id_last_name">Achternaam:</label> {{ form.last_name }} </p>
+    <p><label for="id_affiliation">Blog:</label> {{ form.affiliation }} {{ form.affiliation.help_text|safe }} </p>
+
+
+    <p><label for="id_password1">Wachtwoord:</label> {{ form.password1 }} {{ form.password1.help_text|safe }} </p>
+
+
+    <p><label for="id_password2">Bevestig je wachtwoord:</label> {{ form.password2 }} </p>
+
+
+    <p class='form-section-head'>Social media</p>
+    <p class='form-section-text'> Voer hieronder de urls naar je social media paginas in om je FairBlogs account te koppelen. Als je je accounts hieronder invult, dan taggen we je automatisch in de social media posts die we plaatsen om je blogposts te promoten. </p>
+    <p class='social-submit'>
+      <label for="id_facebook">Facebook:</label> 
+    {{ form.facebook }}
+    <span class="fa fa-facebook input-symbol"></span>
+  </p>
+
+    <p class='social-submit'>
+      <label for="id_twitter">Twitter:</label> 
+      {{ form.twitter }} 
+      <span class="fa fa-twitter input-symbol"></span>
+    </p>
+
+    <p class='social-submit'>
+      <label for="id_instagram">Instagram:</label> 
+      {{ form.instagram }} 
+      <span class="fa fa-instagram input-symbol"></span>
+  </p>
     <button type="submit" class="form-style-button">Aanmelden</button>
   </form>
  </div>

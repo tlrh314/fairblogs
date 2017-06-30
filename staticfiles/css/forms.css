@@ -1,7 +1,7 @@
 .form-style-2{
     max-width: 1000px;
     padding: 20px 12px 10px 20px;
-    font: 13px Arial, Helvetica, sans-serif;
+    /*font: 13px Arial, Helvetica, sans-serif;*/
 }
 
 .form-style-2 label{
@@ -9,11 +9,44 @@
     margin: 0px 0px 15px 0px;
 }
 
-@media only screen and (max-width: 768px) {
+.social-submit input {
+    max-width: 600px;
+    padding-left: 25px !important;
+}
+
+.input-symbol {
+    float: left;
+    margin-right: 6px;
+    margin-left: 6px;
+    margin-top: -20px;
+    position: relative;
+    z-index: 2;
+}
+
+.form-section-head {
+    /*font-weight: 400;*/
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    position: relative;
+    font-size: 16px;
+    margin: 30px 0;
+    /*text-align: center;*/
+}
+
+.form-section-text {
+    max-width: 80%;
+}
+
+@media only screen and (max-width: 980px) {
     .form-style-2 input {
         width: 100%;
     }
+    .form-section-text {
+        max-width: 100%;
     }
+    }
+
 
 .form-style-2 input, select, textarea {
     box-sizing: border-box;
@@ -30,6 +63,7 @@
     outline: none;
     width: 80%;
     display: block;
+    font-family: 'Lato', sans-serif;
 }
 .form-style-2 input:focus,select:focus,textarea:focus {
     border: 1px solid #d5d5f6;
