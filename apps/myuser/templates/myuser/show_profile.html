@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block stylesheets %}{{ block.super }} 
+<link href="{% static 'css/forms.css' %}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+
+<div id="main-wrapper" class="main-content" role="main">
+  <h1>Profile</h1><br>
+
+  {{ request.user }}
+ </div>
+{% endblock %}

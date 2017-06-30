@@ -21,3 +21,11 @@ class CreateAffiliationForm(forms.ModelForm):
     class Meta:
         model = AffiliatedBlog
         fields = ("blogname", "url", "logo", "email")
+
+class EditBloggerForm(forms.ModelForm):
+    # affiliation = forms.ModelChoiceField(queryset=AffiliatedBlog.objects.all(),
+    #     required=True, help_text="Welke blog? Laat leeg als jouw blog er niet tussen staat!")
+
+    class Meta:
+        model = Blogger
+        fields = ("email", "first_name", "last_name", "affiliation", "avatar", "facebook", "twitter", "instagram",)
