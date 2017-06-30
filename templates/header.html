@@ -11,9 +11,14 @@
                               <ul id='nav1' itemscope='' itemtype='http://schema.org/SiteNavigationElement'>
                                  <li itemprop='name'><a href='/' itemprop='url'><i class="fa fa-home"></i> Home</a></li>
                                  <li itemprop='name'><a href='{% url "pages:contact" %}'  itemprop='url'><i class="fa fa-envelope"></i> Contact</a></li>
+                                 {% if user.is_authenticated %} <li itemprop='name'><a href='{% url "blogs:submit" %}' itemprop='url'><i class="fa fa-newspaper-o"></i> Voeg blogpost toe</a></li> {% endif %}
+                                 {% if not user.is_authenticated %} <li itemprop='name'><a href='{% url "signup" %}' itemprop='url'><i class="fa fa-sign-in"></i> Aanmelden</a></li> {% endif %}
+                                 {% if user.is_authenticated %}
+                                 <li itemprop='name'><a href='{% url "update_account" %}' itemprop='url'><i class="fa fa-user"></i> {{ request.user }}</a></li>
+                                 <li itemprop='name'><a href='{% url "logout" %}' itemprop='url'><i class="fa fa-sign-out"></i> Logout</a></li>
+                                 {% else %}
                                  <li itemprop='name'><a href='{% url "login" %}' itemprop='url'><i class="fa fa-user"></i> Login</a></li>
-                                 <li itemprop='name'><a href='{% url "signup" %}' itemprop='url'><i class="fa fa-sign-in"></i> Aanmelden</a></li>
-                                 <li itemprop='name'><a href='{% url "blogs:submit" %}' itemprop='url'><i class="fa fa-newspaper-o"></i> Voeg blogpost toe</a></li>
+                                 {% endif %}
                               </ul>
                            </div>
                         </div>

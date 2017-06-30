@@ -7,12 +7,14 @@ from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_encode
 from django.utils.http import urlsafe_base64_decode
 from django.template.loader import render_to_string
+from django.contrib.auth.decorators import login_required
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.admin.models import ADDITION, CHANGE, DELETION, LogEntry
 
 from .forms import SignUpForm
 from .forms import CreateAffiliationForm
+from .forms import EditBloggerForm
 from .models import Blogger
 from .models import AffiliatedBlog
 from .tokens import account_activation_token
@@ -135,3 +137,25 @@ def activate(request, uidb64, token):
         return redirect("email_validated")
     else:
         return render(request, "myuser/account_activation_invalid.html")
+
+@login_required
+def update_account(request):
+    if request.method == "POST":
+        form = EditBloggerForm(data=request.POST, instance=get_object_or_404(Blogger, pk=request.user.pk))
+        if form.is_valid():
+            user = form.save()
+
+            # Add record to LogEntry
+            content_type_pk = ContentType.objects.get_for_model(Blogger).pk
+            LogEntry.objects.log_action(
+                user.pk, content_type_pk, user.pk, str(user), CHANGE,
+                change_message="User updated profile via website."
+            )
+
+            return redirect("show_account")
+    else:
+        form = EditBloggerForm(instance=get_object_or_404(Blogger, pk=request.user.pk))
+    return render(request, "myuser/update_profile.html", {"form": form})
+
+def show_account(request):
+    return render(request, "myuser/show_profile.html")
