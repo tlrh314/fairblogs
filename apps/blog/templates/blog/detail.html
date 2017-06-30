@@ -13,7 +13,11 @@
             <div class='post hentry'>
                 <div class='block-image'>
                     <div class='thumb'>
+                        {% if post.image %}
                         <a href='{{ post.url }}' target='_blank' style='background:url(/{{ post.image.url }}) no-repeat center center;background-size:cover'></a>
+                        {% else %}
+                        <a href='{{ post.url }}' target='_blank' style='background:url(#) no-repeat center center;background-size:cover'></a>
+                        {% endif %}
                     </div>
                 </div>
                 <div class='post-header'></div>

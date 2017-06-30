@@ -130,9 +130,15 @@
                <li>
                   <div class='item-thumbnail-only'>
                      <div class='item-thumbnail'>
+                        {% if top_post.image %}
                         <a href='/viewpost/{{top_post.slug}}/?next={{ top_post.url }}' target='_blank'>
                         <img alt='{{ top_post.title }}' border='0' src='/{{ top_post.image.url }}'/>
                         </a>
+                        {% else %}
+                        <a href='/viewpost/{{top_post.slug}}/?next={{ top_post.url }}' target='_blank'>
+                        <img alt='{{ top_post.title }}' border='0' src=''/>
+                        </a>
+                        {% endif %}
                      </div>
                      <div class='item-title'><a href='/viewpost/{{top_post.slug}}/?next={{ top_post.url }}''>{{ top_post.title }}</a></div>
                   </div>

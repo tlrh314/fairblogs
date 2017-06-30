@@ -26,7 +26,11 @@
                      <div class='post hentry'>
                         <div class='block-image'>
                            <div class='thumb'>
+                               {% if blog.image %}
                               <a href='/viewpost/{{blog.slug}}/?next={{ blog.url }}' target='_blank' class="block-image-a" style='background:url(/{{ blog.image.url }}) no-repeat center center;background-size:cover'></a>
+                              {% else %}
+                              <a href='#' target='_blank' class="block-image-a" style='background:url(#) no-repeat center center;background-size:cover'></a>
+                              {% endif %}
                            </div>
 
                            <div class='labels-post resumo'>
