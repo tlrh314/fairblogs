@@ -1275,6 +1275,10 @@ float: left;
 .fairblog-logo {
 	max-width:75%
 }
+.labels-post {
+	width: 100%;
+	display: inline-block;
+}
 }
 @media screen and (max-width: 880px) {
 #nav1, #nav {
