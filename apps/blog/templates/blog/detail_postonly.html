@@ -1,13 +1,3 @@
-{% extends "base.html" %}
-{% load static %}
-{# load interviewtags #}
-{% block stylesheets %} {{ block.super }} <link rel="stylesheet" type="text/css" href="{% static 'css/interviews.css' %}" />{% endblock stylesheets %}
-{% block title %} FairBlogs - Submit Success {% endblock title %}
-
-{% block content %}
-
-<div id='main-wrapper'>
-    <div class='main section' id='main'>
         <div class='post-outer'>
             <div class='post hentry'>
                 <div class='block-image'>
@@ -45,8 +35,3 @@
                 </article>
             </div>
         </div>
-    </div>
-</div>
-
-
-{% endblock %}

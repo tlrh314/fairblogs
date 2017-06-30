@@ -9,26 +9,40 @@
 {% block content %}
 
 <div id="main-wrapper" class="main-content" role="main" >
-    {% for message in messages %}
-    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-    {% endfor %}
-
-    <div class="search-shizzle">
-        <h2> Posts ({% if posts %} {{ posts.count }} {% else %} 0 {% endif %})  </h2>
-        <ul>
-            <li> Sjenkie 1 </li>
-            <li> Sjenkie 2 </li>
-            <li> Sjenkie 3 </li>
-        </ul>
+    {% if messages %}
+     <div class="search-results">
+        {% for message in messages %}
+            <h2 class="search-shizzle">{{ message }}</h2>
+        {% endfor %}
     </div>
 
-    <div class="search-shizzle">
+    {% else %}
+    <div class="search-results">
+        <h2> Posts ({% if posts %} {{ posts.count }} {% else %} 0 {% endif %}) </h2>
+        {% for post in posts %}
+            <div class="post">
+                {{ post.title }} <br>
+                {% autoescape off %} {{ post.teaser}} {% endautoescape %}
+            </div>
+        {% endfor %}
+    </div>
+
+
+
+    <div class="search-results">
         <h2> Bloggers ({% if bloggers %} {{ bloggers.count }} {% else %} 0 {% endif %}) </h2>
+        {% for blogger in bloggers %}
+            {{ blogger }} <br>
+        {% endfor %}
     </div>
 
-    <div class="search-shizzle">
+    <div class="search-results">
         <h2> Affilated Blogs ({% if affiliated_blogs %} {{ affiliated_blogs.count }} {% else %} 0 {% endif %}) </h2>
+        {% for affiliated_blog in affiliated_blogs %}
+            {{ affiliated_blog }} <br>
+        {% endfor %}
     </div>
+    {% endif %} {# messages #}
 </div>
 
 
@@ -63,5 +77,6 @@
       }
     }
 </script>
+
 
 {% endblock content %}

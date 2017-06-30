@@ -1,10 +1,4 @@
-.search-shizzle {
-    filter:none;
-    margin-bottom: 20px;
-}
-
-
-.search-shizzle h2{
+.search-results h2 {
     border: 3px double #cccccc;
     color: #f1a18e;
     font-size: 16px;
@@ -15,10 +9,4 @@
     text-transform: uppercase;
     position: relative;
     text-align: center;
-}
-
-.search-shizzle ul{
-    color: magenta;
-    margin-left: 50px;
-    list-style-type: square;
 }
