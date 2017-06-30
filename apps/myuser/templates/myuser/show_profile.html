@@ -10,7 +10,7 @@
 <div id="main-wrapper" class="main-content" role="main">
     {# TODO: @MarcellJP ff front-enden ;-) #}
     <div style="margin-bottom: 50px;">
-        <h1 style="float: left;"> Profile </h1> <h1 style="float: right;"><a href="{% url 'update_account' %}"><i class="fa fa-edit"></i> Wijzigen</a></h1>
+        <h1 style="float: left;"> Profile </h1> <h1 style="float: right;"></h1>
     </div>
 
 
@@ -43,6 +43,10 @@
             {% if request.user.twitter %}<li><a class="twitter" href="{{ request.user.twitter }}" target="_blank" title="twitter"></a></li>{% endif %}
             {% if request.user.instagram %}<li><a class="instagram" href="{{ request.user.instagram }}" target="_blank" title="instagram"></a></li>{% endif %}
         </ul>
+    </div>
+
+    <div style="width: 100%; text-align: center; margin-top: 20px">
+    <h3><a href="{% url 'update_account' %}"><i class="fa fa-edit"></i> Wijzig profiel</a></h3>
     </div>
 
 </div>
