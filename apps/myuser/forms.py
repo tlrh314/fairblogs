@@ -14,7 +14,7 @@ class SignUpForm(UserCreationForm):
 
     class Meta:
         model = Blogger
-        fields = ("email", "first_name", "last_name", "affiliation", "password1", "password2", )
+        fields = ("email", "first_name", "last_name", "facebook", "twitter", "instagram", "affiliation", "password1", "password2", )
 
 
 class CreateAffiliationForm(forms.ModelForm):
