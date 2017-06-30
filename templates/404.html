@@ -6,14 +6,16 @@
 {% block title %}FairBlogs - Page Not Found{% endblock title %}
 
 {% block content %}
-<div class="main-content" role="main">
-    <h1 class="text-center">The requested page cannot be found.</h1>
+<div id='main-wrapper' class="main-content" role="main">
+    <h1 class="text-center">Deze pagina bestaat niet.</h1>
 
 <p>
-The requested page could not be found. This can happen because of a bad link or an incorrectly typed web address. Our webpage administrator has automatically been notified in case of an incorrect link. <br>
+De pagina die u probeert te bereiken bestaat niet. Dit kan gebeuren door een foute of verkeerd gespelde link. The requested page could not be found. Via het menu op deze pagina of de zoekbar kunt u naar onze website navigeren.  
+
+<!-- This can happen because of a bad link or an incorrectly typed web address. Our webpage administrator has automatically been notified in case of an incorrect link. <br>
 <br>
 
-Please try again via the menu or use the search bar in the upper right corner. If you need the missing information promptly and it's not on our webpages, you can ofcourse always <a href="{% url "pages:contact" %}">contact</a> or <a href="mailto:{{ contactinfo.contact_email }}">email us</a>. 
+Please try again via the menu or use the search bar in the upper right corner. If you need the missing information promptly and it's not on our webpages, you can ofcourse always <a href="{% url "pages:contact" %}">contact</a> or <a href="mailto:{{ contactinfo.contact_email }}">email us</a>. -->
 </p>
 
 </div>
