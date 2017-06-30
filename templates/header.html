@@ -30,8 +30,8 @@
                   <div class='header-search'>
                      <li>
                         <a class='search'>
-                           <form action='/search/max-results=7' method='get'>
-                              <input id='s' name='q' placeholder='Zoeken...' type='text'/>
+                            <form action='{% url "search:terms" %}' method='get' accept-charset='utf-8'> 
+                              <input id='terms' name='terms' placeholder='Zoeken...' type='text'/>
                            </form>
                         </a>
                      </li>
@@ -39,20 +39,7 @@
                </div>
             </div>
          </div>
-         <!-- <div style='clear: both;'></div> -->
-<!--          <div id='header-wrapper'>
-            <div class='header section' id='header'>
-               <div class='widget Header' data-version='1' id='Header1'>
-                  <div id='header-inner'>
-                     <a href='http://impreza-soratemplates.blogspot.nl/' style='display: block'>
-                        <h1 style='display:none;'></h1>
-                        <img alt='Impreza' height='120px; ' id='Header1_headerimg' src='http://2.bp.blogspot.com/-tRPIRp2Jhag/V_xfo3dIypI/AAAAAAAABFU/K9XY80H9ZlQHgyrCseAM1cY79BRYydw_ACK4B/s1600/Impreza%2BLogo.png' style='display: block' width='341px; '/>
-                     </a>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div style='clear: both;'></div> -->
+
          <div id='ads-blog'>
             <div class='home-ad-top section' id='ads-home-top' name='Top ADS'>
                <div class='widget HTML' data-version='1' id='HTML119'>

@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+
+{% block stylesheets %} {{ block.super }}
+    <link href="{% static 'css/search.css' %}" type="text/css" rel="stylesheet" />
+{% endblock stylesheets %}
+
+{% block content %}
+
+<div id="main-wrapper" class="main-content" role="main" >
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+
+    <div class="search-shizzle">
+        <h2> Posts ({% if posts %} {{ posts.count }} {% else %} 0 {% endif %})  </h2>
+        <ul>
+            <li> Sjenkie 1 </li>
+            <li> Sjenkie 2 </li>
+            <li> Sjenkie 3 </li>
+        </ul>
+    </div>
+
+    <div class="search-shizzle">
+        <h2> Bloggers ({% if bloggers %} {{ bloggers.count }} {% else %} 0 {% endif %}) </h2>
+    </div>
+
+    <div class="search-shizzle">
+        <h2> Affilated Blogs ({% if affiliated_blogs %} {{ affiliated_blogs.count }} {% else %} 0 {% endif %}) </h2>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    {% comment %}
+    The following JS code is for highlighting the search keywords.
+    It is adapted from 'http://jsfiddle.net/crgTU/7/'.
+    {% endcomment %}
+    {% for word in key_words %}
+        highlightWord(document.body,'{{ word }}');
+    {% endfor %}
+    /**
+     * Highlight words from search
+     */
+    function highlightWord(root,word){
+      textNodesUnder(root).forEach(highlightWords);
+      function textNodesUnder(root){
+        var walk=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null,false),
+            text=[], node;
+        while(node=walk.nextNode()) text.push(node);
+        return text;
+      }
+      function highlightWords(n){
+        for (var i; (i=n.nodeValue.toLowerCase().indexOf(word,i)) > -1; n=after){
+          var after = n.splitText(i+word.length);
+          var highlighted = n.splitText(i);
+          var span = document.createElement('span');
+          span.className = 'highlighted';
+          span.appendChild(highlighted);
+          after.parentNode.insertBefore(span,after);
+        }
+      }
+    }
+</script>
+
+{% endblock content %}

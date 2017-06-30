@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "apps.myuser",
     "apps.blog",
     "apps.pages",
+    "apps.search",
 
     # "bootstrap",
 ]
