@@ -8,8 +8,42 @@
 {% block content %}
 
 <div id="main-wrapper" class="main-content" role="main">
-  <h1>Profile</h1><br>
+    {# TODO: @MarcellJP ff front-enden ;-) #}
+    <div style="margin-bottom: 50px;">
+        <h1 style="float: left;"> Profile </h1> <h1 style="float: right;"><a href="{% url 'update_account' %}"><i class="fa fa-edit"></i> Wijzigen</a></h1>
+    </div>
 
-  {{ request.user }}
- </div>
+
+    {% if request.user.avatar.url %}
+    <img style="margin-bottom: 50px;" src="/{{ request.user.avatar.url }}" width="200px"></img>
+    {% endif %}
+
+    <table class="form-text">
+        <tr>
+            <th class="first-col"> Gebruiker </td>
+            <td> {{ request.user }} </td>
+        </tr>
+        <tr>
+            <th class="first-col"> Blog </td>
+            <td> {{ request.user.affilation }} </td>
+        </tr>
+        <tr>
+            <th class="first-col"> Email </td>
+            <td> {{ request.user.email }} </td>
+        </tr>
+        <tr>
+            <th class="first-col"> Achternaam </td>
+            <td> {{ request.user.last_name }} </td>
+        </tr>
+    </table> 
+
+    <div class="icons-social">
+        <ul id="social">
+            {% if request.user.facebook %}<li><a class="facebook" href="{{ request.user.facebook }}" target="_blank" title="facebook"></a></li>{% endif %}
+            {% if request.user.twitter %}<li><a class="twitter" href="{{ request.user.twitter }}" target="_blank" title="twitter"></a></li>{% endif %}
+            {% if request.user.instagram %}<li><a class="instagram" href="{{ request.user.instagram }}" target="_blank" title="instagram"></a></li>{% endif %}
+        </ul>
+    </div>
+
+</div>
 {% endblock %}

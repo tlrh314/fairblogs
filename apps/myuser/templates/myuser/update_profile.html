@@ -9,11 +9,15 @@
 
 <div id="main-wrapper" class="main-content" role="main">
   <h1> Update Profiel </h1><br>
-  <form method="post" class="form-style-2">
+
+  <a href="{% url 'site_password_change' %}" > Klik hier om het wachtwoord te veranderen </a>
+
+
+  <form method="post" enctype="multipart/form-data" class="form-style-2">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit" class="form-style-button"> Update </button>
   </form>
  </div>
 {% endblock %}
-
+ 

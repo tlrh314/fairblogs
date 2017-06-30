@@ -141,7 +141,7 @@ def activate(request, uidb64, token):
 @login_required
 def update_account(request):
     if request.method == "POST":
-        form = EditBloggerForm(data=request.POST, instance=get_object_or_404(Blogger, pk=request.user.pk))
+        form = EditBloggerForm(data=request.POST, instance=get_object_or_404(Blogger, pk=request.user.pk), files=request.FILES)
         if form.is_valid():
             user = form.save()
 
