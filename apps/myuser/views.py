@@ -159,3 +159,8 @@ def update_account(request):
 
 def show_account(request):
     return render(request, "myuser/show_profile.html")
+
+
+def all_bloggers(request):
+    bloggers = Blogger.objects.all()
+    return render(request, "myuser/all_bloggers.html", {"bloggers": bloggers})

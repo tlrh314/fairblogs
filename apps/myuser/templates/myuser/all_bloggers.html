@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% load static %}
+{% block stylesheets %} {{ block.super }}
+<style>
+.blogger {
+    width: 100%;
+    position: relative;
+    display: flex;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 3px double #cccccc;
+}
+
+.blogger div.textcol {
+    width: 50%;
+    text-align: center;
+}
+
+.blogger div.imagecol {
+    width: 30%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.blogger div.textcol h3 {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.blogger a.morebutton {
+    background-color: #000000;
+    color: #fff !important;
+    border-radius: 4px;
+    display: inline-block;
+    font-weight: 700;
+    padding: 0 1.5em;
+    height: 2.85em;
+    line-height: 2.95em;
+}
+
+.blogger img.person {
+    display: block;
+    max-width: 150px;
+    max-height: 150px;
+    width: auto;
+    height: auto;
+    border-radius: 100%;
+    box-shadow: 0px 0px 0px 7px #fff, 0px 0px 0px 8px rgba(0, 0, 0, 0.1);
+}
+
+.blogger img.affiliation {
+    display: block;
+    max-width: 150px;
+    max-height: 150px;
+    width: auto;
+    height: auto;
+    margin: 0 auto;
+    /* border-radius: 100%; */
+    box-shadow: 0px 0px 0px 7px #fff, 0px 0px 0px 8px rgba(0, 0, 0, 0.1);
+}
+
+.blogger ul.blogger-posts {
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+  overflow-x: auto;
+  background-color: #ddd;
+}
+.blogger ul.blogger-posts li {
+  display: inline;
+  width: 150px;
+  height: 150px;
+}
+</style>
+{% endblock stylesheets %}
+{% block title %} FairBlogs - All Bloggers {% endblock title %}
+
+{% block content %}
+
+<div id='main-wrapper'>
+    <div class='main section' id='main'>
+
+        {% for blogger in bloggers %}
+        <div class="blogger">
+            {% if blogger.avatar %}
+            <img class="person" src="/{{ blogger.avatar.url }}"/>
+            {% else %}
+            <img class="person" src="{% static 'img/bloggerplaceholder.jpg' %}"/>
+            {% endif %}
+
+            <div class="textcol">
+                <h3>{{ blogger }} </h3>
+                <a href="{{ blogger.affiliation.url }}" target="_blank" class="morebutton">{{ blogger.affiliation }} </a>
+            </div>
+
+            <div class="imagecol">
+                {% if blogger.affiliation.logo %}
+                <img class="affiliation" src="/{{ blogger.affiliation.logo.url }}"/>
+                {% else %}
+                <img class="affiliation" src="{% static 'img/bloggerplaceholder.jpg' %}"/>
+                {% endif %}
+            </div>
+
+            <!--<ul class="blogger-posts">
+                <li></li>
+            </ul> -->
+
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock %}
