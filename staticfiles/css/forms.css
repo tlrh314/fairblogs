@@ -62,9 +62,11 @@
     padding: 7px;
     outline: none;
     width: 80%;
+    max-width: 100%;
     display: block;
     font-family: 'Lato', sans-serif;
 }
+
 .form-style-2 input:focus,select:focus,textarea:focus {
     border: 1px solid #d5d5f6;
 }
@@ -77,6 +79,9 @@
     line-height: 21px;
 }
 
+.form-style-2 textarea {
+    min-height: 300px;
+}
 .form-style-2 input[type=submit],
 .form-style-2 input[type=button]{
     border: none;
