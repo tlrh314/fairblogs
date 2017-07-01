@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.urls import reverse
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.admin.models import ADDITION, CHANGE, DELETION, LogEntry
 
@@ -73,6 +74,9 @@ class PostAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         obj.last_updated_by = request.user
         obj.save()
+
+    def view_on_site(self, obj):
+        return reverse("blogs:post_detail", kwargs={"slug": obj.slug})
 
     def get_affiliation(self, obj):
         return obj.author.affiliation
