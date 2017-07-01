@@ -4,6 +4,7 @@
 
 {% block stylesheets %} {{ block.super }}
     <link href="{% static 'css/search.css' %}" type="text/css" rel="stylesheet" />
+    <style> .highlighted { background: magenta; display: inline; color: white; } </style>
 {% endblock stylesheets %}
 
 {% block content %}
@@ -44,11 +45,6 @@
     </div>
 </div>
 
-
-
-
-{% endblock content %}
-
 <script type="text/javascript">
     {% comment %}
     The following JS code is for highlighting the search keywords.
@@ -80,3 +76,4 @@
       }
     }
 </script>
+{% endblock content %}
