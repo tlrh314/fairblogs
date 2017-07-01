@@ -8,43 +8,46 @@
 
 {% block content %}
 
-<div id="main-wrapper" class="main-content" role="main" >
-    {% if messages %}
-     <div class="search-results">
-        {% for message in messages %}
-            <h2 class="search-shizzle">{{ message }}</h2>
-        {% endfor %}
-    </div>
+<div id="main-wrapper">
+    <div class='main section' id='main'>
+    
+        {% if messages %}
+         <div class="search-results">
+            {% for message in messages %}
+                <div class="search-header">{{ message }}</div>
+            {% endfor %}
+        </div>
 
-    {% else %}
-    <div class="search-results">
-        <h2> Posts ({% if posts %} {{ posts.count }} {% else %} 0 {% endif %}) </h2>
-        {% for post in posts %}
-            <div class="post">
-                {{ post.title }} <br>
-                {% autoescape off %} {{ post.teaser}} {% endautoescape %}
-            </div>
-        {% endfor %}
-    </div>
+        {% else %}
 
-
-
-    <div class="search-results">
-        <h2> Bloggers ({% if bloggers %} {{ bloggers.count }} {% else %} 0 {% endif %}) </h2>
-        {% for blogger in bloggers %}
-        <strong>{{ blogger.affiliation.blogname }}</strong>: {{ blogger }} ({{ blogger.email }}) <br>
-        {% endfor %}
-    </div>
-
-    <div class="search-results">
-        <h2> Affilated Blogs ({% if affiliated_blogs %} {{ affiliated_blogs.count }} {% else %} 0 {% endif %}) </h2>
+        <div class="search-header"> Affilated Blogs ({% if affiliated_blogs %} {{ affiliated_blogs.count }} {% else %} 0 {% endif %}) </div>
         {% for affiliated_blog in affiliated_blogs %}
             {{ affiliated_blog }} <br>
         {% endfor %}
+
+        <div class="search-header">
+            Bloggers ({% if bloggers %} {{ bloggers.count }} {% else %} 0 {% endif %})
+        </div>
+        {% for blogger in bloggers %}
+            <strong>{{ blogger.affiliation.blogname }}</strong>: {{ blogger }} ({{ blogger.email }}) <br>
+        {% endfor %}
+
+        <div class="search-header"> Posts ({% if posts %} {{ posts.count }} {% else %} 0 {% endif %}) </div>
+        
+        <div class="index">
+        {% for blog in posts %}
+            {% include 'blog/detail_postonly.html' %}
+        {% endfor %}
+        </div>
+
+        {% endif %} {# messages #}
     </div>
-    {% endif %} {# messages #}
 </div>
 
+
+
+
+{% endblock content %}
 
 <script type="text/javascript">
     {% comment %}
@@ -77,6 +80,3 @@
       }
     }
 </script>
-
-
-{% endblock content %}
