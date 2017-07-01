@@ -15,11 +15,16 @@ def add_tag(context, tagname):
 	tagdict = url.query.multi_dict
 	tagvalues = tagdict.get('tag', [])
 
+	new_url = URLObject('/')
+	
 	# Prevent adding same value more than once
 	if tagname not in tagvalues:
-		url = url.add_query_param('tag', tagname)
+		new_url = new_url.add_query_param('tag', tagname)
 
-	return url
+	for tag in tagvalues:
+		new_url = new_url.add_query_param('tag', tag)
+
+	return new_url
 
 @register.simple_tag(name='remove_tag', takes_context=True)
 def remove_tag(context, tagname):
