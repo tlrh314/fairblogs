@@ -461,7 +461,7 @@ padding: 10px 0;
 .labels-post {
 	margin-top: 5px;
 }
-#meta-post .fa-calendar-o {
+.meta-post .fa-calendar-o {
 margin-left: 8px;
 }
 .post-meta {
@@ -1403,13 +1403,13 @@ margin: 0 auto;
 float: none;
 height: auto;
 }
-#meta-post {
+.meta-post {
 position: relative;
 overflow: hidden;
 display: block;
 border-bottom: 1px solid #f2f2f2;
 }
-#meta-post:after {
+.meta-post:after {
 display: none;
 }
 .index .post h2, .archive .post h2 {

@@ -22,54 +22,8 @@
                <div class="date-posts">
 
                {% for blog in blogs %}
-                  <div class='post-outer'>
-                     <div class='post hentry'>
-                        <div class='block-image'>
-                           <div class='thumb'>
-                               {% if blog.image %}
-                              <a href='/viewpost/{{blog.slug}}/?next={{ blog.url }}' target='_blank' class="block-image-a" style='background:url(/{{ blog.image.url }}) no-repeat center center;background-size:cover'></a>
-                              {% else %}
-                              <a href='#' target='_blank' class="block-image-a" style='background:url(#) no-repeat center center;background-size:cover'></a>
-                              {% endif %}
-                           </div>
-
-                           <div class='labels-post resumo'>
-                              {% for tag in blog.tags.all %}   
-                              <p class='post-tag'>                    
-                                 <i class='fa fa-hashtag'></i>                        
-                                 <a href='#' class='resumo' rel='tag' style="margin-right:5px;">{{ tag }}</a>
-                              </p>
-                              {% endfor %}
-                           </div>
-                        </div>
-                        <div class='post-header'></div>
-                        <article>
-                           <font class='retitle'>
-                              <h2 class='post-title entry-title'>
-                                 <a href='/viewpost/{{blog.slug}}/?next={{ blog.url }}' target='_blank'>
-                                 {{ blog.title }}
-                                 </a>
-                              </h2>
-                           </font>
-                           <div class='date-header'>
-                              <div id='meta-post'>
-                                 <i class='fa fa-user'></i>
-                                 <a class='g-profile' href='{{ blog.author.affiliation.first.url }}' target='_blank' rel='author' title='{{ blog.author.affiliation.first }}'>
-                                 <span itemprop='name'>{{ blog.author.affiliation }}</span></a>
-                                 <i class='fa fa-calendar-o'></i>
-                                 <abbr class='published timeago' title='{{ blog.date_created }}'>{{ blog.date_created }}</abbr>
-                              </div>
-                              <div class='resumo'><span>{% autoescape off %}{{ blog.teaser }}{% endautoescape %} 
-                              
-                              <a href='{{ blog.author.affiliation.first.url }}' class='blogthumb' target='_blank'><img src='{{ blog.author.affiliation.logo.url}}'/></a>
-                              <a href='/viewpost/{{blog.slug}}/?next={{ blog.url }}' target='_blank' style="float: right;"><strong>Lees verder</strong></a> </span></div>
-                              <div style='clear: both;'></div>
-                           </div>
-                        </article>
-                     </div>
-                  </div>
-
-                  {% endfor %}
+                {% include 'blog/detail_postonly.html' %}
+               {% endfor %}
                </div>
             </div>
          </div>

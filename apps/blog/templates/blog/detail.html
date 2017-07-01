@@ -1,50 +1,15 @@
 {% extends "base.html" %}
 {% load static %}
-{# load interviewtags #}
-{% block stylesheets %} {{ block.super }} <link rel="stylesheet" type="text/css" href="{% static 'css/interviews.css' %}" />{% endblock stylesheets %}
+{% block stylesheets %} {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/interviews.css' %}" />
+{% endblock stylesheets %}
 {% block title %} FairBlogs - Submit Success {% endblock title %}
 
 {% block content %}
 
 <div id='main-wrapper'>
     <div class='main section' id='main'>
-        <div class='post-outer'>
-            <div class='post hentry'>
-                <div class='block-image'>
-                    <div class='thumb'>
-                        {% if post.image %}
-                        <a href='{{ post.url }}' target='_blank' style='background:url(/{{ post.image.url }}) no-repeat center center;background-size:cover'></a>
-                        {% else %}
-                        <a href='{{ post.url }}' target='_blank' style='background:url(#) no-repeat center center;background-size:cover'></a>
-                        {% endif %}
-                    </div>
-                </div>
-                <div class='post-header'></div>
-                <article>
-                    <font class='retitle'>
-                        <h2 class='post-title entry-title'>
-                            <a href='{{ post.url }}' target='_blank'>
-                                {{ post.title }}
-                            </a>
-                        </h2>
-                    </font>
-                    <div class='date-header'>
-                        <div id='meta-post'>
-                            <i class='fa fa-user'></i>
-                            <a class='g-profile' href='{{ post.author.affiliation.first.url }}' target='_blank' rel='author' title='{{ post.author.affiliation.first }}'>
-                                <span itemprop='name'>{{ post.author.affiliation }}</span></a>
-                            <i class='fa fa-calendar-o'></i>
-                            <abbr class='published timeago' title='{{ post.date_created }}'>{{ post.date_created }}</abbr>
-                        </div>
-                        <div class='resumo'><span>{% autoescape off %}{{ post.teaser }}{% endautoescape %} 
-
-                                <a href='{{ post.author.affiliation.first.url }}' class='blogthumb' target='_blank'><img src='{{ post.author.affiliation.logo.url}}'/></a>
-                                <a href='{{ post.url }}' target='_blank' style="float: right;"><strong>Lees verder</strong></a> </span></div>
-                        <div style='clear: both;'></div>
-                    </div>
-                </article>
-            </div>
-        </div>
+        {% include 'blog/detail_postonly.html' with blog=post %}
     </div>
 </div>
 
