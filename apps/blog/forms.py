@@ -15,7 +15,7 @@ class SubmitBlogpostForm(forms.ModelForm):
     url = forms.URLField(initial="https://")
     date_created = forms.DateTimeField(label="Post is gepubliceerd op", initial=timezone.now)
     tags = forms.ModelMultipleChoiceField(queryset=Tag.objects.all())
-    teaser = forms.CharField(required=True, max_length=750, widget=forms.Textarea())
+    teaser = forms.CharField(required=True, min_length=250, max_length=750, widget=forms.Textarea())
 
     def clean(self):
         slug = slugify(self.cleaned_data.get("title"))
@@ -26,12 +26,10 @@ class SubmitBlogpostForm(forms.ModelForm):
             self._errors["title"] = ErrorList()
             self._errors["title"].append("Een post met deze titel bestaat al. Kies een unieke titel!")
 
-        print(self.cleaned_data.items())
-
         if not image:
             self._errors["image"] = ErrorList()
             self._errors["image"].append("Uploaden van een plaatje is verplicht.")
 
         if number_of_tags < 1 or number_of_tags > 5:
             self._errors["tags"] = ErrorList()
-            self._errors["tags"].append("Het aantal tags moet tussen de één en vijf liggen.")
+            self._errors["tags"].append("Het aantal tags moet tussen de een en vijf liggen.")
