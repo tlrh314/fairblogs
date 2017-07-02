@@ -6,12 +6,14 @@ from django.contrib.auth import views as auth_views
 
 from context_processors import contactinfo
 from .views import signup
-from .views import update_account
-from .views import show_account
 from .views import new_affiliation
-from .views import activate
 from .views import activation_sent
+from .views import activate
 from .views import email_validated
+from .views import update_blogger
+from .views import show_blogger
+from .views import update_affiliation
+from .views import show_affiliation
 
 urlpatterns = [
     url(r"^login/$", auth_views.LoginView.as_view(
@@ -66,9 +68,11 @@ urlpatterns = [
     ),
 
     url(r"^signup/$", signup, name="signup"),
-    url(r"^update/$", update_account, name="update_account"),
-    url(r"^profile/$", show_account, name="show_account"),
+    url(r"^update/$", update_blogger, name="update_blogger"),
+    url(r"^profile/$", show_blogger, name="show_blogger"),
     url(r"^new_affiliation/$", new_affiliation, name="new_affiliation"),
+    url(r"^update_affiliation/$", update_affiliation, name="update_affiliation"),
+    url(r"^affiliation/$", show_affiliation, name="show_affiliation"),
     url(r"^activation_sent/$", activation_sent, name="activation_sent"),
     url(r"^email_validated/$", email_validated, name="email_validated"),
     url(r"^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$",

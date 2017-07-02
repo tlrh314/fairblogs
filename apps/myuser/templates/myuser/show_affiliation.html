@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block stylesheets %}{{ block.super }} 
+<link href="{% static 'css/forms.css' %}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+
+<div id="main-wrapper" class="main-content" role="main">
+    <div style="margin-bottom: 50px;">
+        <h1 style="float: left;"> Affliated Blog Profiel </h1> <h1 style="float: right;"></h1>
+    </div>
+
+  <div style="margin-top: 20px; padding-bottom: 20px; padding-left: 20px; width: 75%;"> 
+    <h3 style="float: left;" ><a href="{% url 'update_blogger' %}" ><i class="fa fa-edit"></i> Profiel wijzigen (klik hier) </a></h3>
+    <h3 style="float: right;"><a href="{% url 'update_affiliation' %}" ><i class="fa fa-edit"></i> Blog wijzigen (klik hier) </a></h3>
+  </div>
+
+
+    {% if request.user.affliation.logo %}
+    <img style="padding-left: 20px; margin-bottom: 20px; margin-top: 20px;" src="/{{ request.user.affliation.logo.url }}" width="200px"></img>
+    {% else %}
+    <div style="margin-top: 20px;"></div>
+    {% endif %}
+
+    <table class="form-text">
+        <tr>
+            <th class="first-col"> Blognaam </td>
+            <td> {{ request.user.affiliation.blogname }} </td>
+        </tr>
+
+        <tr>
+            <th class="first-col"> URL </td>
+            <td> {{ request.user.affiliation.url }} </td>
+        </tr>
+        <tr>
+            <th class="first-col"> Email </td>
+            <td> {{ request.user.affiliation.email }} </td>
+        </tr>
+        {% if request.user.affiliation.facebook %}
+        <tr>
+            <th class="first-col"> <span  style="margin-left: 3px; margin-right: 2px;" class="fa fa-facebook"></span> Facebook </td>
+            <td> {{ request.user.affiliation.facebook }} </td>
+        </tr>
+        {% endif %}
+        {% if request.user.affiliation.twitter %}
+        <tr>
+            <th class="first-col"> <span class="fa fa-twitter"></span> Twitter </td>
+            <td> {{ request.user.affiliation.twitter }} </td>
+        </tr>
+        {% endif %}
+        {% if request.user.affiliation.instagram %}
+        <tr>
+            <th class="first-col"> <span style="margin-right: 1px;" class="fa fa-instagram"></span> Instagram </td>
+            <td> {{ request.user.affiliation.instagram }} </td>
+        </tr>
+        {% endif %}
+    </table> 
+</div>
+{% endblock %}

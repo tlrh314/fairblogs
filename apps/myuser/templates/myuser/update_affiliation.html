@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block stylesheets %}{{ block.super }} 
+<link href="{% static 'css/forms.css' %}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+
+<div id="main-wrapper" class="main-content" role="main">
+  <h1> Update Affiliation </h1><br>
+
+  <div style="margin-top: 20px; padding-left: 20px;"> 
+    <h3><a href="{% url 'update_blogger' %}" ><i class="fa fa-edit"></i> Persoonlijke gegevens wijzigen (klik hier) </a></h3>
+  </div>
+
+  <form method="post" enctype="multipart/form-data" class="form-style-2">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+      
+      <p><label for="id_blogname">Blognaam:</label> {{ form.blogname }} </p>
+      <p><label for="id_url">URL:</label> {{ form.url }} </p>
+      <p><label for="id_email">Emailadres:</label> {{ form.email }} </p>
+
+      <p><label for="id_logo">Logo:</label> {{ form.logo }} </p>
+
+      <p class='form-section-head'>Social media</p>
+      <p class='form-section-text'> Voer hieronder de urls naar je social media paginas in om je FairBlogs account te koppelen. Als je je accounts hieronder invult, dan taggen we je automatisch in de social media posts die we plaatsen om je blogposts te promoten. </p>
+
+      <p class='social-submit'>
+          <label for="id_facebook">Facebook:</label> 
+        {{ form.facebook }}
+        <span class="fa fa-facebook input-symbol"></span>
+    </p>
+
+      <p class='social-submit'>
+          <label for="id_twitter">Twitter:</label> 
+          {{ form.twitter }} 
+          <span class="fa fa-twitter input-symbol"></span>
+    </p>
+
+      <p class='social-submit'>
+          <label for="id_instagram">Instagram:</label> 
+          {{ form.instagram }} 
+          <span class="fa fa-instagram input-symbol"></span>
+    </p>
+
+    <button type="submit" class="form-style-button"> Opslaan </button>
+  </form>
+ </div>
+{% endblock %}

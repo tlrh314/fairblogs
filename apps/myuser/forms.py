@@ -14,18 +14,20 @@ class SignUpForm(UserCreationForm):
 
     class Meta:
         model = Blogger
-        fields = ("email", "first_name", "last_name", "facebook", "twitter", "instagram", "affiliation", "password1", "password2", )
+        fields = ("email", "first_name", "last_name", "affiliation", "password1", "password2", )
 
 
 class CreateAffiliationForm(forms.ModelForm):
     class Meta:
         model = AffiliatedBlog
-        fields = ("blogname", "url", "logo", "email")
+        fields = ("blogname", "url", "logo", "email", "facebook", "twitter", "instagram",)
+
+class EditAffiliationForm(forms.ModelForm):
+    class Meta:
+        model = AffiliatedBlog
+        fields = ("blogname", "url", "logo", "email", "facebook", "twitter", "instagram",)
 
 class EditBloggerForm(forms.ModelForm):
-    # affiliation = forms.ModelChoiceField(queryset=AffiliatedBlog.objects.all(),
-    #     required=True, help_text="Welke blog? Laat leeg als jouw blog er niet tussen staat!")
-
     class Meta:
         model = Blogger
-        fields = ("email", "first_name", "last_name", "affiliation", "avatar", "facebook", "twitter", "instagram",)
+        fields = ("email", "first_name", "last_name", "affiliation", "avatar")

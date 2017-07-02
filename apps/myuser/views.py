@@ -15,6 +15,7 @@ from django.contrib.admin.models import ADDITION, CHANGE, DELETION, LogEntry
 from .forms import SignUpForm
 from .forms import CreateAffiliationForm
 from .forms import EditBloggerForm
+from .forms import EditAffiliationForm
 from .models import Blogger
 from .models import AffiliatedBlog
 from .tokens import account_activation_token
@@ -89,9 +90,6 @@ def new_affiliation(request):
 def activation_sent(request):
     return render(request, "myuser/activation_sent.html")
 
-def email_validated(request):
-    return render(request, "myuser/email_validated.html")
-
 
 def activate(request, uidb64, token):
     try:
@@ -138,8 +136,13 @@ def activate(request, uidb64, token):
     else:
         return render(request, "myuser/account_activation_invalid.html")
 
+
+def email_validated(request):
+    return render(request, "myuser/email_validated.html")
+
+
 @login_required
-def update_account(request):
+def update_blogger(request):
     if request.method == "POST":
         form = EditBloggerForm(data=request.POST, instance=get_object_or_404(Blogger, pk=request.user.pk), files=request.FILES)
         if form.is_valid():
@@ -152,13 +155,40 @@ def update_account(request):
                 change_message="User updated profile via website."
             )
 
-            return redirect("show_account")
+            return redirect("show_blogger")
     else:
         form = EditBloggerForm(instance=get_object_or_404(Blogger, pk=request.user.pk))
     return render(request, "myuser/update_profile.html", {"form": form})
 
-def show_account(request):
-    return render(request, "myuser/show_profile.html")
+
+@login_required
+def show_blogger(request):
+    return render(request, "myuser/show_blogger.html")
+
+
+@login_required
+def update_affiliation(request):
+    if request.method == "POST":
+        form = EditAffiliationForm(data=request.POST, instance=get_object_or_404(AffiliatedBlog, pk=request.user.affiliation.pk), files=request.FILES)
+        if form.is_valid():
+            affiliation = form.save()
+
+            # Add record to LogEntry
+            content_type_pk = ContentType.objects.get_for_model(AffiliatedBlog).pk
+            LogEntry.objects.log_action(
+                request.user.pk, content_type_pk, affiliation.pk, str(affiliation), CHANGE,
+                change_message="Affiliation updated profile via website."
+            )
+
+            return redirect("show_affiliation")
+    else:
+        form = EditAffiliationForm(instance=get_object_or_404(AffiliatedBlog, pk=request.user.affiliation.pk))
+    return render(request, "myuser/update_affiliation.html", {"form": form})
+
+
+@login_required
+def show_affiliation(request):
+    return render(request, "myuser/show_affiliation.html")
 
 
 def all_bloggers(request):

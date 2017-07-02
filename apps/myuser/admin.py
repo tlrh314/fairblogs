@@ -18,6 +18,14 @@ class AffiliatedBlogAdmin(admin.ModelAdmin):
     search_fields = ("blogname", "email", "url" )
     readonly_fields = ( "date_created", "date_updated", "last_updated_by" )
 
+
+    fieldsets = (
+        (None, {"fields": ("blogname",)}),
+        (_("Contact Information"), {"fields": ("url", "email",)}),
+        (_("Social Media"), {"fields": ("facebook", "twitter", "instagram")}),
+        (_("Logo"), {"fields": ("logo", )}),
+    )
+
     def save_model(self, request, obj, form, change):
         obj.last_updated_by = request.user
         obj.save()
@@ -38,7 +46,6 @@ class BloggerAdmin(UserAdmin):
         (None, {"fields": ("email", "password")}),
         (_("Personal info"), {"fields": ("first_name", "last_name", "avatar")}),
         (_("Blog Name"), {"fields": ("affiliation",)}),
-        (_("Social Media"), {"fields": ("facebook", "twitter", "instagram")}),
         (_("Permissions"), {"fields": ("is_active", "is_staff", "is_superuser",
                                        "groups", "user_permissions")}),
         (_("Important dates"), {"fields": ("last_login", "date_joined")}),

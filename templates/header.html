@@ -16,7 +16,7 @@
                                  {% if user.is_authenticated %} <li itemprop='name'><a href='{% url "blogs:submit" %}' itemprop='url'><i class="fa fa-cloud-upload"></i> Voeg blogpost toe</a></li> {% endif %}
                                  {% if not user.is_authenticated %} <li itemprop='name'><a href='{% url "signup" %}' itemprop='url'><i class="fa fa-sign-in"></i> Aanmelden</a></li> {% endif %}
                                  {% if user.is_authenticated %}
-                                 <li itemprop='name'><a href='{% url "show_account" %}' itemprop='url'><i class="fa fa-user"></i> {{ request.user }}</a></li>
+                                 <li itemprop='name'><a href='{% url "show_blogger" %}' itemprop='url'><i class="fa fa-user"></i> {{ request.user }}</a></li>
 
                                  {% if user.is_superuser %}
                                  <li itemprop='name'><a href='{% url "admin:index" %}' itemprop='url'><i class="fa fa-newspaper-o"></i> Admin </a></li>

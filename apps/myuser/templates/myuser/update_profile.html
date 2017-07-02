@@ -8,43 +8,27 @@
 {% block content %}
 
 <div id="main-wrapper" class="main-content" role="main">
-  <h1> Update Profiel </h1><br>
+  <h1> Update Persoonlijk Profiel </h1><br>
 
-  <a href="{% url 'site_password_change' %}" > Klik hier om het wachtwoord te veranderen </a>
+
+  <div style="margin-top: 20px; padding-bottom: 20px; padding-left: 20px; width: 75%;"> 
+    <h3 style="float: left;" ><a href="{% url 'site_password_change' %}" ><i class="fa fa-edit"></i> Wachtwoord wijzigen (klik hier) </a></h3>
+    <h3 style="float: right;"><a href="{% url 'update_affiliation' %}" ><i class="fa fa-edit"></i> Blog wijzigen (klik hier) </a></h3>
+  </div>
 
 
   <form method="post" enctype="multipart/form-data" class="form-style-2">
     {% csrf_token %}
     {{ form.non_field_errors }}
-  	
-  	<p><label for="id_email">Emailadres:</label> {{ form.email }} </p>
-  	<p><label for="id_first_name">Voornaam:</label> {{ form.first_name }} </p>
-  	<p><label for="id_last_name">Achternaam:</label> {{ form.last_name }} </p>
-  	<p><label for="id_affiliation">Blog:</label> {{ form.affiliation }} </p>
+      
+      <p><label for="id_email">Emailadres:</label> {{ form.email }} </p>
+      <p><label for="id_first_name">Voornaam:</label> {{ form.first_name }} </p>
+      <p><label for="id_last_name">Achternaam:</label> {{ form.last_name }} </p>
+      <p><label for="id_affiliation">Blog:</label> {{ form.affiliation }} </p>
 
-  	<p><label for="id_avatar">Avatar:</label> {{ form.avatar }} </p>
+      <p><label for="id_avatar">Avatar:</label> {{ form.avatar }} </p>
 
-  	<p class='form-section-head'>Social media</p>
-  	<p class='form-section-text'> Voer hieronder de urls naar je social media paginas in om je FairBlogs account te koppelen. Als je je accounts hieronder invult, dan taggen we je automatisch in de social media posts die we plaatsen om je blogposts te promoten. </p>
-  	<p class='social-submit'>
-  		<label for="id_facebook">Facebook:</label> 
-		{{ form.facebook }}
-		<span class="fa fa-facebook input-symbol"></span>
-	</p>
-
-  	<p class='social-submit'>
-  		<label for="id_twitter">Twitter:</label> 
-  		{{ form.twitter }} 
-  		<span class="fa fa-twitter input-symbol"></span>
-	</p>
-
-  	<p class='social-submit'>
-  		<label for="id_instagram">Instagram:</label> 
-  		{{ form.instagram }} 
-  		<span class="fa fa-instagram input-symbol"></span>
-	</p>
-<!-- <p><label for="id_instagram">Instagram:</label> <input type="url" name="instagram" id="id_instagram" maxlength="200"/></p> -->
-    <button type="submit" class="form-style-button"> Update </button>
+    <button type="submit" class="form-style-button"> Opslaan </button>
   </form>
  </div>
 {% endblock %}

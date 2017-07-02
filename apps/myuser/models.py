@@ -31,6 +31,10 @@ class AffiliatedBlog(models.Model):
     logo = models.ImageField(upload_to=get_blog_logo, blank=True, null=True)
     email = models.EmailField()
 
+    facebook = models.URLField(_("Facebook"), null=True, blank=True)
+    twitter = models.URLField(_("Twitter"), null=True, blank=True)
+    instagram = models.URLField(_("Instagram"), null=True, blank=True)
+
     last_updated_by = models.ForeignKey(settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL, blank=True, null=True,
         related_name="affilations_changed_by", )
@@ -54,10 +58,6 @@ class Blogger(AbstractBaseUser, PermissionsMixin):
 
     affiliation = models.ForeignKey(AffiliatedBlog, related_name="blogger", on_delete=models.SET_NULL, null=True)
     avatar = models.ImageField(upload_to=get_blogger_logo, null=True, blank=True)
-
-    facebook = models.URLField(_("Facebook"), null=True, blank=True)
-    twitter = models.URLField(_("Twitter"), null=True, blank=True)
-    instagram = models.URLField(_("Instagram"), null=True, blank=True)
 
     is_active = models.BooleanField(_("active"), default=True,
         help_text=_("Designates whether this user should be treated as "
