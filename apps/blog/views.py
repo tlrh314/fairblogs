@@ -59,12 +59,9 @@ def index(request):
 
 @login_required
 def submit(request):
-
     if request.method == "POST":
         form = SubmitBlogpostForm(data=request.POST, files=request.FILES)
         if form.is_valid():
-            # TODO: this is why blog should have slug. Then submit-success can be reversed and redirected to the blogpost...
-
             post = Post()
             post.author = request.user
             post.title = form.cleaned_data["title"]
@@ -73,6 +70,10 @@ def submit(request):
             post.image = form.cleaned_data["image"]
             post.date_created = form.cleaned_data["date_created"]
             post.publish()  # publish implies save
+
+            # Caution, post needs to be saved before m2m can be added!
+            post.tags = form.cleaned_data["tags"]
+
             return HttpResponseRedirect(reverse("blogs:post_detail", kwargs={"slug": post.slug}))
     else:
         form = SubmitBlogpostForm()
