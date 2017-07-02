@@ -2,7 +2,6 @@
 {% load staticfiles %}
 
 {% block stylesheets %} {{ block.super }}
-<link href="/tinymce/css/" type="text/css" media="all" rel="stylesheet" />
 <link href="{% static 'css/forms.css' %}" type="text/css" rel="stylesheet" />
 <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">
 <link rel="stylesheet" href="{% static 'css/jquery-ui-timepicker-addon.css' %}">
@@ -10,15 +9,16 @@
 
 
 {% block topscripts %} {{ block.super }}
-<script>function djangoFileBrowser(field_name, url, type, win) { return false;}</script>
-
+<script type="text/javascript" src="{% static 'js/forms.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/jquery-1.12.4.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/jquery-ui.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/jquery-ui-timepicker-addon.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/forms.js' %}"></script>
 <script>
 $( function() {
-    $( "#id_date_created" ).datetimepicker();
+    $( "#id_date_created" ).datetimepicker({
+        dateFormat: "dd-mm-yy",
+        timeFormat: "HH:mm:ss"
+        });
 } );
 </script>
 {% endblock topscripts %}
@@ -28,19 +28,7 @@ $( function() {
 {% block content %}
 <div id="main-wrapper" class="main-content" role="main" >
     <h1 class="text-center"> Voeg blogpost toe </h1><br>
-    <form method="post" class="form-style-2" role="form" action="." enctype="multipart/form-data"> 
-        {% csrf_token %}
-        {{ form.non_field_errors.help_text }}
-
-        {% if form.errors %}
-        <div class="alert alert-danger">
-        Controleer de volgende velden: 
-        {% for error in form.errors %}
-            {{ error|escape }}
-        {% endfor %}
-        </div>
-        {% endif %} 
-
+    <form method="post" class="form-style-2" role="form" action="." enctype="multipart/form-data"> {% csrf_token %}
         <table class="form-text">
           <tr>
             <th class="first-col">Auteur: </th>
@@ -52,28 +40,44 @@ $( function() {
           </tr>
         </table>
 
-        <div class="fieldWrapper form-style-2">
-        {{ form.title.label }} {{ form.title }}
+        <div class="fieldWrapper form-style-2 {% if form.title.errors %} has-error {% endif %}">
+            {{ form.title.label }} {{ form.title }}
+            {% if form.title.errors %}  <span class="fa fa-remove error-symbol"></span> {% endif %}
+            <div class="errorlist">{% for error in form.title.errors %}<p>{{ error|escape }}</p> {% endfor %}</div>
         </div>
 
-        <div class="fieldWrapper form-style-2">
-        {{ form.url.label }} {{ form.url }}
+        <div class="fieldWrapper form-style-2 {% if form.url.errors %} has-error {% endif %}">
+            {{ form.url.label }} {{ form.url }}
+            {% if form.url.errors %}  <span class="fa fa-remove error-symbol"></span> {% endif %}
+            <div class="errorlist">{% for error in form.url.errors %}<p>{{ error|escape }}</p> {% endfor %}</div>
         </div>
 
-        <div class="fieldWrapper form-style-2">
-        {{ form.date_created.label }} {{ form.date_created }}
+        <div class="fieldWrapper form-style-2 {% if form.date_created.errors %} has-error {% endif %}">
+            {{ form.date_created.label }} {{ form.date_created }}
+            {% if form.date_created.errors %}  <span class="fa fa-remove error-symbol"></span> {% endif %}
+            <div class="errorlist">{% for error in form.date_created.errors %}<p>{{ error|escape }}</p> {% endfor %}</div>
         </div>
 
-        <div class="fieldWrapper form-style-2">
-        {{ form.tags.label }} {{ form.tags }}
+        <div class="fieldWrapper form-style-2 {% if form.image.errors %} has-error {% endif %}">
+            {{ form.image.label }} {{ form.image }}
+            {% if form.image.errors %}  <span class="fa fa-remove error-symbol"></span> {% endif %}
+            <div class="errorlist">{% for error in form.image.errors %}<p>{{ error|escape }}</p> {% endfor %}</div>
         </div>
 
-        <div class="fieldWrapper form-style-2" id="submit-text">
-        {{ form.teaser.label }} {{ form.teaser }}
-        <div id="textarea_feedback">0/750 karakters</div>
+        <div class="fieldWrapper form-style-2 {% if form.tags.errors %} has-error {% endif %} ">
+            {{ form.tags.label }} {{ form.tags }}
+            {% if form.tags.errors %} <span class="fa fa-remove error-symbol"></span> {% endif %}
+            <div class="errorlist">{% for error in form.tags.errors %}<p>{{ error|escape }}</p> {% endfor %}</div>
         </div>
 
-        <button type="submit" class="form-style-button">Toevoegen</button>
+        <div class="fieldWrapper form-style-2  {% if form.teaser.errors %} has-error {% endif %}" id="submit-text">
+            {{ form.teaser.label }} {{ form.teaser }}
+            {% if form.teaser.errors %}  <span class="fa fa-remove error-symbol"></span> {% endif %}
+            <div class="errorlist">{% for error in form.teaser.errors %}<p>{{ error|escape }}</p> {% endfor %}</div>
+            <div id="textarea_feedback">0/750 karakters</div>
+        </div>
+
+        <button type="submit" class="form-style-button"> Toevoegen </button>
     </form>
 </div>
 {% endblock %}

@@ -18,14 +18,26 @@ class SignUpForm(UserCreationForm):
 
 
 class CreateAffiliationForm(forms.ModelForm):
+    url = forms.URLField(initial="https://")
+    facebook = forms.URLField(initial="https://")
+    twitter = forms.URLField(initial="https://")
+    instagram = forms.URLField(initial="https://")
+
     class Meta:
         model = AffiliatedBlog
         fields = ("blogname", "url", "logo", "email", "facebook", "twitter", "instagram",)
 
+
 class EditAffiliationForm(forms.ModelForm):
+    url = forms.URLField(initial="https://")
+    facebook = forms.URLField(initial="https://")
+    twitter = forms.URLField(initial="https://")
+    instagram = forms.URLField(initial="https://")
+
     class Meta:
         model = AffiliatedBlog
         fields = ("blogname", "url", "logo", "email", "facebook", "twitter", "instagram",)
+
 
 class EditBloggerForm(forms.ModelForm):
     class Meta:

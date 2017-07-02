@@ -23,6 +23,16 @@
     z-index: 2;
 }
 
+.error-symbol {
+    color: red;
+    float: right;
+    margin-right: 6px;
+    margin-left: 6px;
+    margin-top: -22px;
+    position: relative;
+    z-index: 2;
+}
+
 .form-section-head {
     /*font-weight: 400;*/
     font-weight: bold;
@@ -61,11 +71,12 @@
     -moz-border-radius: 3px;
     padding: 7px;
     outline: none;
-    width: 80%;
+    width: 100%;
     max-width: 100%;
     display: block;
     font-family: 'Lato', sans-serif;
 }
+
 
 .form-style-2 input:focus,select:focus,textarea:focus {
     border: 1px solid #d5d5f6;
@@ -100,6 +111,18 @@
     background: #EA7B00;
     color: #fff;
 
+}
+
+.form-style-2 .has-error input, .has-error select, .has-error textarea {
+    border: 2px solid red;
+}
+
+.form-style-2 .errorlist {
+    color: red;
+}
+
+.form-style-2 .errorlist p{
+    margin: 5px 0px 0px 25px;
 }
 
 .form-style-button {

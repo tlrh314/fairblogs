@@ -35,24 +35,6 @@ class Tag(models.Model):
         return self.tag_name
 
 
-# @python_2_unicode_compatible
-# class Category(models.Model):
-#     category_name = models.CharField(max_length=200)
-
-#     last_updated_by  = models.ForeignKey(settings.AUTH_USER_MODEL,
-#         on_delete=models.SET_NULL, blank=True, null=True,
-#         related_name="category_changed_by", )
-#     date_created = models.DateTimeField(_("Date/Time Created"), auto_now_add=True)
-#     date_updated = models.DateTimeField(_("Date/Time Last Changed"), auto_now=True)
-
-#     class Meta:
-#         verbose_name = _("Category")
-#         verbose_name_plural = _("Categories")
-
-#     def __str__(self):
-#         return self.category_name
-
-
 @python_2_unicode_compatible
 class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
