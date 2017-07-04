@@ -52,4 +52,4 @@ FILEBROWSER_EXTENSIONS = {
 FILEBROWSER_ADMIN_VERSIONS = ['big']  # 'thumbnail', 'small', 'medium', 'large'
 
 # For files uploaded via submit form
-FILE_UPLOAD_PERMISSIONS = 0644
+FILE_UPLOAD_PERMISSIONS = 0o644
