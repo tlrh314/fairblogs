@@ -20,8 +20,9 @@ def get_blog_logo(instance, filename):
 
 def get_blogger_logo(instance, filename):
     """ Logo of the blogger (person) """
-    return os.path.join("static", "img",
-        instance.affiliation.blogname.replace(" ", ""), filename)
+
+    # Affiliation could still be empty on save at signup (for new affliations)
+    return os.path.join("static", "img", "bloggers", filename)
 
 
 @python_2_unicode_compatible
