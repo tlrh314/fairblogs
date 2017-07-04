@@ -1,18 +1,12 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 
-{% block title %} FairBlogs - Invalid Token {% endblock title %}
+{% block title %} FairBlogs - Ongeldig Token {% endblock title %}
 
 {% block content %}
+<div id="main-wrapper" class="main-content" role="main" >
+    <h1 class="text-center"> Ongeldige Registratielink </h1>
 
-<div class="main-content" role="main" >
-    <h1 class="text-center"> Invalid Token </h1>
-
-    <div id="contact-form-wrapper" class="text-justify col-xs-12 col-sm-8 col-sm-offset-2 ">
-        <div>
-            The registration token is invalid. Please <a href="{% url 'pages:contact' %}">contact us</a>.
-        </div>
-    </div>
+    <p> Het registratietoken is ongeldig. <a href="{% url 'pages:contact' %}">Neem contact met ons op</a>. </p>
 </div>
-
 {% endblock %}

@@ -1,14 +1,12 @@
-{% autoescape off %}Dear {{ user }},
+{% autoescape off %}Hoi {{ user }},
 
-You are receiving this email because somebody, probably you, signed up for FairBlogs. Thank you for your interest in our platform!
-
-As a first step, please click on the link below to confirm your registration:
-
+Welkom bij FairBlogs!
+ 
+Je bent bijna klaar om gratis al je blogs te promoten op het enige groene en eerlijke bloggersplatform in Nederland. Klik op de onderstaande link om je account te bevestigen, en we zien vanzelf al jouw geweldige blogs verschijnen. We kijken ernaar uit!
+ 
 {{ protocol }}://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+ 
+Groene groetjes,
+Het FairBlogs team
 
-The second step is that we check and verify your account. You will receive a second confirmation email once your account is ready to be used!
-
-Kind regards,
-The FairBlogs Team
-
-[this is a machine generated mail]{% endautoescape %}
+[Dit is een automatisch gegenereerde e-mail. Je hoeft deze e-mail niet te beantwoorden.]

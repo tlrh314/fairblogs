@@ -1,11 +1,11 @@
-{% autoescape off %}Dear admin,
+{% autoescape off %}Beste FairBlogs Admin,
 
-A new user signed up for FairBlogs: {{ user_email }} ({{ user }}).
+Er is een nieuwe aanmelding voor FairBlogs: {{ user_email }} ({{ user }}).
 
-Please confirm this user at {{ protocol }}://{{ domain }}{% url 'admin:myuser_blogger_changelist' %}.
-Select the user, then select the action 'Confirm new user' and press 'Go'.
+Bevestig deze account via {{ protocol }}://{{ domain }}{% url 'admin:myuser_blogger_changelist' %}.
+Seleceer de gebruiker, kies daarna de actie 'Confirm new user' en klik op 'Uitvoeren'.
 
-Kind regards,
-The FairBlogs Team
+Groene groetjes,
+Het FairBlogs team
 
-[this is a machine generated mail]{% endautoescape %}
+[Dit is een automatisch gegenereerde e-mail. Je hoeft deze e-mail niet te beantwoorden.]{% endautoescape %}
