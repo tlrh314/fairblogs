@@ -16,6 +16,7 @@ TINYMCE_FULL_CONFIG = {
     { 'title': 'Test template 1', 'content': 'Test 1' },
     { 'title': 'Test template 2', 'content': 'Test 2' }
   ],
+  'paste_as_text': True,
   'content_css': [
     '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
     '//www.tinymce.com/css/codepen.min.css',
@@ -27,8 +28,8 @@ TINYMCE_COMPRESSOR = True
 TINYMCE_FILEBROWSER = True
 TINYMCE_DEFAULT_CONFIG = {
     'selector': 'textarea',
-    'height': 80,
-    'width': 500,
+    'height': 400,
+    'width': 600,
     'menubar': False,
     'statusbar': False,
     'elementpath': False,
@@ -36,8 +37,8 @@ TINYMCE_DEFAULT_CONFIG = {
         'link paste autolink code',
     ],
     'toolbar1': 'undo redo | bold italic | bullist numlist outdent indent | link code',
-    'toolbar2': ''
-
+    'toolbar2': '',
+    'paste_as_text': True,
 }
 
 # http://django-filebrowser.readthedocs.io/en/latest/settings.html
