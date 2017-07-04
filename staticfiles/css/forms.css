@@ -94,7 +94,6 @@
     font-family: 'Lato', sans-serif;
 }
 
-
 .form-style-2 input:focus,select:focus,textarea:focus {
     border: 1px solid #d5d5f6;
 }
@@ -154,7 +153,8 @@
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     width: 350px;
-    margin-left: 20px;
+    margin-top: 10px;
+    margin-left: 10px;
 }
 
 .login-button {
@@ -181,7 +181,7 @@
     font-size: 14px;
     font-weight: normal;
     line-height: 21px; 
-    margin: 0px 20px;   
+    margin: 0px 10px;   
 }
 
 .first-col {

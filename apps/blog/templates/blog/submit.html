@@ -28,6 +28,11 @@ $( function() {
 {% block content %}
 <div id="main-wrapper" class="main-content" role="main" >
     <h1 class="text-center"> Voeg blogpost toe </h1><br>
+
+    <p> Door het onderstaande formulier in te vullen, voeg je een blog artikel toe aan FairBlogs.
+    In de teaser kun je een tekst van <strong>minimaal 250</strong> en <strong>maximaal 750</strong> tekens.
+    Je blog wordt automatisch toegevoegd aan de stream op onze homepagina met een linkje naar je eigen blog.  </p>
+
     <form method="post" class="form-style-2" role="form" action="." enctype="multipart/form-data"> {% csrf_token %}
         <table class="form-text">
           <tr>
@@ -40,35 +45,16 @@ $( function() {
           </tr>
         </table>
 
-        <div class="form-style-2 {% if form.title.errors %} has-error {% endif %}">
-            {{ form.title.label }} {{ form.title }}
-            {% if form.title.errors %}  <span class="fa fa-remove error-symbol"></span> {% endif %}
-            <div class="errorlist">{% for error in form.title.errors %}<p>{{ error|escape }}</p> {% endfor %}</div>
+        {% for field in form %} 
+        {% if field.label != "Teaser" %}
+        <div class="form-style-2  {% if field.errors %} has-error {% endif %}">
+            {{ field.label }} {% if field.errors %} <div class="errorlist">{% for error in field.errors %} {{ error|escape }} {% endfor %}</div> {% endif %}
+            {{ field }}
+            {% if field.errors %}  <span class="fa fa-remove error-symbol"></span> {% endif %}
+            {% if field.help_text %} <p class="helptext">{{ field.help_text|safe }}</p> {% endif %}
         </div>
-
-        <div class="form-style-2 {% if form.url.errors %} has-error {% endif %}">
-            {{ form.url.label }} {{ form.url }}
-            {% if form.url.errors %}  <span class="fa fa-remove error-symbol"></span> {% endif %}
-            <div class="errorlist">{% for error in form.url.errors %}<p>{{ error|escape }}</p> {% endfor %}</div>
-        </div>
-
-        <div class="form-style-2 {% if form.date_created.errors %} has-error {% endif %}">
-            {{ form.date_created.label }} {{ form.date_created }}
-            {% if form.date_created.errors %}  <span class="fa fa-remove error-symbol"></span> {% endif %}
-            <div class="errorlist">{% for error in form.date_created.errors %}<p>{{ error|escape }}</p> {% endfor %}</div>
-        </div>
-
-        <div class="form-style-2 {% if form.image.errors %} has-error {% endif %}">
-            {{ form.image.label }} {{ form.image }}
-            {% if form.image.errors %}  <span class="fa fa-remove error-symbol"></span> {% endif %}
-            <div class="errorlist">{% for error in form.image.errors %}<p>{{ error|escape }}</p> {% endfor %}</div>
-        </div>
-
-        <div class="form-style-2 {% if form.tags.errors %} has-error {% endif %} ">
-            {{ form.tags.label }} {{ form.tags }}
-            {% if form.tags.errors %} <span class="fa fa-remove error-symbol"></span> {% endif %}
-            <div class="errorlist">{% for error in form.tags.errors %}<p>{{ error|escape }}</p> {% endfor %}</div>
-        </div>
+        {% endif %}
+        {% endfor %}
 
         <div class="form-style-2  {% if form.teaser.errors %} has-error {% endif %}" id="submit-text">
             {{ form.teaser.label }} {{ form.teaser }}

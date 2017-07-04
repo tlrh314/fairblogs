@@ -10,60 +10,41 @@
 {% block content %}
 
 <div id="main-wrapper" class="main-content" role="main">
-
     <h1 class="text-center"> FairBlogs Login </h1> <br>
 
-    <div id="contact-form-wrapper" class="text-justify col-xs-12 col-sm-8 col-sm-offset-2 ">
+    Log in bij FairBlogs om je blogs te kunnen posten of je profiel aan te passen. <br>
+    Heb je nog geen account? Ga dan naar <a href="{% url 'signup' %}"> {{ site }} {% url 'signup' %} </a> en word ook een FairBlogger! <br>
+    <br>
+
+    Blog je met meerdere auteurs voor een blog dat al een account heeft, maar heb je nog geen persoonlijk profiel? <br>
+    Iedere auteur kan een eigen profielpagina aanmaken. Ook hiervoor ga je naar <a href="{% url 'signup' %}"> {{ site }} {% url 'signup' %} </a>.
+
+    <form method="post" action="" class="form-style-2"> {% csrf_token %}
         {% if form.errors %}
-        <div class="alert alert-danger">
-            Onjuist wachtwoord/gebruikersnaam. Probeer het opnieuw.
-        </div>
+        <p class="errorlist" style="margin-left: -10px;"> Onjuist wachtwoord/gebruikersnaam. Probeer het opnieuw. </p>
         {% endif %}
 
-        <form class="form-horizontal col-sm-12" role="form" action="" method="post"> {% csrf_token %}
-            {% if form.errors %} 
-            <div class="form-style-2 form-group has-error has-feedback">
-            {% else %}
-            <div class="form-style-2 form-group">
-            {% endif %}
-                <label for="id_username" class="login">Emailadres:</label>
-                <input class="form-control login" type="text" name="username" required="" id="id_username">
-                {% if form.errors %} 
-                    <i class="glyphicon glyphicon-remove form-control-feedback"></i>
-                {% endif %}
-            </div>
 
-            {% if form.errors %} 
-            <div class="form-style-2 form-group has-error has-feedback">
-            {% else %}
-            <div class="form-style-2 form-group">
-            {% endif %}
-                <label for="id_password" class="login">Wachtwoord:</label>
-                <input class="form-control login" type="password" name="password" required="" id="id_password">
-                {% if form.errors %} 
-                    <i class="glyphicon glyphicon-remove form-control-feedback"></i>
-                {% endif %}
-            </div>
-
-            <div class="form-style-2 form-group">
-                <button type="submit" class="login-button form-style-button btn btn-success center-block"> Log In </button>
-            </div>
-
-            <div class="text-center">
-                {% url 'site_password_reset' as password_reset_url %}
-                {% if password_reset_url %}
-                    <a href="{{ password_reset_url }}" class="margin20"> 
-                        Wachtwoord of gebruikersnaam vergeten? 
-                    </a> 
-                    <a href="{% url 'signup' %}"> 
-                        Or a new user? 
-                    </a> 
-                {% endif %}
-
-            </div>
-        </form>
+        {% for field in form %} 
+        <div class="form-style-2  {% if form.errors %} has-error {% endif %}">
+            {{ field.label }}
+            {{ field }}
+            {% if form.errors %}  <span class="fa fa-remove error-symbol"></span> {% endif %}
+        </div>
+        {% endfor %}
+        <button type="submit" class="form-style-button"> Aanmelden </button>
     </form>
-</div>
-</div>
 
+    <p>
+        {% url 'site_password_reset' as password_reset_url %}
+        {% if password_reset_url %}
+        <a href="{{ password_reset_url }}"> 
+            Wachtwoord of gebruikersnaam vergeten? 
+        </a> 
+        <a href="{% url 'signup' %}"> 
+            Of een nieuwe FairBlogger?
+        </a> 
+        {% endif %}
+    </p>
+</div>
 {% endblock %}
