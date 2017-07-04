@@ -11,18 +11,24 @@ from django.utils.encoding import python_2_unicode_compatible
 
 from .managers import BloggerManager
 import os
+import re
 
 
 def get_blog_logo(instance, filename):
     """ Logo of the blog (website) """
+
+    filename, extension = filename.split(".")
     return os.path.join("static", "img",
-        instance.blogname.replace(" ", ""), filename)
+        re.compile('[\W_]+').sub('', instance.blogname),
+        re.compile('[\W_]+').sub('', filename)+"."+extension)
 
 def get_blogger_logo(instance, filename):
     """ Logo of the blogger (person) """
+    filename, extension = filename.split(".")
 
     # Affiliation could still be empty on save at signup (for new affliations)
-    return os.path.join("static", "img", "bloggers", filename)
+    return os.path.join("static", "img", "bloggers",
+        re.compile('[\W_]+').sub('', filename)+"."+extension)
 
 
 @python_2_unicode_compatible

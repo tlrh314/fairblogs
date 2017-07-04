@@ -1,4 +1,5 @@
 import os
+import re
 
 from django.db import models
 from django.conf import settings
@@ -12,9 +13,12 @@ from tinymce.models import HTMLField
 
 def get_post_image(instance, filename):
     """ Logo of the blog (website) """
+
+    filename, extension = filename.split(".")
     return os.path.join("static", "img",
-        instance.author.affiliation.blogname.replace(" ", ""),
-        "posts", str(instance.author).replace(" ", ""), filename)
+        re.compile('[\W_]+').sub('', instance.author.affiliation.blogname),
+        re.compile('[\W_]+').sub('', str(instance.author)),
+        re.compile('[\W_]+').sub('', filename)+"."+extension)
 
 
 @python_2_unicode_compatible
