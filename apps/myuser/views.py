@@ -23,7 +23,7 @@ from context_processors import contactinfo
 
 def signup(request):
     if request.method == "POST":
-        form = SignUpForm(request.POST)
+        form = SignUpForm(data=request.POST, files=request.FILES)
         if form.is_valid():
             user = form.save(commit=False)
             user.is_active = False
