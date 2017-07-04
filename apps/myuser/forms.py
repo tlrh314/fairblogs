@@ -19,10 +19,14 @@ class SignUpForm(UserCreationForm):
 
 
 class CreateAffiliationForm(forms.ModelForm):
-    url = forms.URLField(initial="https://")
-    facebook = forms.URLField(required=False, initial="https://")
-    twitter = forms.URLField(required=False, initial="https://")
-    instagram = forms.URLField(required=False, initial="https://")
+    blogname = forms.CharField(label="Naam van de Blog")
+    url = forms.URLField(label="Link naar de Blog", initial="https://")
+    facebook = forms.URLField(initial="https://", required=False,
+        help_text="Begint met 'https://'. Laat helemaal leeg als er geen Facebook voor de blog is.")
+    twitter = forms.URLField(initial="https://", required=False,
+        help_text="Begint met 'https://'. Laat helemaal leeg als er geen Twitter voor de blog is.")
+    instagram = forms.URLField(initial="https://", required=False,
+        help_text="Begint met 'https://'. Laat helemaal leeg als er geen Instagram voor de blog is.")
 
     class Meta:
         model = AffiliatedBlog
@@ -30,10 +34,14 @@ class CreateAffiliationForm(forms.ModelForm):
 
 
 class EditAffiliationForm(forms.ModelForm):
-    url = forms.URLField(initial="https://")
-    facebook = forms.URLField(initial="https://")
-    twitter = forms.URLField(initial="https://")
-    instagram = forms.URLField(initial="https://")
+    blogname = forms.CharField(label="Naam van de Blog")
+    url = forms.URLField(label="Link naar de Blog", initial="https://")
+    facebook = forms.URLField(initial="https://", required=False,
+        help_text="Begint met 'https://'. Laat helemaal leeg als er geen Facebook voor de blog is.")
+    twitter = forms.URLField(initial="https://", required=False,
+        help_text="Begint met 'https://'. Laat helemaal leeg als er geen Twitter voor de blog is.")
+    instagram = forms.URLField(initial="https://", required=False,
+        help_text="Begint met 'https://'. Laat helemaal leeg als er geen Instagram voor de blog is.")
 
     class Meta:
         model = AffiliatedBlog
