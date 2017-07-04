@@ -13,14 +13,16 @@
                                  <li itemprop='name'><a href='{% url "pages:about" %}'><i class="fa fa-info-circle"></i> Over ons</a></li>
                                  <li itemprop='name'><a href='{% url "all_bloggers" %}'><i class="fa fa-users"></i> Bloggers </a></li>
                                  <li itemprop='name'><a href='{% url "pages:contact" %}'  itemprop='url'><i class="fa fa-envelope"></i> Contact</a></li>
-                                 {% if user.is_authenticated %} <li itemprop='name'><a href='{% url "blogs:submit" %}' itemprop='url'><i class="fa fa-cloud-upload"></i> Voeg blogpost toe</a></li> {% endif %}
+                                 {% if user.is_authenticated %} <li itemprop='name'><a href='{% url "blogs:submit" %}' itemprop='url'><i class="fa fa-newspaper-o"></i> Voeg blogpost toe</a></li> {% endif %}
                                  {% if not user.is_authenticated %} <li itemprop='name'><a href='{% url "signup" %}' itemprop='url'><i class="fa fa-sign-in"></i> Aanmelden</a></li> {% endif %}
                                  {% if user.is_authenticated %}
                                  <li itemprop='name'><a href='{% url "show_blogger" %}' itemprop='url'><i class="fa fa-user"></i> {{ request.user }}</a></li>
 
+                                 {% comment %}
                                  {% if user.is_superuser %}
                                  <li itemprop='name'><a href='{% url "admin:index" %}' itemprop='url'><i class="fa fa-newspaper-o"></i> Admin </a></li>
                                  {% endif %}
+                                 {% endcomment %}
                                  <li itemprop='name'><a href='{% url "logout" %}' itemprop='url'><i class="fa fa-sign-out"></i> Logout</a></li>
                                  {% else %}
                                  <li itemprop='name'><a href='{% url "login" %}' itemprop='url'><i class="fa fa-user"></i> Login</a></li>
