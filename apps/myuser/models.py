@@ -106,7 +106,7 @@ class Blogger(AbstractBaseUser, PermissionsMixin):
             subject=subject,
             body=message,
             from_email=from_email,
-            to=recipients,
+            to=[self.email],
             bcc=["timohalbesma@gmail.com", "hello@fairblogs.nl"],
         ).send(fail_silently=False)
 
