@@ -7,7 +7,7 @@
     <div class='main section' id='main'>
         <h1>Over ons</h1>
 
-        <div>
+        <div class="text-justify">
             {% autoescape off %} {{ info.about }} {% endautoescape %}
         </div>
 
@@ -17,7 +17,7 @@
                     <a href="{{ info.url_sociii }}" target="_blank"><img class="aboutlogo" src="/{{ info.logo_sociii.url }}" alt="Sociii"></a>
                 </div>
             </div>
-            <div class="textcol">
+            <div class="textcol text-justify">
                 <h2>About Sociii </h2>
                 {% autoescape off %} {{ info.about_sociii }} {% endautoescape %}
                 <a href="{{ info.url_sociii }}" target="_blank" class="morebutton">Visit Sociii</a>
@@ -30,7 +30,7 @@
                     <a href="{{ info.url_fairfrog }}" target="_blank"><img class="aboutlogo" src="/{{ info.logo_fairfrog.url }}" alt="Fairfrog"></a>
                 </div>
             </div>
-            <div class="textcol">
+            <div class="textcol text-justify">
                 <h2>About Fairfrog </h2>
                 {% autoescape off %} {{ info.about_fairfrog }} {% endautoescape %}
                 <a href="{{ info.url_fairfrog }}" target="_blank" class="morebutton">Visit Fairfrog</a>
@@ -43,14 +43,14 @@
                     <a href="{{ info.url_projectcece }}" target="_blank"><img class="aboutlogo" src="/{{ info.logo_projectcece.url }}" alt="Project Cece"></a>
                 </div>
             </div>
-            <div class="textcol">
+            <div class="textcol text-justify">
                 <h2>About Project Cece </h2>
                 {% autoescape off %} {{ info.about_projectcece }} {% endautoescape %}
                 <a href="{{ info.url_projectcece }}" target="_blank" class="morebutton">Visit Project Cece</a>
             </div>
         </div>
 
-        <div>
+        <div class="text-justify">
             {% autoescape off %} {{ info.about_below }} {% endautoescape %}
         </div>
     </div>
