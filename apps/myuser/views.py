@@ -59,7 +59,7 @@ def signup(request):
 
 def new_affiliation(request):
     if request.method == "POST":
-        user = get_object_or_404(Blogger, pk=request.session["new_user_pk"])
+        user = get_object_or_404(Blogger, pk=request.session.get("new_user_pk", None))
         form = CreateAffiliationForm(data=request.POST, files=request.FILES)
         if form.is_valid():
             affiliation = form.save(commit=False)
