@@ -8,12 +8,23 @@
 {% block content %}
 
 <div id="main-wrapper" class="main-content" role="main">
-  <h1>Aanmelden</h1><br>
-  Maak een account aan om ook blogs toe te voegen aan FairBlogs. Na het aanmaken van een persoonlijk account kun je deze direct koppelen aan je blog.
-  <form method="post" enctype="multipart/form-data" class="form-style-2">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="form-style-button">Aanmelden</button>
+  <h1> Aanmelden -- Nieuwe Blog </h1><br>
+  Maak een account aan om ook blogs toe te voegen aan FairBlogs. <br>
+  <br>
+  Na het aanmaken van een persoonlijk account verifieren wij de account. <br>
+  Daarna kan een thumbnail met tekst en link naar de blogsposts direct toegevoegd worden op FairBlogs!
+
+  <form method="post" enctype="multipart/form-data" class="form-style-2">{% csrf_token %}
+    {% for field in form %} 
+    <div class="form-style-2  {% if field.errors %} has-error {% endif %}">
+        {{ field.label }} <div class="errorlist">{% for error in field.errors %} {{ error|escape }} {% endfor %}</div>
+        {{ field }}
+        {% if field.errors %}  <span class="fa fa-remove error-symbol"></span> {% endif %}
+        {% if field.help_text %} <p class="helptext">{{ field.help_text|safe }}</p> {% endif %}
+    </div>
+    {% endfor %}
+    
+    <button type="submit" class="form-style-button"> Aanmelden </button>
   </form>
  </div>
 {% endblock %}

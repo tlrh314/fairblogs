@@ -8,74 +8,22 @@
 {% block content %}
 
 <div id="main-wrapper" class="main-content" role="main">
-  <h1>Aanmelden</h1><br>
+  <h1> Aanmelden </h1><br>
   Maak een account aan om ook blogs toe te voegen aan FairBlogs. <br>
   <br>
-  Na het aanmaken van een persoonlijk account verifieren wij de account en daarna
-  kun je thumbnails voor je blogsposts direct uploaden op FairBlogs!
-  <form method="post" class="form-style-2">
-    {% csrf_token %}
-    {{ form.non_field_errors.help_text }}
+  Na het aanmaken van een persoonlijk account verifieren wij de account. <br>
+  Daarna kan een thumbnail met tekst en link naar de blogsposts direct toegevoegd worden op FairBlogs!
 
-    {% if form.errors %}
-        {{ form.errors }}
-    {% endif %}
-
-    {% if form.errors %}
-    <div class="alert alert-danger">
-    Controleer de volgende velden: 
-    {% for error in form.errors %}
-        {{ error|escape }}
-    {% endfor %}
+  <form method="post" enctype="multipart/form-data" class="form-style-2"> {% csrf_token %}
+    {% for field in form %} 
+    <div class="form-style-2  {% if field.errors %} has-error {% endif %}">
+        {{ field.label }} <div class="errorlist">{% for error in field.errors %} {{ error|escape }} {% endfor %}</div>
+        {{ field }}
+        {% if field.errors %}  <span class="fa fa-remove error-symbol"></span> {% endif %}
+        {% if field.help_text %} <p class="helptext">{{ field.help_text|safe }}</p> {% endif %}
     </div>
-    {% endif %} 
-
-    <p><label for="id_email">Emailadres:</label> {{ form.email }} </p>
-    {% if form.email.errors %} 
-        {{ form.email.errors }}
-    <span class="fa fa-remove input-symbol"></span>
-    {% endif %} 
-    <p><label for="id_first_name">Voornaam:</label> {{ form.first_name }} </p>
-    {% if form.first_name.errors %} 
-    {% endif %} 
-    <p><label for="id_last_name">Achternaam:</label> {{ form.last_name }} </p>
-    {% if form.last_name.errors %} 
-    {% endif %} 
-    <p><label for="id_affiliation">Blog:</label> {{ form.affiliation }} {{ form.affiliation.help_text|safe }} </p>
-    {% if form.affiliation.errors %} 
-    {% endif %} 
-
-
-    <p><label for="id_password1">Wachtwoord:</label> {{ form.password1 }} {{ form.password1.help_text|safe }} </p>
-    {% if form.password1.errors %} 
-    {% endif %} 
-
-
-    <p><label for="id_password2">Bevestig je wachtwoord:</label> {{ form.password2 }} </p>
-    {% if form.password2.errors %} 
-    {% endif %} 
-
-
-    <p class='form-section-head'>Social media</p>
-    <p class='form-section-text'> Voer hieronder de urls naar je social media paginas in om je FairBlogs account te koppelen. Als je je accounts hieronder invult, dan taggen we je automatisch in de social media posts die we plaatsen om je blogposts te promoten. </p>
-    <p class='social-submit'>
-      <label for="id_facebook">Facebook:</label> 
-    {{ form.facebook }}
-    <span class="fa fa-facebook input-symbol"></span>
-  </p>
-
-    <p class='social-submit'>
-      <label for="id_twitter">Twitter:</label> 
-      {{ form.twitter }} 
-      <span class="fa fa-twitter input-symbol"></span>
-    </p>
-
-    <p class='social-submit'>
-      <label for="id_instagram">Instagram:</label> 
-      {{ form.instagram }} 
-      <span class="fa fa-instagram input-symbol"></span>
-  </p>
-    <button type="submit" class="form-style-button">Aanmelden</button>
+    {% endfor %}
+    <button type="submit" class="form-style-button"> Aanmelden </button>
   </form>
  </div>
 {% endblock %}

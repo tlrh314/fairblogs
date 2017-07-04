@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.conf import settings
-from django.core.mail import send_mail
+from django.core.mail import EmailMessage
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.models import BaseUserManager
@@ -52,9 +52,9 @@ class AffiliatedBlog(models.Model):
 @python_2_unicode_compatible
 class Blogger(AbstractBaseUser, PermissionsMixin):
     """ When referencing users, use: 'settings.AUTH_USER_MODEL' or 'get_user_model()' """
-    email = models.EmailField(_("email address"), unique=True)
-    first_name = models.CharField(_("first name"), max_length=30)
-    last_name = models.CharField(_("last name"), max_length=30)
+    email = models.EmailField(_("Email"), unique=True)
+    first_name = models.CharField(_("Voornaam"), max_length=30)
+    last_name = models.CharField(_("Achternaam"), max_length=30)
 
     affiliation = models.ForeignKey(AffiliatedBlog, related_name="blogger", on_delete=models.SET_NULL, null=True)
     avatar = models.ImageField(upload_to=get_blogger_logo, null=True, blank=True)
@@ -97,11 +97,17 @@ class Blogger(AbstractBaseUser, PermissionsMixin):
         """
         return self.first_name
 
-    def email_user(self, subject, message, from_email=None, **kwargs):
+    def email_user(self, subject, message, from_email="no-reply@fairblogs.nl", **kwargs):
         """
-        Sends an email to this User.
+        Sends an email to this User. Caution, from_email must contain domain name!
         """
-        send_mail(subject, message, from_email, [self.email], **kwargs)
+        EmailMessage(
+            subject=subject,
+            body=message,
+            from_email=from_email,
+            to=recipients,
+            bcc=["timohalbesma@gmail.com", "hello@fairblogs.nl"],
+        ).send(fail_silently=False)
 
     def __str__(self):
         return self.get_full_name()
