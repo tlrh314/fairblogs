@@ -50,3 +50,6 @@ FILEBROWSER_EXTENSIONS = {
     'Audio': [], # ['.mp3','.mp4','.wav','.aiff','.midi','.m4p']
 }
 FILEBROWSER_ADMIN_VERSIONS = ['big']  # 'thumbnail', 'small', 'medium', 'large'
+
+# For files uploaded via submit form
+FILE_UPLOAD_PERMISSIONS = 0644
