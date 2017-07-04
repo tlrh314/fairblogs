@@ -40,9 +40,10 @@ class PrivacyPolicy(models.Model):
 
 
 class AboutUs(models.Model):
-    about = HTMLField(verbose_name=_("About Us"), blank=True, help_text='Introduction about Fairblogs for on the About Us page')
+    about = HTMLField(verbose_name=_("About Us"), blank=True, help_text='Bovenste gedeelte over FairBlogs op de about pagina.')
+    about_below = HTMLField(verbose_name=_("About Us"), blank=True, help_text='Onderste gedeelte over FairBlogs op de about pagina.')
 
-    about_fairfrog = HTMLField(verbose_name=_("About Fairfrog"), blank=True)   
+    about_fairfrog = HTMLField(verbose_name=_("About Fairfrog"), blank=True)
     url_fairfrog = models.URLField(help_text='Website url', blank=True)
     logo_fairfrog = models.ImageField(upload_to=get_company_logo, blank=True, null=True)
 

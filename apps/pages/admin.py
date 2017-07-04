@@ -13,22 +13,19 @@ class AboutUsAdmin(admin.ModelAdmin):
     readonly_fields = ( "date_created", "date_updated", "last_updated_by" )
 
     fieldsets = [
-        ( "About Us", {
-                "fields": [ "about" ]
-            }),
-         ("About Fairfrog", {
-                "fields": [ "about_fairfrog", "url_fairfrog", "logo_fairfrog" ]
-            }),
-         ("About Socii", {
-                "fields": [ "about_sociii", "url_sociii", "logo_sociii" ]
-            }),
-         ("About Project Cece", {
-                "fields": [ "about_projectcece", "url_projectcece", "logo_projectcece" ]
-            }         
+        ( "About Us -- Bovenste deel", {
+            "fields": [ "about" ] }
+        ), ("About Fairfrog", {
+            "fields": [ "about_fairfrog", "url_fairfrog", "logo_fairfrog" ]}
+        ), ("About Socii", {
+            "fields": [ "about_sociii", "url_sociii", "logo_sociii" ]}
+        ), ("About Project Cece", {
+            "fields": [ "about_projectcece", "url_projectcece", "logo_projectcece" ]}
+        ), ( "About Us -- Onderste deel", {
+            "fields": [ "about_below" ] }
         ), ( "Meta", {
-                "classes": ["collapse"],
-                "fields": ["date_created", "date_updated", "last_updated_by"]
-            }
+            "classes": ["collapse"],
+            "fields": ["date_created", "date_updated", "last_updated_by"]}
         ),
     ]
 
@@ -37,7 +34,7 @@ class AboutUsAdmin(admin.ModelAdmin):
         obj.save()
 
     def rename_text(self, obj):
-       return "Click here to change the About Us page"
+        return "Click here to change the About Us page"
     rename_text.short_description = "About Us"
 
 @admin.register(PrivacyPolicy)
@@ -47,12 +44,10 @@ class PrivacyPolicyAdmin(admin.ModelAdmin):
 
     fieldsets = [
         ( "Privacy Policy", {
-                "fields": [ "policy", "date_updated"]
-            }
+            "fields": [ "policy", "date_updated"]}
         ), ( "Meta", {
-                "classes": ["collapse"],
-                "fields": ["date_created", "date_updated", "last_updated_by"]
-            }
+            "classes": ["collapse"],
+            "fields": ["date_created", "date_updated", "last_updated_by"]}
         ),
     ]
 
@@ -61,7 +56,7 @@ class PrivacyPolicyAdmin(admin.ModelAdmin):
         obj.save()
 
     def rename_text(self, obj):
-       return "Click here to change the Privacy Policy"
+        return "Click here to change the Privacy Policy"
     rename_text.short_description = "Privacy Policy"
 
 
@@ -81,18 +76,16 @@ class ContactInfoForm(forms.ModelForm):
 @admin.register(ContactInfo)
 class ContactInfoAdmin(admin.ModelAdmin):
     list_display = ("contact_email", "webmaster_email",
-                    "address", "postbox", "phone" )
+            "address", "postbox", "phone" )
     readonly_fields = ( "date_created", "date_updated", "last_updated_by" )
     form = ContactInfoForm
 
     fieldsets = [
         ( "Contact Information", {
-                "fields": ["contact_email", "webmaster_email", "address", "postbox", "phone"]
-            }
+            "fields": ["contact_email", "webmaster_email", "address", "postbox", "phone"]}
         ), ( "Meta", {
-                "classes": ["collapse"],
-                "fields": ["date_created", "date_updated", "last_updated_by"]
-            }
+            "classes": ["collapse"],
+            "fields": ["date_created", "date_updated", "last_updated_by"]}
         ),
     ]
 
