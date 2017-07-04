@@ -38,6 +38,7 @@ urlpatterns = [
     url(r"^ajax_select/", include(ajax_select_urls)),
     url(r"^admin/", admin.site.urls),
     url(r"^admin/password_reset/$", auth_views.PasswordResetView.as_view(), name="password_reset"),
+    url(r'^admin/', include('django.contrib.auth.urls')),
     url(r"^accounts/", include("apps.myuser.urls")),
     url(r"^bloggers/", all_bloggers, name="all_bloggers"),
     url(r"", include("apps.blog.urls", namespace="blogs")),
