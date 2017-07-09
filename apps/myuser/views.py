@@ -14,6 +14,7 @@ from django.contrib.admin.models import ADDITION, CHANGE, DELETION, LogEntry
 
 from .forms import SignUpForm
 from .forms import CreateAffiliationForm
+from .forms import SelectAffiliationForm
 from .forms import EditBloggerForm
 from .forms import EditAffiliationForm
 from .models import Blogger
@@ -85,6 +86,25 @@ def new_affiliation(request):
     else:
         form = CreateAffiliationForm()
     return render(request, "myuser/new_affiliation.html", {"form": form})
+
+
+@login_required
+def set_affiliation(request):
+    if request.method == "POST":
+        form = SelectAffiliationForm(data=request.POST)
+        if form.is_valid():
+            which_blog = form.cleaned_data.get("which_blog", None)
+            if not which_blog:
+                request.session["new_user_pk"] = request.user.pk
+                return redirect("new_affiliation")
+            else:
+                request.user.affiliation = which_blog
+                request.user.save()
+                return redirect("blogs:submit")
+    else:
+        form = SelectAffiliationForm()
+
+    return render(request, "myuser/set_affiliation.html", { "form": form })
 
 
 def activation_sent(request):

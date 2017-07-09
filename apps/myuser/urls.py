@@ -7,6 +7,7 @@ from django.contrib.auth import views as auth_views
 from context_processors import contactinfo
 from .views import signup
 from .views import new_affiliation
+from .views import set_affiliation
 from .views import activation_sent
 from .views import activate
 from .views import email_validated
@@ -71,6 +72,7 @@ urlpatterns = [
     url(r"^update/$", update_blogger, name="update_blogger"),
     url(r"^profile/$", show_blogger, name="show_blogger"),
     url(r"^new_affiliation/$", new_affiliation, name="new_affiliation"),
+    url(r'^set_affiliation/$', set_affiliation, name='set_affiliation'),
     url(r"^update_affiliation/$", update_affiliation, name="update_affiliation"),
     url(r"^affiliation/$", show_affiliation, name="show_affiliation"),
     url(r"^activation_sent/$", activation_sent, name="activation_sent"),

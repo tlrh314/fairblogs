@@ -2,6 +2,7 @@ from django import template
 from django.db.models import Q
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator
@@ -59,6 +60,11 @@ def index(request):
 
 @login_required
 def submit(request):
+    # Catch rascals that created user account w/o AffiliatedBlog
+    if not request.user.affiliation:
+        request.session["new_user_pk"] = request.user.pk
+        return redirect("set_affiliation")
+
     if request.method == "POST":
         form = SubmitBlogpostForm(data=request.POST, files=request.FILES)
         if form.is_valid():

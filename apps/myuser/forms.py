@@ -33,6 +33,19 @@ class CreateAffiliationForm(forms.ModelForm):
         fields = ("blogname", "url", "logo", "email", "facebook", "twitter", "instagram",)
 
 
+class SelectAffiliationForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super(SelectAffiliationForm, self).__init__(*args, **kwargs)
+        self.fields["which_blog"].queryset = AffiliatedBlog.objects.all()
+
+    which_blog = forms.ModelChoiceField(
+        label="Voor welke blog schrijf je?",
+        required=False,
+        queryset=None,  # note that we set the queryset in the init method above
+        widget=forms.Select(attrs={"class": "form-control"})
+    )
+
+
 class EditAffiliationForm(forms.ModelForm):
     blogname = forms.CharField(label="Naam van de Blog")
     url = forms.URLField(label="Link naar de Blog", initial="https://")
