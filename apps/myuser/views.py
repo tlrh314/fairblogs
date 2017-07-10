@@ -213,7 +213,7 @@ def show_affiliation(request):
 
 def all_bloggers(request):
     affiliation__bloggers = list()
-    for blog in AffiliatedBlog.objects.all().order_by("blogname"):
+    for blog in AffiliatedBlog.objects.all().exclude(blogname__in=["Project Cece", "FairFrog", "Sociii"]).order_by("blogname"):
         affiliation__bloggers.append(Blogger.objects.filter(affiliation=blog).order_by("last_name", "first_name"))
 
     return render(request, "myuser/all_bloggers.html", { "affiliation__bloggers": affiliation__bloggers })
