@@ -8,28 +8,32 @@
 {% block content %}
 
 <div id="main-wrapper" class="main-content" role="main">
-  <h1> Update Persoonlijk Profiel </h1><br>
+    <h1> Update Persoonlijk Profiel </h1><br>
 
 
-  <div style="margin-top: 20px; padding-bottom: 20px; padding-left: 20px; width: 75%;"> 
-    <h3 style="float: left;" ><a href="{% url 'site_password_change' %}" ><i class="fa fa-edit"></i> Wachtwoord wijzigen (klik hier) </a></h3>
-    <h3 style="float: right;"><a href="{% url 'update_affiliation' %}" ><i class="fa fa-edit"></i> Blog wijzigen (klik hier) </a></h3>
-  </div>
+    <div style="margin-top: 20px; padding-bottom: 20px; padding-left: 20px; width: 75%;"> 
+        <h3 style="float: left;" ><a href="{% url 'site_password_change' %}" ><i class="fa fa-edit"></i> Wachtwoord wijzigen (klik hier) </a></h3>
+    </div>
+    <div style="margin-top: 20px; padding-bottom: 20px; padding-left: 20px; width: 75%;"> 
+        <h3 style="float: left;"><a href="{% url 'update_affiliation' %}" ><i class="fa fa-edit"></i> Blog wijzigen (klik hier) </a></h3>
+    </div>
+    <div style="margin-top: 20px; padding-bottom: 20px; padding-left: 20px; width: 75%;"> 
+        <h3 style="float: left;"><a href="{% url 'blogs:select_post' %}" ><i class="fa fa-edit"></i> Blogpost wijzigen (klik hier) </a></h3>
+    </div>
 
 
-  <form method="post" enctype="multipart/form-data" class="form-style-2">
-    {% csrf_token %}
-    {{ form.non_field_errors }}
-      
-      <p><label for="id_email">Emailadres:</label> {{ form.email }} </p>
-      <p><label for="id_first_name">Voornaam:</label> {{ form.first_name }} </p>
-      <p><label for="id_last_name">Achternaam:</label> {{ form.last_name }} </p>
-      <p><label for="id_affiliation">Blog:</label> {{ form.affiliation }} </p>
+    <form method="post" enctype="multipart/form-data" class="form-style-2">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
 
-      <p><label for="id_avatar">Avatar:</label> {{ form.avatar }} </p>
+        <p><label for="id_email">Emailadres:</label> {{ form.email }} </p>
+        <p><label for="id_first_name">Voornaam:</label> {{ form.first_name }} </p>
+        <p><label for="id_last_name">Achternaam:</label> {{ form.last_name }} </p>
+        <p><label for="id_affiliation">Blog:</label> {{ form.affiliation }} </p>
 
-    <button type="submit" class="form-style-button"> Opslaan </button>
-  </form>
- </div>
+        <p><label for="id_avatar">Avatar:</label> {{ form.avatar }} </p>
+
+        <button type="submit" class="form-style-button"> Opslaan </button>
+    </form>
+</div>
 {% endblock %}
- 

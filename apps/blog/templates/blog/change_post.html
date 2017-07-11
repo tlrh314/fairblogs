@@ -23,17 +23,17 @@ $( function() {
 </script>
 {% endblock topscripts %}
 
-{% block title %} FairBlogs - Submit Blogpost {% endblock title %}
+{% block title %} FairBlogs - Wijzig Blogpost {% endblock title %}
 
 {% block content %}
 <div id="main-wrapper" class="main-content" role="main" >
-    <h1 class="text-center"> Voeg blogpost toe </h1><br>
+    <h1 class="text-center"> Wijzig blogpost </h1><br>
 
-    <p> Door het onderstaande formulier in te vullen, voeg je een blogpost toe aan FairBlogs.
+    <p> Door het onderstaande formulier in te vullen, wijzig je de betreffende blogpost op FairBlogs.
     In de teaser kun je een tekst van <strong>minimaal 250</strong> en <strong>maximaal 750</strong> tekens.
     De post wordt automatisch toegevoegd aan de stream op onze homepagina met een linkje naar jouw eigen blog.  </p>
 
-    <form method="post" class="form-style-2" role="form" action="." enctype="multipart/form-data"> {% csrf_token %}
+    <form method="post" class="form-style-2" role="form" action="{% url 'blogs:change_post' form.instance.slug %}" enctype="multipart/form-data"> {% csrf_token %}
         <table class="form-text">
           <tr>
             <th class="first-col">Auteur: </th>
@@ -63,7 +63,8 @@ $( function() {
             <div id="textarea_feedback">0/750 karakters</div>
         </div>
 
-        <button type="submit" class="form-style-button"> Toevoegen </button>
+        <button type="submit" class="form-style-button"> Aanpassen </button>
     </form>
 </div>
 {% endblock %}
+

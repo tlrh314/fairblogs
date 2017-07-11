@@ -9,10 +9,13 @@ from django.core.paginator import Paginator
 from django.core.paginator import EmptyPage
 from django.core.paginator import PageNotAnInteger
 from django.contrib.auth.decorators import login_required
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.admin.models import ADDITION, CHANGE, DELETION, LogEntry
 
 from .models import Post
 from .models import Tag
 from .forms import SubmitBlogpostForm
+from .forms import SelectPostForm
 
 
 register = template.Library()
@@ -80,6 +83,13 @@ def submit(request):
             # Caution, post needs to be saved before m2m can be added!
             post.tags = form.cleaned_data["tags"]
 
+            # Add record to LogEntry
+            content_type_pk = ContentType.objects.get_for_model(Post).pk
+            LogEntry.objects.log_action(
+                request.user.pk, content_type_pk, post.pk, str(post), ADDITION,
+                change_message="New Post created via submit form."
+            )
+
             return HttpResponseRedirect(reverse("blogs:post_detail", kwargs={"slug": post.slug}))
     else:
         form = SubmitBlogpostForm()
@@ -87,9 +97,44 @@ def submit(request):
     return render(request, "blog/submit.html", { "form": form })
 
 
+@login_required
+def select_post(request):
+    if request.method == "POST":
+        form = SelectPostForm(data=request.POST, affiliation=request.user.affiliation)
+        if form.is_valid():
+            post = form.cleaned_data["which_post"]
+            return HttpResponseRedirect(reverse("blogs:change_post", kwargs={"slug": post.slug}))
+    else:
+        form = SelectPostForm(affiliation=request.user.affiliation)
+
+    return render(request, "blog/select_post.html", { "form": form })
+
+
+@login_required
+def change_post(request, slug):
+    if request.method == "POST":
+        form = SubmitBlogpostForm(instance=get_object_or_404(Post, slug=slug), data=request.POST, files=request.FILES)
+        if form.is_valid():
+            post = form.save()
+
+            # Add record to LogEntry
+            content_type_pk = ContentType.objects.get_for_model(Post).pk
+            LogEntry.objects.log_action(
+                request.user.pk, content_type_pk, post.pk, str(post), CHANGE,
+                change_message="Post changed via submit form."
+            )
+
+            return HttpResponseRedirect(reverse("blogs:post_detail", kwargs={"slug": post.slug}))
+    else:
+        form = SubmitBlogpostForm(instance=get_object_or_404(Post, slug=slug))
+
+    return render(request, "blog/change_post.html", { "form": form })
+
+
 def post_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
     return render(request, "blog/detail.html", { "post": post })
+
 
 def update_post_counter(request, slug):
     post = get_object_or_404(Post, slug=slug.replace('/', ''))

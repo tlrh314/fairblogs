@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+{% block stylesheets %} {{ block.super }} 
+    <link href="{% static 'css/forms.css' %}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block title %} FairBlogs - Blogpost Toevoegen Geslaagd! {% endblock title %}
+
+{% block content %}
+
+<div id="main-wrapper" class="main-content" role="main">
+    <h1> Selecteer Post </h1><br>
+
+    Het is zowel mogelijk om jouw eigen posts alsmede eventuele posts geschreven door andere auteurs van jouw blog te selecteren om aan te passen. <br>
+    <br> 
+
+    <form method="post" class="form-style-2">{% csrf_token %}
+        <table class="form-text">
+            <tr>
+                <th class="first-col">Auteur: </th>
+                <th>{{ request.user.first_name }} {{ request.user.last_name }}</th>
+            </tr>
+            <tr>
+                <th class="first-col">Blog: </th>
+                <th>{{ request.user.affiliation }}</th>
+            </tr>
+        </table>
+
+        {% for field in form %} 
+        <div class="form-style-2  {% if field.errors %} has-error {% endif %}">
+            {{ field.label }} <div class="errorlist">{% for error in field.errors %} {{ error|escape }} {% endfor %}</div>
+            {{ field }}
+            {% if field.errors %}  <span class="fa fa-remove error-symbol"></span> {% endif %}
+            {% if field.help_text %} <p class="helptext">{{ field.help_text|safe }}</p> {% endif %}
+        </div>
+        {% endfor %}
+
+        <button type="submit" class="form-style-button"> Selecteer </button>
+    </form>
+</div>
+{% endblock %}
