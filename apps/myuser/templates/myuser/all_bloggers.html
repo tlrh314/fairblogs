@@ -16,15 +16,23 @@
     margin-bottom: 20px;
 }
 
+.affiliation h3 {
+    text-align: center;
+}
 .affiliation a.morebutton {
     background-color: #000000;
     color: #fff !important;
     border-radius: 4px;
-    display: inline-block;
+    display: block;
     font-weight: 700;
     padding: 0 1.5em;
     height: 2.85em;
     line-height: 2.95em;
+    margin: 0 auto;
+    text-align: center;
+    width: 50px;
+    position: relative;
+    bottom: 150px;
 }
 
 .affiliation div.info img {
@@ -88,18 +96,19 @@
                 {% else %}
                 <img class="person" src="{% static 'img/bloggerplaceholder.jpg' %}"/>
                 {% endif %}
-                <h3>{{ blogger }} </h3>
             </div>
 
-            <a href="{{ affiliation.url }}" target="_blank" class="morebutton"> Visit </a>
-            
             <div class="info">
                 {% if affiliation.logo %}
-                <img src="/{{ affiliation.logo.url }}"/>
+                <a href="{{ affiliation.url }}" target="_blank"><img src="/{{ affiliation.logo.url }}"/></a>
                 {% else %}
-                <img src="{% static 'img/bloggerplaceholder.jpg' %}"/>
+                <a href="{{ affiliation.url }}" target="_blank"><img src="{% static 'img/bloggerplaceholder.jpg' %}"/></a>
                 {% endif %}
             </div>
+
+            <h3>{{ blogger }} </h3>
+            <a href="{{ affiliation.url }}" target="_blank" class="morebutton"> Visit </a>
+            
         {% endfor %}
         </div>
     {% endwith %}
