@@ -17,7 +17,6 @@ def get_post_image(instance, filename):
     filename, extension = filename.split(".")
     return os.path.join("static", "img",
         re.compile('[\W_]+').sub('', instance.author.affiliation.blogname),
-        re.compile('[\W_]+').sub('', str(instance.author)),
         re.compile('[\W_]+').sub('', filename)+"."+extension)
 
 
