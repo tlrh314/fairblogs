@@ -30,7 +30,7 @@ def signup(request):
             user.is_active = False
             user.save()
             current_site = get_current_site(request)
-            subject = "Activate your account at {0}".format(current_site.name)
+            subject = "Activeer jouw account op {0}".format(current_site.name)
             message = render_to_string("myuser/account_activation_email.html", {
                 "user": user,
                 "protocol": request.scheme,
@@ -142,7 +142,7 @@ def activate(request, uidb64, token):
             "domain": current_site.domain,
         })
         email = EmailMessage(
-            subject="Activate new user account at {0}".format(current_site.name),
+            subject="Activeer nieuwe gebruiker op {0}".format(current_site.name),
             body=message,
             # Caution, from_email must contain domain name!
             from_email="no-reply@fairblogs.nl",

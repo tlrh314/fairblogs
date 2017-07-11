@@ -66,7 +66,7 @@ class BloggerAdmin(UserAdmin):
             user.is_active = True
             user.save()
             current_site = get_current_site(request)
-            subject = "Your account at {0} has been confirmed!".format(current_site.name)
+            subject = "Jouw account op {0} is geactiveerd!".format(current_site.name)
             message = render_to_string("myuser/account_verified.html", {
                 "user": user,
                 "protocol": request.scheme,
