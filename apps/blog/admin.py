@@ -51,7 +51,7 @@ class TagAdmin(admin.ModelAdmin):
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     readonly_fields = ( "slug", "date_updated", "last_updated_by", "popularity" )
-    list_display = ("title", "author", "get_affiliation", "date_updated", "popularity" )
+    list_display = ("title", "author", "get_affiliation", "date_created", "date_updated", "popularity" )
     search_fields = ("title", "author", "teaser")
     list_filter = ("is_published",)
     filter_horizontal = ("tags",)
