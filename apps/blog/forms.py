@@ -40,7 +40,10 @@ class SubmitBlogpostForm(forms.ModelForm):
 class SelectPostForm(forms.Form):
     def __init__(self, affiliation, *args, **kwargs):
         super(SelectPostForm, self).__init__(*args, **kwargs)
-        self.fields["which_post"].queryset = Post.objects.filter(author__affiliation=affiliation)
+        # is_published is not included in the SubmitBlogpostForm, so it cannot be changed on-site.
+        # Only admins can change it. TODO: decide whether or not Bloggers should be able to change is_published
+        # if so, add it to the form
+        self.fields["which_post"].queryset = Post.objects.filter(author__affiliation=affiliation).exclude(is_published=False)
 
     which_post = forms.ModelChoiceField(
         label="Welke post wil je aanpassen?",

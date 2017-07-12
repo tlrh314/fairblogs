@@ -3,6 +3,7 @@ from django.db.models import Q
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
+from django.http import Http404
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator
@@ -22,7 +23,7 @@ register = template.Library()
 
 
 def index(request):
-    blogs = Post.objects.all()
+    blogs = Post.objects.filter(is_published=True)
 
     tags = request.GET.getlist("tag", None)
 
@@ -78,6 +79,8 @@ def submit(request):
             post.url = form.cleaned_data["url"]
             post.image = form.cleaned_data["image"]
             post.date_created = form.cleaned_data["date_created"]
+            # TODO: if is_published should be included in the SubmitBlogpostForm, then
+            # post.publish() if form.cleaned_data["is_published"] else post.unpublish()
             post.publish()  # publish implies save
 
             # Caution, post needs to be saved before m2m can be added!
@@ -112,8 +115,12 @@ def select_post(request):
 
 @login_required
 def change_post(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    if not post.is_published:
+        raise Http404("Post is unpublished. First publish the blogpost, then edit the blogpost on the website. ")
+
     if request.method == "POST":
-        form = SubmitBlogpostForm(instance=get_object_or_404(Post, slug=slug), data=request.POST, files=request.FILES)
+        form = SubmitBlogpostForm(instance=post, data=request.POST, files=request.FILES)
         if form.is_valid():
             post = form.save()
 
@@ -126,18 +133,22 @@ def change_post(request, slug):
 
             return HttpResponseRedirect(reverse("blogs:post_detail", kwargs={"slug": post.slug}))
     else:
-        form = SubmitBlogpostForm(instance=get_object_or_404(Post, slug=slug))
+        form = SubmitBlogpostForm(instance=post)
 
     return render(request, "blog/change_post.html", { "form": form })
 
 
 def post_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
+    if not post.is_published:
+        raise Http404("Post is unpublished. First publish the blogpost, then view the blogpost on the website. ")
     return render(request, "blog/detail.html", { "post": post })
 
 
 def update_post_counter(request, slug):
     post = get_object_or_404(Post, slug=slug.replace('/', ''))
+    if not post.is_published:
+        raise Http404("Post is unpublished. First publish the blogpost, then use the outlink.")
     post.popularity += 1
     post.save()
     return HttpResponseRedirect(request.GET.get('next'))
