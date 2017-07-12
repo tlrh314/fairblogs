@@ -66,7 +66,7 @@ def search(request):
     posts_filter = Q()
     bloggers_filter = Q()
     affiliated_blogs_filter = Q()
-    all_posts = Post.objects.all()
+    all_posts = Post.objects.filter(is_published=True)
     all_bloggers = Blogger.objects.all()
     all_affiliated_blogs = AffiliatedBlog.objects.all()
 
