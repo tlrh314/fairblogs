@@ -5,6 +5,7 @@ from django.core.exceptions import ValidationError
 from .models import AboutUs
 from .models import ContactInfo
 from .models import PrivacyPolicy
+from .models import Disclaimer
 
 
 @admin.register(AboutUs)
@@ -58,6 +59,29 @@ class PrivacyPolicyAdmin(admin.ModelAdmin):
     def rename_text(self, obj):
         return "Click here to change the Privacy Policy"
     rename_text.short_description = "Privacy Policy"
+
+
+@admin.register(Disclaimer)
+class DisclaimerAdmin(admin.ModelAdmin):
+    list_display = ("rename_text",)
+    readonly_fields = ( "date_created", "date_updated", "last_updated_by" )
+
+    fieldsets = [
+        ( "Disclaimer", {
+            "fields": [ "policy", "date_updated"]}
+        ), ( "Meta", {
+            "classes": ["collapse"],
+            "fields": ["date_created", "date_updated", "last_updated_by"]}
+        ),
+    ]
+
+    def save_model(self, request, obj, form, change):
+        obj.last_updated_by = request.user
+        obj.save()
+
+    def rename_text(self, obj):
+        return "Click here to change the Disclaimer"
+    rename_text.short_description = "Disclaimer"
 
 
 class ContactInfoForm(forms.ModelForm):

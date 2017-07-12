@@ -39,6 +39,23 @@ class PrivacyPolicy(models.Model):
         validate_only_one_instance(self)
 
 
+class Disclaimer(models.Model):
+    policy = HTMLField(verbose_name=_("Disclaimer"), blank=True)
+
+    last_updated_by = models.ForeignKey(settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL, blank=True, null=True,
+        related_name="disclaimer_changed_by", )
+    date_created = models.DateTimeField(_("Date Created"), auto_now_add=True)
+    date_updated = models.DateTimeField(_("Date Last Changed"), auto_now=True)
+
+    class Meta:
+        verbose_name = _("Disclaimer")
+        verbose_name_plural = _("Disclaimer")
+
+    def clean(self):
+        validate_only_one_instance(self)
+
+
 class AboutUs(models.Model):
     about = HTMLField(verbose_name=_("About Us"), blank=True, help_text='Bovenste gedeelte over FairBlogs op de about pagina.')
     about_below = HTMLField(verbose_name=_("About Us"), blank=True, help_text='Onderste gedeelte over FairBlogs op de about pagina.')

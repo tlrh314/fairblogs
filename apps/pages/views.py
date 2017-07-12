@@ -13,6 +13,7 @@ from django.contrib.auth.decorators import login_required
 
 from .models import ContactInfo
 from .models import PrivacyPolicy
+from .models import Disclaimer
 from .models import AboutUs
 from .forms import ContactForm
 from ..blog.models import Post
@@ -97,7 +98,18 @@ def privacy_policy(request):
         policy = "Our privacy policy is still work in progress."
         last_updated = None
     return render(request, "pages/privacy_policy.html",
-        {"privacy_policy": policy, "privacy_policy_last_update": last_updated })
+        {"privacy_policy": policy, "last_updated": last_updated })
+
+def disclaimer(request):
+    disclaimer = Disclaimer.objects.all()
+    if len(disclaimer) == 1:
+        policy = disclaimer[0].policy
+        last_updated = disclaimer[0].date_updated
+    else:
+        policy = "Our disclaimer is still work in progress."
+        last_updated = None
+    return render(request, "pages/disclaimer.html",
+        {"disclaimer_policy": policy, "last_updated": last_updated })
 
 def page_not_found(request):
     # Info from context_processors seems unavailable. So we pass contactinfo.

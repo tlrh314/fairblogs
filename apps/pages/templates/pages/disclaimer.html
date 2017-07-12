@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+<div id='main-wrapper'>
+    <div class='main section' id='main'>
+        <h1>Disclaimer</h1>
+
+        <div>
+            {{ last_updated }}
+            {% autoescape off %} {{ disclaimer_policy }} {% endautoescape %}
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
