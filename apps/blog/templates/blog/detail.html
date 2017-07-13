@@ -1,7 +1,15 @@
 {% extends "base.html" %}
 {% load static %}
+{% block meta_description %}Blog by {{ post.author.affiliation }}: {{ post.title }}. {{ block.super }} {% endblock meta_description %} 
+{% block meta_keywords %}{% for tag in post.tags.all %}{{ tag }} {% endfor %} {{ block.super }} {% endblock meta_keywords %} 
+{% block meta_twitter_url %}{{ full_url }}{% endblock meta_twitter_url %} 
+{% block meta_twitter_title %}{{ block.super}} | {{ post.title }}{% endblock meta_twitter_title %} 
+{% block meta_twitter_description %}Blog by {{ post.author.affiliation }}: {{ post.title }}. {{ block.super }}{% endblock meta_twitter_description %} 
+{% block meta_og_url %}{{ full_url }}{% endblock meta_og_url %} 
+{% block meta_og_title %}{{ block.super}} | {{ post.title }}{% endblock meta_og_title %} 
+{% block meta_og_description %}Blog by {{ post.author.affiliation }}: {{ post.title }}. {{ block.super }} {% endblock meta_og_description %} 
 {% block stylesheets %} {{ block.super }} {% endblock stylesheets %}
-{% block title %} {{ block.super }} | Blogpost Toevoegen Geslaagd! {% endblock title %}
+{% block title %} {{ block.super }} | {{ post.title }} {% endblock title %}
 
 {% block content %}
 

@@ -11,32 +11,31 @@
         <link rel="apple-touch-icon" href="{% static 'img/Fair.png' %}">
         <link rel="icon" type="image/gif/png" href="{% static 'img/Fair.png' %}">
 
-        <meta content='https://fairblogs.nl/' property='og:url'/>
-        <meta content='FairBlogs' property='og:title'/>
-        <meta content='blogger' name='generator'/>
-
         {# Description and Keywords #} 
-        <meta content='FairBlogs: Vind duurzame en eerlijke blogs via één website!' property='og:description'/>
-        <meta content='FairBlogs: Vind duurzame en eerlijke blogs via één website!' name='description'/>
-        <meta content='Fair Fashion Blog Better Planet' name='keywords'/>
+        <meta name='description' content='{% block meta_description %}FairBlogs: Vind duurzame en eerlijke blogs via één website!{% endblock meta_description %}' />
+        <meta name='keywords' content='{% block meta_keywords %}Fair Fashion Blog Better Planet{% endblock meta_keywords %}' />
 
         {# Twitter #}
-        <meta content='FairBlogs' property='og:site_name'/>
-        <meta content='https://fairblogs.nl/' name='twitter:domain'/>
-        <meta content='' name='twitter:title'/>
-        <meta content='summary' name='twitter:card'/>
-        <meta content='' name='twitter:title'/>
-        <meta content='@BlogsFair' name='twitter:site'/>
-        <meta content='@BlogsFair' name='twitter:creator'/>
+        <meta name='twitter:domain' content='{% block meta_twitter_url %}https://fairblogs.nl/{% endblock meta_twitter_url %}' />
+        <meta name='twitter:title' content='{% block meta_twitter_title %}FairBlogs{% endblock meta_twitter_title %}' />
+        <meta name='twitter:description' content='{% block meta_twitter_description %}FairBlogs: Vind duurzame en eerlijke blogs via één website!{% endblock meta_twitter_description %}'>
+        <meta name='twitter:card' content='summary' />
+        <meta name='twitter:site' content='@BlogsFair' />
+        <meta name='twitter:creator' content='@BlogsFair' />
 
         {# Facebok #}
-        <meta content='Facebook App ID here' property='fb:app_id'/>
-        <meta content='Facebook Admin ID here' property='fb:admins'/>
+        <meta property='og:site_name' content='FairBlogs' />
+        <meta property='og:url' content='{% block meta_og_url %}https://fairblogs.nl/{% endblock meta_og_url %}' />
+        <meta property='og:title' content='{% block meta_og_title %}FairBlogs{% endblock meta_og_title %}' />
+        <meta property='og:type' content='Blogpost' />
+        <meta property='og:description' content='{% block meta_og_description %}FairBlogs: Vind duurzame en eerlijke blogs via één website!{% endblock meta_og_description %}'/>
+        <meta property="og:locale" content="nl" />
+        <meta property='fb:app_id' content='Facebook App ID here' />
+        <meta property='fb:admins' content='Facebook Admin ID here' />
 
         <title>
             {% block title %} FairBlogs {% endblock title %}
         </title>
-
 
 <!--       <link href='http://impreza-soratemplates.blogspot.nl/favicon.ico' rel='icon' type='image/x-icon'/>
       <link href='http://impreza-soratemplates.blogspot.com/' rel='canonical'/>

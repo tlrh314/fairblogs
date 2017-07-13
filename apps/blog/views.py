@@ -140,9 +140,10 @@ def change_post(request, slug):
 
 def post_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
+    full_url = request.build_absolute_uri()
     if not post.is_published:
         raise Http404("Post is unpublished. First publish the blogpost, then view the blogpost on the website. ")
-    return render(request, "blog/detail.html", { "post": post })
+    return render(request, "blog/detail.html", { "post": post, "full_url": full_url })
 
 
 def update_post_counter(request, slug):
