@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% load template_extras %}
+
+{% block title %} {{ block.super }} {% if current_tags %} | {% endif %} {% for tagname in current_tags %} {{ tagname }} {% if not forloop.last %} & {% endif %} {% endfor %} {% endblock title %}
 {% block content %}
 
 <div id='main-wrapper'>

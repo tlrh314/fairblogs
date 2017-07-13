@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+
+{% block title %} {{ block.super }} | Over Ons {% endblock title %}
+
 {% block content %}
 
 <link rel="stylesheet" type="text/css" href="{% static 'css/aboutus.css' %}" />
