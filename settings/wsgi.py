@@ -12,8 +12,7 @@ import sys
 
 root_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', ))
 sys.path.insert(0, os.path.abspath(os.path.join(root_path)))
-# sys.path.insert(0, os.path.abspath('/srv/fairblogs/venv/lib/python3.6/site-packages/'))
-sys.path.insert(0, os.path.abspath('/srv/fairblogs/venv/lib/python2.7/site-packages/'))
+sys.path.insert(0, os.path.abspath('/srv/fairblogs/venv3/lib/python3.6/site-packages/'))
 
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")

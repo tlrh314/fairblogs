@@ -83,8 +83,8 @@ celerybeat-schedule
 .env
 
 # virtualenv
-.venv
-venv/
+.venv3
+venv3/
 ENV/
 
 # Spyder project settings
@@ -105,7 +105,7 @@ ENV/
 
 
 # Fairblogs ignore
-venv
+venv3
 settings/local.py
 migrations/
 static/
