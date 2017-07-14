@@ -16,7 +16,9 @@
 <div id='main-wrapper'>
     <div class='main section' id='main'>
 
+        {% if request.user.affiliation == post.author.affiliation %}
         <h1 style="margin-top: 20px; margin-bottom: 20px; text-align: center;"><a href="{% url 'blogs:change_post' post.slug %}" ><i class="fa fa-edit"></i> Post wijzigen (klik hier) </a></h1>
+        {% endif %}
 
         {% include 'blog/detail_postonly.html' with blog=post %}
     </div>

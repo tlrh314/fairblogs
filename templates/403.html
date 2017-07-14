@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block stylesheets %} {{ block.super }} {% endblock stylesheets %}
+
+{% block title %}{{ block.super }} - Geen Toegang {% endblock title %}
+
+{% block content %}
+<div id='main-wrapper' class="main-content" role="main">
+    <h1 class="text-center">Je hebt geen toegang tot deze pagina.</h1>
+
+<p>
+    Je hebt geen toegang tot de pagina die je probeert te bereiken. 
+</p>
+
+</div>
+{% endblock content %}

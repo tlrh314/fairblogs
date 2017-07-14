@@ -112,5 +112,7 @@ def disclaimer(request):
         {"disclaimer_policy": policy, "last_updated": last_updated })
 
 def page_not_found(request):
-    # Info from context_processors seems unavailable. So we pass contactinfo.
-    return render(request, "404.html", contactinfo(request))
+    return render(request, "404.html")
+
+def permission_denied(request):
+    return render(request, "403.html")

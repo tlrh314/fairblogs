@@ -20,7 +20,7 @@ import django.views.static
 from django.conf import settings
 from django.contrib import admin
 from django.conf.urls import url
-from django.conf.urls import include, url, handler404, handler500
+from django.conf.urls import include, url, handler403, handler404, handler500
 from django.contrib.auth import views as auth_views
 
 import filebrowser.sites
@@ -29,6 +29,7 @@ from ajax_select import urls as ajax_select_urls
 from apps.myuser.views import all_bloggers
 
 
+handler403 = "apps.pages.views.permission_denied"
 handler404 = "apps.pages.views.page_not_found"
 handler500 = "apps.pages.views.page_not_found"
 

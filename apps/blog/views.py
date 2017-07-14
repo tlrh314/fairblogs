@@ -128,9 +128,17 @@ def select_post(request):
     return render(request, "blog/select_post.html", { "form": form })
 
 
+def affiliation_check(user):
+    return user.affiliation.endswith("sjenk")
+
+
 @login_required
 def change_post(request, slug):
     post = get_object_or_404(Post, slug=slug)
+
+    if request.user.affiliation != post.author.affiliation:
+        return redirect(reverse("pages:permission_denied"))
+
     if not post.is_published:
         raise Http404("Post is unpublished. First publish the blogpost, then edit the blogpost on the website. ")
 

@@ -3,19 +3,14 @@
 
 {% block stylesheets %} {{ block.super }} {% endblock stylesheets %}
 
-{% block title %}FairBlogs - Page Not Found{% endblock title %}
+{% block title %}{{ block.super }} - Niet Gevonden {% endblock title %}
 
 {% block content %}
 <div id='main-wrapper' class="main-content" role="main">
     <h1 class="text-center">Deze pagina bestaat niet.</h1>
 
 <p>
-De pagina die u probeert te bereiken bestaat niet. Dit kan gebeuren door een foute of verkeerd gespelde link. Via het menu op deze pagina of de zoekbar kunt u naar onze website navigeren.  
-
-<!-- This can happen because of a bad link or an incorrectly typed web address. Our webpage administrator has automatically been notified in case of an incorrect link. <br>
-<br>
-
-Please try again via the menu or use the search bar in the upper right corner. If you need the missing information promptly and it's not on our webpages, you can ofcourse always <a href="{% url "pages:contact" %}">contact</a> or <a href="mailto:{{ contactinfo.contact_email }}">email us</a>. -->
+    De pagina die u probeert te bereiken bestaat niet. Dit kan gebeuren door een foute of verkeerd gespelde link. Via het menu op deze pagina of de zoekbar kunt u naar onze website navigeren.  
 </p>
 
 </div>

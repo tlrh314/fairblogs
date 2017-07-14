@@ -10,10 +10,12 @@ from .views import contact_success
 from .views import privacy_policy
 from .views import disclaimer
 from .views import page_not_found
+from .views import permission_denied
 
 
 urlpatterns = [
     url(r"^404.html$", page_not_found, name="page_not_found"),
+    url(r"^denied/$", permission_denied, name="permission_denied"),
     url(r"^about/$", about, name="about"),
     url(r"^contact/$", contact, name="contact"),
     url(r"^thanks/$", contact_success, name="contact_success"),
