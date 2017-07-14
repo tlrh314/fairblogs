@@ -31,8 +31,9 @@ DEBUG = TEMPLATE_DEBUG = False
 
 INSTALLED_APPS = [
     #Filebrowser should be listed before django.contrib.admin
+    "dal",
+    "dal_select2",
     "tinymce",
-    "ajax_select",
     "filebrowser",
 
     "django.contrib.admin",

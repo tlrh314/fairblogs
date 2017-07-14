@@ -68,3 +68,7 @@ $( function() {
 </div>
 {% endblock %}
 
+{% block bottomscripts %}
+    {{ block.super }}
+    {{ form.media }}
+{% endblock bottomscripts %}

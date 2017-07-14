@@ -3,6 +3,8 @@ from django.utils import timezone
 from django.forms.utils import ErrorList
 from django.template.defaultfilters import slugify
 
+from dal import autocomplete
+
 from .models import Post
 from .models import Tag
 
@@ -12,10 +14,14 @@ class SubmitBlogpostForm(forms.ModelForm):
         model = Post
         fields = ("title", "url", "date_created", "tags", "image", "teaser" )
 
+        widgets = {
+            "tags": autocomplete.ModelSelect2Multiple(url="blogs:tag-autocomplete"),
+        }
+
     url = forms.URLField(initial="https://")
     date_created = forms.DateTimeField(label="Post is gepubliceerd op", initial=timezone.now)
-    tags = forms.ModelMultipleChoiceField(queryset=Tag.objects.all())
     teaser = forms.CharField(required=True, min_length=250, max_length=750, widget=forms.Textarea())
+
 
     def clean(self):
         slug = slugify(self.cleaned_data.get("title"))

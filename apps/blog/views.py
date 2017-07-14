@@ -13,6 +13,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.admin.models import ADDITION, CHANGE, DELETION, LogEntry
 
+from dal import autocomplete
+
 from .models import Post
 from .models import Tag
 from .forms import SubmitBlogpostForm
@@ -20,6 +22,19 @@ from .forms import SelectPostForm
 
 
 register = template.Library()
+
+
+class TagAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        if not self.request.user.is_authenticated():
+            return Tag.objects.none()
+
+        qs = Tag.objects.all()
+
+        if self.q:
+            qs = qs.filter(tag_name__icontains=self.q)
+
+        return qs
 
 
 def index(request):
@@ -60,7 +75,7 @@ def index(request):
         blogs = paginator.page(paginator.num_pages)
 
     return render(request, "blog/index.html", {"blogs": blogs,
-                                                "current_tags": tags})
+        "current_tags": tags})
 
 @login_required
 def submit(request):
@@ -89,9 +104,9 @@ def submit(request):
             # Add record to LogEntry
             content_type_pk = ContentType.objects.get_for_model(Post).pk
             LogEntry.objects.log_action(
-                request.user.pk, content_type_pk, post.pk, str(post), ADDITION,
-                change_message="New Post created via submit form."
-            )
+                    request.user.pk, content_type_pk, post.pk, str(post), ADDITION,
+                    change_message="New Post created via submit form."
+                    )
 
             return HttpResponseRedirect(reverse("blogs:post_detail", kwargs={"slug": post.slug}))
     else:
@@ -127,9 +142,9 @@ def change_post(request, slug):
             # Add record to LogEntry
             content_type_pk = ContentType.objects.get_for_model(Post).pk
             LogEntry.objects.log_action(
-                request.user.pk, content_type_pk, post.pk, str(post), CHANGE,
-                change_message="Post changed via submit form."
-            )
+                    request.user.pk, content_type_pk, post.pk, str(post), CHANGE,
+                    change_message="Post changed via submit form."
+                    )
 
             return HttpResponseRedirect(reverse("blogs:post_detail", kwargs={"slug": post.slug}))
     else:

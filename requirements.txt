@@ -3,7 +3,7 @@ backports.shutil-get-terminal-size==1.0.0
 decorator==4.0.11
 Django==1.11.3
 django-admin-view-permission==1.0
-django-ajax-selects==1.6.0
+django-autocomplete-light==3.2.9
 django-filebrowser-no-grappelli==3.7.2
 django-tinymce4-lite==1.4.1
 enum34==1.1.6
