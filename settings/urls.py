@@ -24,7 +24,6 @@ from django.conf.urls import include, url, handler403, handler404, handler500
 from django.contrib.auth import views as auth_views
 
 import filebrowser.sites
-from ajax_select import urls as ajax_select_urls
 
 from apps.myuser.views import all_bloggers
 
@@ -36,7 +35,6 @@ handler500 = "apps.pages.views.page_not_found"
 urlpatterns = [
     url(r"^admin/filebrowser/", include(filebrowser.sites.site.urls)),
     url(r"^tinymce/", include("tinymce.urls")),
-    url(r"^ajax_select/", include(ajax_select_urls)),
     url(r"^admin/", admin.site.urls),
     url(r"^admin/password_reset/$", auth_views.PasswordResetView.as_view(), name="password_reset"),
     url(r'^admin/', include('django.contrib.auth.urls')),
