@@ -2,6 +2,7 @@
 <Variable name="primarycolor" description="Primary Color" type="color" default="#f1a18e" />
 <Variable name="topcolor" description="Top Bar Color" type="color" default="#161616" />
 
+/* #83df83 old color: #f1a18e */
 /*****************************************
 reset.css
 ******************************************/
@@ -105,7 +106,7 @@ max-width: 330px;
 /* ######## Top Header Bar Css ######################### */
 .top-bar {
 background: #161616;
-border-bottom: 4px solid #f1a18e;;
+border-bottom: 4px solid #83df83;;
 }
 .top-bar-wrapper {
 position: relative;
@@ -262,7 +263,7 @@ text-transform: uppercase;
 margin-right: 3px;
 }
 .nav-menu li a:hover {
-color: #f1a18e;
+color: #83df83;
 }
 .nav-menu ul li ul {
 width: 180px;
@@ -320,7 +321,7 @@ position: relative;
 }
 .sidebar h2 {
 border: 3px double #cccccc;
-color: #f1a18e;
+color: #83df83;
 font-size: 16px;
 padding: 10px 0;
 margin: 0 0 20px;
@@ -382,17 +383,17 @@ margin: 0;
 font-size: 13px;
 }
 .breadcrumbs i {
-color: #f1a18e;
+color: #83df83;
 }
 .breadcrumbs span a.bhome {
-color: #f1a18e;
+color: #83df83;
 }
 .breadcrumbs span,
 .breadcrumbs span a {
 color: #333;
 }
 .breadcrumbs span a:hover {
-color:#f1a18e;
+color:#83df83;
 }
 .post-labels {
 position: absolute;
@@ -410,7 +411,7 @@ z-index: 1;
 color: #000;
 }
 .post-labels:hover {
-background:#f1a18e;
+background:#83df83;
 color:#fff;
 }
 .post-body {
@@ -542,11 +543,11 @@ border: 3px double #cccccc;
 }
 .blog-pager-older-link:hover, .blog-pager-newer-link:hover, .blog-pager-older-link:hover .post-nav-icon, .blog-pager-newer-link:hover  .post-nav-icon  {
 background:#333;
-color:#f1a18e;
+color:#83df83;
 border-color:#333;
 }
 .blog-pager-older-link:hover .pager-heading, .blog-pager-newer-link:hover  .pager-heading, .blog-pager-older-link:hover .pager-title, .blog-pager-newer-link:hover  .pager-title {
-color:#f1a18e;
+color:#83df83;
 }
 .blog-pager-newer-link {
 float: left;
@@ -602,7 +603,7 @@ height: 100%;
 text-align: center;
 line-height: 66px;
 background-color: #eee;
-color: #f1a18e;
+color: #83df83;
 letter-spacing: 0;
 }
 /* ######## Share widget Css ######################### */
@@ -709,7 +710,7 @@ margin-right: 0;
 position: absolute;
 top: 15px;
 left: 15px;
-background-color: #f1a18e;
+background-color: #83df83;
 color: #fff;
 text-transform: uppercase;
 font-weight: 400;
@@ -948,7 +949,7 @@ max-width: 375px;
 .lowerbar .widget {margin: 0; padding: 10px 20px 0px 20px;box-sizing:border-box;}
 .lowerbar h2 {
 border: 3px double #cccccc;
-color: #f1a18e;
+color: #83df83;
 font-size: 16px;
 padding: 10px 0;
 margin: 0 0 20px;
@@ -1155,10 +1156,10 @@ color: #000;
 .label-size a:hover,
 .label-size a:active {
 background: #fff;
-color: #F86E7D;
+color: #83df83; /* #F86E7D;*/
 }
 .label-size .label-count {
-background: #F86E7D;
+background: #83df83; /*#F86E7D;*/
 color: #fff;
 white-space: nowrap;
 display: inline-block;
@@ -1187,7 +1188,7 @@ position: absolute;
 left: 0px;
 top: 2px;
 font-size: 22px;
-color: #f1a18e
+color: #83df83
 }
 .list-label-widget-content li a {
 color: #fff;
@@ -1197,7 +1198,7 @@ font-weight: 400;
 text-transform: uppercase
 }
 .list-label-widget-content li span:last-child {
-color: #f1a18e;
+color: #83df83;
 font-size: 12px;
 font-weight: 700;
 position: absolute;
