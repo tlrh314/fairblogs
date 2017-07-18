@@ -35,10 +35,11 @@
                                  <i class='fa fa-calendar-o'></i>
                                  <abbr class='published timeago' title='{{ blog.date_created }}'>{{ blog.date_created }}</abbr>
                               </div>
-                              <div class='resumo'><span>{% autoescape off %}{{ blog.teaser }}{% endautoescape %} 
-                              
+                              <div class='resumo'><span><p>{% autoescape off %}{{ blog.teaser }}{% endautoescape %} 
+                              <a href='/viewpost/{{blog.slug}}/?next={{ blog.url }}' target='_blank' style="float: right;"><strong>Lees verder</strong></a> 
+                              </p>
                               <a href='{{ blog.author.affiliation.first.url }}' class='blogthumb' target='_blank'><img src='/{{ blog.author.affiliation.logo.url}}'/></a>
-                              <a href='/viewpost/{{blog.slug}}/?next={{ blog.url }}' target='_blank' style="float: right;"><strong>Lees verder</strong></a> </span></div>
+                              </span></div>
                               <div style='clear: both;'></div>
                            </div>
                         </article>
