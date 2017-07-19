@@ -11,7 +11,7 @@
 
 <div id="main-wrapper" class="main-content" role="main">
     <div style="margin-bottom: 50px;">
-        <h1 style="float: left;"> Persoonlijk Profiel </h1> <h1 style="float: right;"></h1>
+        <h1> Persoonlijk Profiel </h1> <h1 style="float: right;"></h1>
     </div>
 
     <div style="margin-top: 20px; padding-bottom: 20px; padding-left: 20px; width: 75%;"> 
@@ -27,9 +27,9 @@
 
     <div>
         {% if request.user.avatar %}
-        <img style="float: left; padding-left: 20px; margin-bottom: 20px; margin-top: 20px;" src="/{{ request.user.avatar.url }}" width="200px"></img>
+        <img style="padding-left: 20px; margin-bottom: 20px; margin-top: 20px;" src="/{{ request.user.avatar.url }}" width="200px"></img>
         {% else %}
-        <img style="float: left; padding-left: 20px; margin-bottom: 20px; margin-top: 20px;" src="{% static 'img/bloggerplaceholder.jpg' %}" width="200px"></img>
+        <img style="padding-left: 20px; margin-bottom: 20px; margin-top: 20px;" src="{% static 'img/bloggerplaceholder.jpg' %}" width="200px"></img>
         {% endif %}
 
 
