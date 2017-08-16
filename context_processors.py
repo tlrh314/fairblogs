@@ -40,9 +40,9 @@ def base(request):
     View that is inherited everywhere (for base template)
     """
     all_posts = Post.objects.all()
-    popular_posts = all_posts.order_by('-popularity')
+    popular_posts = all_posts.order_by('-popularity', '-date_created')
     if len(all_posts) >= 6:
         popular_posts = popular_posts[:7]
 
-    return {'tags': Tag.objects.all(), 
+    return {'tags': Tag.objects.all(),
             'popular_posts': popular_posts}
