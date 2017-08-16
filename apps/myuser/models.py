@@ -17,14 +17,18 @@ import re
 def get_blog_logo(instance, filename):
     """ Logo of the blog (website) """
 
-    filename, extension = filename.split(".")
+    fnamesplit = filename.split(".")
+    filename = "".join(fnamesplit[:-1])
+    extension = fnamesplit[-1]
     return os.path.join("static", "img",
         re.compile('[\W_]+').sub('', instance.blogname),
         re.compile('[\W_]+').sub('', filename)+"."+extension)
 
 def get_blogger_logo(instance, filename):
     """ Logo of the blogger (person) """
-    filename, extension = filename.split(".")
+    fnamesplit = filename.split(".")
+    filename = "".join(fnamesplit[:-1])
+    extension = fnamesplit[-1]
 
     # Affiliation could still be empty on save at signup (for new affliations)
     return os.path.join("static", "img", "bloggers",

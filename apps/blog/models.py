@@ -14,7 +14,9 @@ from tinymce.models import HTMLField
 def get_post_image(instance, filename):
     """ Logo of the blog (website) """
 
-    filename, extension = filename.split(".")
+    fnamesplit = filename.split(".")
+    filename = "".join(fnamesplit[:-1])
+    extension = fnamesplit[-1]
     return os.path.join("static", "img",
         re.compile('[\W_]+').sub('', instance.author.affiliation.blogname),
         re.compile('[\W_]+').sub('', filename)+"."+extension)
