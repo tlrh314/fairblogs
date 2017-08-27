@@ -17,8 +17,16 @@ Site code structure:
   - Create debug directory: `mkdir -p venv/debug`
 
   - Install required packages: `pip install -r requirements.txt`
+  - Create static/img dir: `mkdir -p static/img`
   - Setup local_settings: `mv settings/local.py.example settings/local.py`
   - Edit `settings/local.py` to tailor to your machine.
+
+
+- ** Add development url to Site **
+  - Only needed when using latest mysql dump converted to sqlite3 db
+  - In [1]: `from django.contrib.sites.models import Site`
+  - In [2]: `new_site = Site.objects.create(domain="127.0.0.1:8000", name="127.0.0.1:8000")`
+  - In [3]: `new_site = Site.objects.create(domain="localhost:8000", name="localhost:8000")`
 
 - ** Production **
   - `mkdir -p static/img static/_versions`
