@@ -12,6 +12,7 @@ from django.core.paginator import PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.admin.models import ADDITION, CHANGE, DELETION, LogEntry
+from django.contrib.syndication.views import Feed
 
 from dal import autocomplete
 
@@ -177,3 +178,19 @@ def update_post_counter(request, slug):
     post.popularity += 1
     post.save()
     return HttpResponseRedirect(request.GET.get('next'))
+
+
+
+class PostsFeed(Feed):
+    title = "Blog posts"
+    link = "feeds/posts/"
+    description = "Posts from FairBlogs"
+
+    def items(self):
+        return Post.objects.order_by('-pub_date')[:10]
+
+    def item_title(self, item):
+        return item.title
+
+    def item_description(self, item):
+        return item.text

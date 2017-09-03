@@ -111,6 +111,7 @@ migrations/
 static/
 media/
 piwik/
+debug/
 templates/piwik.html
 
 # Filebrowser thumbnails
