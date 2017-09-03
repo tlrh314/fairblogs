@@ -188,7 +188,7 @@ class PostsFeed(Feed):
     description = "Posts from FairBlogs"
 
     def items(self):
-        return Post.objects.order_by('date_created')[10:]
+        return Post.objects.order_by('-date_created')[10:]
 
     def item_title(self, item):
         return item.title
