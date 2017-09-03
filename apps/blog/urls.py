@@ -20,5 +20,5 @@ urlpatterns = [
     url(r'^index/$', index, name='index'),
     url(r'^$', index, name='index'),
     # feed posts
-    url(r'^feeds/posts/$', PostsFeed()),
+    url(r'^feeds/posts/$', PostsFeed(), name='posts'),
 ]
