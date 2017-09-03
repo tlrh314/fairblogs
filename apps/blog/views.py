@@ -200,4 +200,5 @@ class PostsFeed(Feed):
         return item.author
 
     def item_link(self, item):
-        return reverse('posts', args=[item.pk])
+        return reverse("blogs:post_detail", kwargs={"slug": post.slug})
+            #('posts', args=[item.pk])
