@@ -200,4 +200,4 @@ class PostsFeed(Feed):
         return item.author
 
     def item_link(self, item):
-        return reverse('Post', args=[item.pk])
+        return reverse('post_detail', args=[item.pk])
