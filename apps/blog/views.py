@@ -182,7 +182,7 @@ def update_post_counter(request, slug):
 
 
 class PostsFeed(Feed):
-    title = "Blog posts"
+    title = "Feed blog posts"
     link = "feeds/posts/"
     description = "Posts from FairBlogs"
 
