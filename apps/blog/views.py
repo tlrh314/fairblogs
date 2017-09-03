@@ -14,6 +14,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.admin.models import ADDITION, CHANGE, DELETION, LogEntry
 from django.contrib.syndication.views import Feed
 
+
 from dal import autocomplete
 
 from .models import Post
@@ -192,5 +193,11 @@ class PostsFeed(Feed):
     def item_title(self, item):
         return item.title
 
- #   def item_description(self, item):
- #       return item.text
+    def item_description(self, item):
+        return item.teaser
+
+    def item_author(self, item):
+        return item.author
+
+    def item_link(self, item):
+        return reverse('Post', args=[item.pk])
