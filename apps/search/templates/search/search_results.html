@@ -72,6 +72,7 @@
           var highlighted = n.splitText(i);
           var span = document.createElement('span');
           span.className = 'highlighted';
+          span.style = 'display: inline;';
           span.appendChild(highlighted);
           after.parentNode.insertBefore(span,after);
         }
