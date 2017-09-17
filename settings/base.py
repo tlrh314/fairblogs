@@ -44,12 +44,12 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.sites",
     "django.forms",
+    "django.contrib.syndication",
 
     "apps.myuser",
     "apps.blog",
     "apps.pages",
     "apps.search",
-
     # "bootstrap",
 ]
 

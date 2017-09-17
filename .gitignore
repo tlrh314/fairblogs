@@ -23,6 +23,7 @@ var/
 wheels/
 *.egg-info/
 .installed.cfg
+.idea
 *.egg
 
 # PyInstaller
@@ -111,6 +112,7 @@ migrations/
 static/
 media/
 piwik/
+debug/
 templates/piwik.html
 
 # Filebrowser thumbnails

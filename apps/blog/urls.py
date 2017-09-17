@@ -7,7 +7,7 @@ from .views import select_post
 from .views import change_post
 from .views import update_post_counter
 from .views import TagAutocomplete
-
+from .views import PostsFeed
 
 urlpatterns = [
     url(r'^submit/$', submit, name='submit'),
@@ -19,4 +19,6 @@ urlpatterns = [
     url(r'^tag-autocomplete/$', TagAutocomplete.as_view(), name='tag-autocomplete'),
     url(r'^index/$', index, name='index'),
     url(r'^$', index, name='index'),
+    # feed posts
+    url(r'^feeds/posts/$', PostsFeed(), name='posts'),
 ]

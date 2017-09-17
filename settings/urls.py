@@ -43,6 +43,7 @@ urlpatterns = [
     url(r"", include("apps.blog.urls", namespace="blogs")),
     url(r"", include("apps.pages.urls", namespace="pages")),
     url(r"^search/", include("apps.search.urls", namespace="search")),
+    url(r"^feeds/posts", include("apps.blog.urls", namespace='posts')),
 ]
 
 if "runserver" in sys.argv:
