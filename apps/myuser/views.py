@@ -213,7 +213,17 @@ def show_affiliation(request):
 
 def all_bloggers(request):
     affiliation__bloggers = list()
-    for blog in AffiliatedBlog.objects.all().exclude(blogname__in=["Project Cece", "FairFrog", "Sociii"]).order_by("blogname"):
-        affiliation__bloggers.append(Blogger.objects.filter(affiliation=blog).order_by("last_name", "first_name"))
+
+    # Exclude certain accounts
+    marcella = [b.pk for b in Blogger.objects.filter(last_name="Wijngaarden").filter(first_name="Marcella")]
+    timo = [b.pk for b in Blogger.objects.filter(last_name="Halbesma").filter(first_name="Timo")]
+    nancy = [b.pk for b in Blogger.objects.filter(last_name__icontains="Tjon").filter(first_name="Nancy")]
+
+    print(marcella+timo+nancy)
+    print(type(marcella+timo+nancy))
+
+    for blog in AffiliatedBlog.objects.all().order_by("blogname"):
+        affiliation__bloggers.append(Blogger.objects.filter(affiliation=blog)\
+            .exclude(pk__in=list(marcella+timo+nancy)).order_by("last_name", "first_name"))
 
     return render(request, "myuser/all_bloggers.html", { "affiliation__bloggers": affiliation__bloggers })

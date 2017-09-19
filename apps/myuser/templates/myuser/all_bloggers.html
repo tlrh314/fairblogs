@@ -93,8 +93,8 @@
     <div class='main section' id='main'>
         {% for affiliation_queryset in affiliation__bloggers %}
         {% with affiliation_queryset.0.affiliation as affiliation %}
-        <div class="affiliation {% if not forloop.last %} hline {% endif %}">
-            {% for blogger in affiliation_queryset %}
+        {% for blogger in affiliation_queryset %}
+        <div class="affiliation hline">
             <div class="blogger">
                 {% if blogger.avatar %}
                 <img class="person" src="/{{ blogger.avatar.url }}"/>
@@ -114,8 +114,8 @@
             <h3>{{ blogger }} </h3>
             <a href="{{ affiliation.url }}" target="_blank" class="morebutton"> Visit </a>
             
-        {% endfor %}
         </div>
+    {% endfor %}
     {% endwith %}
     {% endfor %}
     </div>
