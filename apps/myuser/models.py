@@ -67,6 +67,8 @@ class Blogger(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(_("Voornaam"), max_length=30)
     last_name = models.CharField(_("Achternaam"), max_length=30)
 
+    show_blogger = models.BooleanField(_("Show in Bloggers list"), default=True,
+        help_text=_("Designates whether the blogger is displayed in the list of all bloggers"))
     affiliation = models.ForeignKey(AffiliatedBlog, related_name="blogger", on_delete=models.SET_NULL, null=True)
     avatar = models.ImageField(upload_to=get_blogger_logo, null=True, blank=True)
 
