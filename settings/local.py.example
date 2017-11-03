@@ -42,6 +42,7 @@ DATABASES = {
         # "PASSWORD": "secret",
         # "HOST": "/var/run/mysqld/mysqld.sock",
         # "PORT": "",
+        "OPTIONS": {"charset": "utf8mb4"},
     }
 }
 
