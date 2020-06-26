@@ -14,12 +14,12 @@ services:
     volumes:
       - ${CECE_DATA_PATH:-../data}/fairblogs/mariadb:/var/lib/mysql
 
-  django:
+  app:
     build:
       context: .
     image: fairblogs
     restart: unless-stopped
-    container_name: fairblogs-django
+    container_name: fairblogs-app
     environment:
       DJANGO_SETTINGS_MODULE: settings
       DJANGO_ENV_FILE: settings/.env
@@ -28,9 +28,9 @@ services:
     volumes:
       - .:/fairblogs
       - ./settings/.env:/fairblogs/settings/.env:ro
-      - ${CECE_DATA_PATH-../data}/log:/fairblogs/log:rw
-      - ${CECE_DATA_PATH-../data}/media:/fairblogs/media:rw
-      - ${CECE_DATA_PATH-../data}/static:/fairblogs/static:rw
+      - ${CECE_DATA_PATH-../data}/fairblogs/log:/fairblogs/log:rw
+      - ${CECE_DATA_PATH-../data}/fairblogs/media:/fairblogs/media:rw
+      - ${CECE_DATA_PATH-../data}/fairblogs/static:/fairblogs/static:rw
     command: ['uwsgi', '--ini', 'uwsgi/fairblogs.ini']
     ports:
       - "8888:1337"
