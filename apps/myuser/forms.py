@@ -1,8 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 
-from .models import Blogger
-from .models import AffiliatedBlog
+from myuser.models import Blogger
+from myuser.models import AffiliatedBlog
 
 
 class SignUpForm(UserCreationForm):

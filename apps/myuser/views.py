@@ -12,14 +12,14 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.admin.models import ADDITION, CHANGE, DELETION, LogEntry
 
-from .forms import SignUpForm
-from .forms import CreateAffiliationForm
-from .forms import SelectAffiliationForm
-from .forms import EditBloggerForm
-from .forms import EditAffiliationForm
-from .models import Blogger
-from .models import AffiliatedBlog
-from .tokens import account_activation_token
+from myuser.forms import SignUpForm
+from myuser.forms import CreateAffiliationForm
+from myuser.forms import SelectAffiliationForm
+from myuser.forms import EditBloggerForm
+from myuser.forms import EditAffiliationForm
+from myuser.models import Blogger
+from myuser.models import AffiliatedBlog
+from myuser.tokens import account_activation_token
 from context_processors import contactinfo
 
 def signup(request):

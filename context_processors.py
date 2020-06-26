@@ -1,10 +1,10 @@
 from __future__ import unicode_literals, absolute_import, division
 
-from apps.pages.models import ContactInfo
-from apps.blog.models import Tag
-from apps.blog.models import Post
+from pages.models import ContactInfo
+from blog.models import Tag
+from blog.models import Post
 
-from django.db.utils import OperationalError
+from django.db.utils import OperationalError, ProgrammingError
 
 
 class ContactInfoDefault(object):
@@ -17,22 +17,22 @@ class ContactInfoDefault(object):
 
 
 def contactinfo(request):
-    contactinfo = ContactInfo.objects.all()
     try:
+        contactinfo = ContactInfo.objects.all()
         if contactinfo:
             contactinfo = contactinfo[0]
             p = contactinfo.phone
         else:
             contactinfo = ContactInfoDefault()
             p = contactinfo.phone
-    except OperationalError as e:
+    except (OperationalError, ProgrammingError) as e:
         print("Database was not yet created. Make migrations and migrate first.")
         contactinfo = ContactInfoDefault()
         p = contactinfo.phone
 
     phone_formatted = "+"+p[2:4]+" (0)"+p[4:6]+" "+p[6:9]+" "+p[9:11]+" "+p[11:13]
 
-    return {"contactinfo": contactinfo, "phone_formatted": phone_formatted }
+    return { "contactinfo": contactinfo, "phone_formatted": phone_formatted }
 
 
 def base(request):
@@ -40,9 +40,8 @@ def base(request):
     View that is inherited everywhere (for base template)
     """
     all_posts = Post.objects.all()
-    popular_posts = all_posts.order_by('-popularity', '-date_created')
+    popular_posts = all_posts.order_by("-popularity", "-date_created")
     if len(all_posts) >= 6:
         popular_posts = popular_posts[:7]
 
-    return {'tags': Tag.objects.all(),
-            'popular_posts': popular_posts}
+    return { "tags": Tag.objects.all(), "popular_posts": popular_posts }

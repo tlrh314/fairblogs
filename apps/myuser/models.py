@@ -1,4 +1,6 @@
 from __future__ import unicode_literals
+import os
+import re
 
 from django.db import models
 from django.conf import settings
@@ -9,9 +11,7 @@ from django.contrib.auth.models import BaseUserManager
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import python_2_unicode_compatible
 
-from .managers import BloggerManager
-import os
-import re
+from myuser.managers import BloggerManager
 
 
 def get_blog_logo(instance, filename):

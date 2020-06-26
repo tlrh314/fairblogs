@@ -5,19 +5,20 @@ from django.http import HttpResponseRedirect
 from django.conf import settings
 from django.shortcuts import render
 from django.core.mail import EmailMessage
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.views.generic import TemplateView, RedirectView
 from django.contrib import messages
 from django.contrib.sites.models import Site
 from django.contrib.auth.decorators import login_required
 
-from .models import ContactInfo
-from .models import PrivacyPolicy
-from .models import Disclaimer
-from .models import AboutUs
-from .forms import ContactForm
-from ..blog.models import Post
+from pages.models import ContactInfo
+from pages.models import PrivacyPolicy
+from pages.models import Disclaimer
+from pages.models import AboutUs
+from pages.forms import ContactForm
+from blog.models import Post
 from context_processors import contactinfo
+
 
 def about(request):
     about = AboutUs.objects.all()
@@ -111,8 +112,23 @@ def disclaimer(request):
     return render(request, "pages/disclaimer.html",
         {"disclaimer_policy": policy, "last_updated": last_updated })
 
-def page_not_found(request):
-    return render(request, "404.html")
 
-def permission_denied(request):
+def permission_denied(request, exception=None, template_name=None):
     return render(request, "403.html")
+
+
+def page_not_found(request, exception=None, template_name=None):
+    return render(request, "404.html", {
+        "request_path": request.path,
+        "exception": exception.__class__.__name__
+    })
+
+
+def handler500(request, *args, **argv):
+    from django.conf import settings
+    from sentry_sdk import last_event_id
+
+    return render(request, "500.html", {
+        'sentry_event_id': last_event_id(),
+        'sentry_dsn': settings.SENTRY_DSN_API
+    }, status=500)
