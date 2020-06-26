@@ -258,9 +258,7 @@ venv3
 settings/local.py
 static/
 media/
-piwik/
 debug/
-templates/piwik.html
 
 # Filebrowser thumbnails
 _versions
