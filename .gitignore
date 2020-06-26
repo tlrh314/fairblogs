@@ -256,7 +256,6 @@ $RECYCLE.BIN/
 # Fairblogs ignore
 venv3
 settings/local.py
-migrations/
 static/
 media/
 piwik/
