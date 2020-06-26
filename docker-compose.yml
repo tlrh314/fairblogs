@@ -1,0 +1,42 @@
+version: "3.7"
+
+services:
+
+  mariadb:
+    image: mariadb:10.4
+    restart: always
+    container_name: fairblogs-mariadb
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD_FAIRBLOGS-secret}
+      - MYSQL_USER=${FAIRBLOGS_MYSQL_USER-dbuser}
+      - MYSQL_PASSWORD=${FAIRBLOGS_MYSQL_PASSWORD-dbpassword}
+      - MYSQL_DATABASE=${FAIRBLOGS_MYSQL_DATABASE-fairblogs}
+    volumes:
+      - ${CECE_DATA_PATH:-../data}/fairblogs/mariadb:/var/lib/mysql
+
+  app:
+    build:
+      context: .
+    image: fairblogs
+    restart: unless-stopped
+    container_name: fairblogs-app
+    environment:
+      DJANGO_SETTINGS_MODULE: settings
+      DJANGO_ENV_FILE: settings/.env
+    depends_on:
+      - 'mariadb'
+    volumes:
+      - .:/fairblogs
+      - ./settings/.env:/fairblogs/settings/.env:ro
+      - ${CECE_DATA_PATH-../data}/fairblogs/log:/fairblogs/log:rw
+      - ${CECE_DATA_PATH-../data}/fairblogs/media:/fairblogs/media:rw
+      - ${CECE_DATA_PATH-../data}/fairblogs/static:/fairblogs/static:rw
+    command: ['uwsgi', '--ini', 'uwsgi/fairblogs.ini']
+    ports:
+      - "8888:1337"
+  
+
+networks:
+  default:
+    external: 
+      name: cecenet

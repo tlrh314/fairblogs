@@ -1,0 +1,21 @@
+# Auto-generated
+__pycache__/
+*.swp
+*.pyc
+.DS_Store
+
+# Not needed to run the application
+.dockerignore
+.git/
+.gitignore
+Dockerfile
+README.md
+fixtures
+docker-compose.yml
+
+# Linked into the container
+settings/.env
+log/
+media/
+static/
+staticfiles/

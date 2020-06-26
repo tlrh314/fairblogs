@@ -2,10 +2,10 @@ from django import forms
 from django.contrib import admin
 from django.core.exceptions import ValidationError
 
-from .models import AboutUs
-from .models import ContactInfo
-from .models import PrivacyPolicy
-from .models import Disclaimer
+from pages.models import AboutUs
+from pages.models import ContactInfo
+from pages.models import PrivacyPolicy
+from pages.models import Disclaimer
 
 
 @admin.register(AboutUs)
@@ -45,7 +45,7 @@ class PrivacyPolicyAdmin(admin.ModelAdmin):
 
     fieldsets = [
         ( "Privacy Policy", {
-            "fields": [ "policy", "date_updated"]}
+            "fields": [ "policy",]}
         ), ( "Meta", {
             "classes": ["collapse"],
             "fields": ["date_created", "date_updated", "last_updated_by"]}
@@ -68,7 +68,7 @@ class DisclaimerAdmin(admin.ModelAdmin):
 
     fieldsets = [
         ( "Disclaimer", {
-            "fields": [ "policy", "date_updated"]}
+            "fields": [ "policy",]}
         ), ( "Meta", {
             "classes": ["collapse"],
             "fields": ["date_created", "date_updated", "last_updated_by"]}

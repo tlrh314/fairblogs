@@ -57,19 +57,21 @@ class Disclaimer(models.Model):
 
 
 class AboutUs(models.Model):
-    about = HTMLField(verbose_name=_("About Us"), blank=True, help_text='Bovenste gedeelte over FairBlogs op de about pagina.')
-    about_below = HTMLField(verbose_name=_("About Us"), blank=True, help_text='Onderste gedeelte over FairBlogs op de about pagina.')
+    about = HTMLField(verbose_name=_("About Us"), blank=True,
+        help_text="Bovenste gedeelte over FairBlogs op de about pagina.")
+    about_below = HTMLField(verbose_name=_("About Us"), blank=True,
+        help_text="Onderste gedeelte over FairBlogs op de about pagina.")
 
     about_fairfrog = HTMLField(verbose_name=_("About Fairfrog"), blank=True)
-    url_fairfrog = models.URLField(help_text='Website url', blank=True)
+    url_fairfrog = models.URLField(help_text="Website url", blank=True)
     logo_fairfrog = models.ImageField(upload_to=get_company_logo, blank=True, null=True)
 
     about_sociii = HTMLField(verbose_name=_("About Sociii"), blank=True)
-    url_sociii = models.URLField(help_text='Website url', blank=True)
+    url_sociii = models.URLField(help_text="Website url", blank=True)
     logo_sociii = models.ImageField(upload_to=get_company_logo, blank=True, null=True)
 
     about_projectcece = HTMLField(verbose_name=_("About Project Cece"), blank=True)
-    url_projectcece = models.URLField(help_text='Website url', blank=True)
+    url_projectcece = models.URLField(help_text="Website url", blank=True)
     logo_projectcece = models.ImageField(upload_to=get_company_logo, blank=True, null=True)
 
     last_updated_by = models.ForeignKey(settings.AUTH_USER_MODEL,

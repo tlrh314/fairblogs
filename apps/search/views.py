@@ -6,10 +6,10 @@ from django.db.models import Q
 from django.contrib import messages
 from django.shortcuts import render
 
-from .forms import SearchForm
-from ..myuser.models import Blogger
-from ..myuser.models import AffiliatedBlog
-from ..blog.models import Post
+from search.forms import SearchForm
+from myuser.models import Blogger
+from myuser.models import AffiliatedBlog
+from blog.models import Post
 
 def search(request):
     """

@@ -1,10 +1,11 @@
 from __future__ import unicode_literals, absolute_import, division
 
-from django.conf.urls import url
+from django.urls import path
 
-from .views import search
+from search.views import search
 
 
+app_name = "search"
 urlpatterns = [
-    url(r"^$", view=search, name="terms"),
+    path("", view=search, name="terms"),
 ]

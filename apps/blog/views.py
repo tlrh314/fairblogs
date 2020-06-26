@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.http import Http404
 from django.http import HttpResponseRedirect
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.core.paginator import Paginator
 from django.core.paginator import EmptyPage
 from django.core.paginator import PageNotAnInteger
@@ -17,10 +17,10 @@ from django.contrib.syndication.views import Feed
 
 from dal import autocomplete
 
-from .models import Post
-from .models import Tag
-from .forms import SubmitBlogpostForm
-from .forms import SelectPostForm
+from blog.models import Post
+from blog.models import Tag
+from blog.forms import SubmitBlogpostForm
+from blog.forms import SelectPostForm
 
 
 register = template.Library()

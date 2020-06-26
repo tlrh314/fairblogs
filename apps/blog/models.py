@@ -42,8 +42,8 @@ class Tag(models.Model):
 
 @python_2_unicode_compatible
 class Post(models.Model):
-    author = models.ForeignKey(settings.AUTH_USER_MODEL,
-        related_name="post_written_by", default=None)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, null=True,
+        on_delete=models.SET_NULL, related_name="post_written_by", default=None)
     title = models.CharField(_("Titel"), max_length=200)
     slug = models.SlugField(_("slug"), max_length=255, unique=True)
     teaser = HTMLField(_("Teaser"), blank=True, default="Inleiding/teaser voor je blogpost van max. 750 karakters", max_length=750)
