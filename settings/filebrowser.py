@@ -11,9 +11,13 @@ FILEBROWSER_EXTENSIONS = {
     "Video": [], # [".mov", ".wmv", ".mpeg", ".mpg", ".avi", ".rm"],
     "Audio": [], # [".mp3", ".mp4", ".wav", ".aiff", ".midi", ".m4p"]
 }
+FILEBROWSER_ADMIN_VERSIONS = ["big"]  # "thumbnail", "small", "medium", "large"
 
 from django.core.files.storage import FileSystemStorage
 from filebrowser.sites import site
 from django.conf import settings
 site.storage = FileSystemStorage(location=settings.STATIC_ROOT, base_url="/static/")
 site.directory = "img/"
+
+# For files uploaded via submit form
+FILE_UPLOAD_PERMISSIONS = 0o644

@@ -138,7 +138,6 @@ DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
 SERVER_EMAIL = env("SERVER_EMAIL")
 
 from settings.logsetup import *
-# from settings.tinymce import *
 
 SENTRY_DSN_API = env("SENTRY_DSN_API", default="")
 DJANGO_ENVIRONMENT = env("DJANGO_ENVIRONMENT")
