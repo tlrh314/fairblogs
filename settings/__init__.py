@@ -1,13 +1,4 @@
-from .base import *
-# Attempt to add local settings
-try:
-    from .local import *
-except ImportError:
-    pass
+from settings.base import *
 
-# Add any base settings that should come after local, but
-try:
-    from .extra import *
-except ImportError:
-    pass
-
+# Needs to be loaded after setting SECRET_KEY etc
+from settings.filebrowser import *
