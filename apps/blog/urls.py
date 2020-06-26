@@ -10,7 +10,7 @@ from blog.views import TagAutocomplete
 from blog.views import PostsFeed
 
 
-app_name="blog"
+app_name="blogs"
 urlpatterns = [
     path("submit/", submit, name="submit"),
     path("post/<slug>", post_detail, name="post_detail"),
