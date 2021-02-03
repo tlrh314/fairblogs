@@ -1051,6 +1051,9 @@ content: "\f0e1";
 .top-bar-social .instagram:before {
 content: "\f16d";
 }
+.top-bar-social .github:before {
+content: "\f09b";
+}
 .top-bar-social .pinterest:before {
 content: "\f0d2";
 }
