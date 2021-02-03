@@ -97,7 +97,7 @@
         <div class="affiliation hline">
             <div class="blogger">
                 {% if blogger.avatar %}
-                <img class="person" src="/{{ blogger.avatar.url }}"/>
+                <img class="person" src="{{ blogger.avatar.url }}"/>
                 {% else %}
                 <img class="person" src="{% static 'img/bloggerplaceholder.jpg' %}"/>
                 {% endif %}
@@ -105,7 +105,7 @@
 
             <div class="info">
                 {% if affiliation.logo %}
-                <a href="{{ affiliation.url }}" target="_blank"><img src="/{{ affiliation.logo.url }}"/></a>
+                <a href="{{ affiliation.url }}" target="_blank"><img src="{{ affiliation.logo.url }}"/></a>
                 {% else %}
                 <a href="{{ affiliation.url }}" target="_blank"><img src="{% static 'img/bloggerplaceholder.jpg' %}"/></a>
                 {% endif %}

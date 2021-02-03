@@ -27,7 +27,7 @@
 
     <div>
         {% if request.user.avatar %}
-        <img style="padding-left: 20px; margin-bottom: 20px; margin-top: 20px;" src="/{{ request.user.avatar.url }}" width="200px"></img>
+        <img style="padding-left: 20px; margin-bottom: 20px; margin-top: 20px;" src="{{ request.user.avatar.url }}" width="200px"></img>
         {% else %}
         <img style="padding-left: 20px; margin-bottom: 20px; margin-top: 20px;" src="{% static 'img/bloggerplaceholder.jpg' %}" width="200px"></img>
         {% endif %}

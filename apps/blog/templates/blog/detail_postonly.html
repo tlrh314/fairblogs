@@ -3,7 +3,7 @@
                         <div class='block-image'>
                            <div class='thumb'>
                                {% if blog.image %}
-                              <a href='/viewpost/{{blog.slug}}/?next={{ blog.url }}' target='_blank' class="block-image-a" style='background:url(/{{ blog.image.url }}) no-repeat center center;background-size:cover'></a>
+                              <a href='/viewpost/{{blog.slug}}/?next={{ blog.url }}' target='_blank' class="block-image-a" style='background:url({{ blog.image.url }}) no-repeat center center;background-size:cover'></a>
                               {% else %}
                               <a href='#' target='_blank' class="block-image-a" style='background:url(#) no-repeat center center;background-size:cover'></a>
                               {% endif %}
@@ -38,7 +38,7 @@
                               <div class='resumo'><span><p>{% autoescape off %}{{ blog.teaser }}{% endautoescape %}
                               <a href='/viewpost/{{blog.slug}}/?next={{ blog.url }}' target='_blank' style="float: right;"><strong>Lees verder</strong></a>
                               </p>
-                              <a href='{{ blog.author.affiliation.first.url }}' class='blogthumb' target='_blank'><img src='/{{ blog.author.affiliation.logo.url}}'/></a>
+                              <a href='{{ blog.author.affiliation.first.url }}' class='blogthumb' target='_blank'><img src='{{ blog.author.affiliation.logo.url}}'/></a>
                               </span></div>
                               <div style='clear: both;'></div>
                            </div>

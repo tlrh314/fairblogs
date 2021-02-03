@@ -26,7 +26,7 @@
 
 
     {% if request.user.affliation.logo %}
-    <img style="padding-left: 20px; margin-bottom: 20px; margin-top: 20px;" src="/{{ request.user.affliation.logo.url }}" width="200px"></img>
+    <img style="padding-left: 20px; margin-bottom: 20px; margin-top: 20px;" src="{{ request.user.affliation.logo.url }}" width="200px"></img>
     {% else %}
     <div style="margin-top: 20px;"></div>
     {% endif %}
