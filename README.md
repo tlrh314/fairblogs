@@ -6,7 +6,7 @@ Source of www.fairblogs.nl, including
 Site code structure:
 
 - **Dependencies**
-  - Python 3.8.7
-  - Django 2.2.17
-  - See requirements.txt for package dependencies 
+  - Python 3.8.7, 3.9.1
+  - Django 3.1.6
+  - See requirements.txt for package dependencies
   - Note that iPython and its dependencies are not strictly necessary

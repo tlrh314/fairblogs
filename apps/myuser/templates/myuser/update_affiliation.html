@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
+{% load static %}
 
-{% block stylesheets %}{{ block.super }} 
+{% block stylesheets %}{{ block.super }}
 <link href="{% static 'css/forms.css' %}" type="text/css" rel="stylesheet" />
 {% endblock %}
 
@@ -12,10 +12,10 @@
 <div id="main-wrapper" class="main-content" role="main">
     <h1> Update Affiliation </h1><br>
 
-    <div style="margin-top: 20px; padding-left: 20px;"> 
+    <div style="margin-top: 20px; padding-left: 20px;">
         <h3><a href="{% url 'update_blogger' %}" ><i class="fa fa-edit"></i> Persoonlijke gegevens wijzigen (klik hier) </a></h3>
     </div>
-    <div style="margin-top: 20px; padding-bottom: 20px; padding-left: 20px; width: 75%;"> 
+    <div style="margin-top: 20px; padding-bottom: 20px; padding-left: 20px; width: 75%;">
         <h3 style="float: left;"><a href="{% url 'blogs:select_post' %}" ><i class="fa fa-edit"></i> Blogpost wijzigen (klik hier) </a></h3>
     </div>
 
@@ -33,20 +33,20 @@
         <p class='form-section-text'> Voer hieronder de urls naar je social media paginas in om je FairBlogs account te koppelen. Als je je accounts hieronder invult, dan taggen we je automatisch in de social media posts die we plaatsen om je blogposts te promoten. </p>
 
         <p class='social-submit'>
-        <label for="id_facebook">Facebook:</label> 
+        <label for="id_facebook">Facebook:</label>
         {{ form.facebook }}
         <span class="fa fa-facebook input-symbol"></span>
         </p>
 
         <p class='social-submit'>
-        <label for="id_twitter">Twitter:</label> 
-        {{ form.twitter }} 
+        <label for="id_twitter">Twitter:</label>
+        {{ form.twitter }}
         <span class="fa fa-twitter input-symbol"></span>
         </p>
 
         <p class='social-submit'>
-        <label for="id_instagram">Instagram:</label> 
-        {{ form.instagram }} 
+        <label for="id_instagram">Instagram:</label>
+        {{ form.instagram }}
         <span class="fa fa-instagram input-symbol"></span>
         </p>
 

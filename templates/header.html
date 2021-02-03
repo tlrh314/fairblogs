@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load static %}
 {% load template_extras %}
 
          <div class='top-bar'>
@@ -37,7 +37,7 @@
                   <div class='header-search'>
                      <li>
                         <a class='search'>
-                            <form action='{% url "search:terms" %}' method='get' accept-charset='utf-8'> 
+                            <form action='{% url "search:terms" %}' method='get' accept-charset='utf-8'>
                               <input id='terms' name='terms' placeholder='Zoeken...' type='text'/>
                            </form>
                         </a>

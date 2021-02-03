@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
+{% load static %}
 
-{% block stylesheets %} {{ block.super }} 
+{% block stylesheets %} {{ block.super }}
     <link href="{% static 'css/forms.css' %}" type="text/css" rel="stylesheet" />
 {% endblock %}
 
@@ -12,11 +12,11 @@
 <div id="main-wrapper" class="main-content" role="main">
   <h1> Selecteer Blog </h1><br>
     De gegevens van jouw blog zijn nog niet aan jouw gebruikersaccount gekoppeld. Selecteer daarom eerst hier de blog waarvoor je posts wilt toevoegen. <br>
-    <br> 
+    <br>
     Staat jouw blog er nog niet tussen? Geen probleem, laat het veld dan leeg zodat je de gegevens van jouw blog kunt invullen, en klik dan op selecteer. <br>
 
   <form method="post" class="form-style-2">{% csrf_token %}
-    {% for field in form %} 
+    {% for field in form %}
     <div class="form-style-2  {% if field.errors %} has-error {% endif %}">
         {{ field.label }} <div class="errorlist">{% for error in field.errors %} {{ error|escape }} {% endfor %}</div>
         {{ field }}
@@ -24,7 +24,7 @@
         {% if field.help_text %} <p class="helptext">{{ field.help_text|safe }}</p> {% endif %}
     </div>
     {% endfor %}
-    
+
     <button type="submit" class="form-style-button"> Selecteer </button>
   </form>
  </div>

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load staticfiles %}
+{% load static %}
 
 
 {% block stylesheets %} {{ block.super }}
@@ -13,7 +13,7 @@
 
 <div id="main-wrapper">
     <div class='main section' id='main'>
-    
+
         {% if messages %}
          <div class="search-results">
             {% for message in messages %}
@@ -36,7 +36,7 @@
         {% endfor %}
 
         <div class="search-header"> Posts ({% if posts %} {{ posts.count }} {% else %} 0 {% endif %}) </div>
-        
+
         <div class="index">
         {% for blog in posts %}
             {% include 'blog/detail_postonly.html' %}

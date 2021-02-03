@@ -1,7 +1,7 @@
 {% extends "base.html" %}
-{% load staticfiles %}
+{% load static %}
 
-{% block stylesheets %}{{ block.super }} 
+{% block stylesheets %}{{ block.super }}
 <link href="{% static 'css/forms.css' %}" type="text/css" rel="stylesheet" />
 {% endblock %}
 
@@ -25,7 +25,7 @@
         {% endif %}
 
 
-        {% for field in form %} 
+        {% for field in form %}
         <div class="form-style-2  {% if form.errors %} has-error {% endif %}">
             {{ field.label }}
             {{ field }}
@@ -38,12 +38,12 @@
     <p>
         {% url 'site_password_reset' as password_reset_url %}
         {% if password_reset_url %}
-        <a href="{{ password_reset_url }}"> 
-            Wachtwoord of gebruikersnaam vergeten? 
-        </a> 
-        <a href="{% url 'signup' %}"> 
+        <a href="{{ password_reset_url }}">
+            Wachtwoord of gebruikersnaam vergeten?
+        </a>
+        <a href="{% url 'signup' %}">
             Of een nieuwe FairBlogger?
-        </a> 
+        </a>
         {% endif %}
     </p>
 </div>

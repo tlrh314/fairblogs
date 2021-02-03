@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
+{% load static %}
 
-{% block stylesheets %}{{ block.super }} 
+{% block stylesheets %}{{ block.super }}
 <link href="{% static 'css/forms.css' %}" type="text/css" rel="stylesheet" />
 {% endblock %}
 
@@ -19,15 +19,15 @@
     Stuur je liever zelf een e-mail? <a href="mailto:{{ contactinfo.contact_email }}">  Klik dan hier </a>.
 
     <form method="post" role="form" action="." class="form-style-2"> {% csrf_token %}
-        {% for field in form %} 
-        {% if "kopie" not in field.label %} 
+        {% for field in form %}
+        {% if "kopie" not in field.label %}
         <div class="form-style-2 {% if field.errors %} has-error {% endif %}">
             {{ field.label }} {% if field.errors %} <div class="errorlist">{% for error in field.errors %} {{ error|escape }} {% endfor %}</div> {% endif %}
             {{ field }}
             {% if field.errors %}  <span class="fa fa-remove error-symbol"></span> {% endif %}
             {% if field.help_text %} <p class="helptext">{{ field.help_text|safe }}</p> {% endif %}
         </div>
-        {% else %} {# only to style the checkbox inline with tekst #} 
+        {% else %} {# only to style the checkbox inline with tekst #}
         <div class="form-style-2 {% if field.errors %} has-error {% endif %}" style="">
             <input name="cc_myself" id="id_cc_myself" type="checkbox" style="display: unset; width: unset; max-width: unset; padding: 0px; margin: 0px; border: 0px;">
             <label>{{ field.label }} </label>

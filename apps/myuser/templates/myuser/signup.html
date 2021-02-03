@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
+{% load static %}
 
-{% block stylesheets %}{{ block.super }} 
+{% block stylesheets %}{{ block.super }}
 <link href="{% static 'css/forms.css' %}" type="text/css" rel="stylesheet" />
 {% endblock %}
 
@@ -13,12 +13,12 @@
     <h1> Aanmelden </h1><br>
     Maak hier je account aan zodat je blogs kan toevoegen aan FairBlogs. <br>
     Zijn er meerdere auteurs van jouw blog? Elke auteur kan bij FairBlogs een eigen account maken <br> die gekoppeld is aan dezelfde blog. <br>
-    <br> 
+    <br>
     Na het aanmaken van een persoonlijk account moet je eerst je account per e-mail verifiëren. <br>
     Daarna kun je jouw blogposts direct delen op FairBlogs! <br>
 
     <form method="post" enctype="multipart/form-data" class="form-style-2"> {% csrf_token %}
-        {% for field in form %} 
+        {% for field in form %}
         <div class="form-style-2  {% if field.errors %} has-error {% endif %}">
             {{ field.label }} {% if field.errors %} <div class="errorlist">{% for error in field.errors %} {{ error|escape }} {% endfor %}</div> {% endif %}
             {{ field }}

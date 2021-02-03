@@ -1,34 +1,23 @@
-from __future__ import unicode_literals, absolute_import, division
-
-from django.http import Http404
-from django.http import HttpResponseRedirect
 from django.conf import settings
-from django.shortcuts import render
-from django.core.mail import EmailMessage
-from django.urls import reverse
-from django.views.generic import TemplateView, RedirectView
-from django.contrib import messages
 from django.contrib.sites.models import Site
-from django.contrib.auth.decorators import login_required
+from django.core.mail import EmailMessage
+from django.http import Http404, HttpResponseRedirect
+from django.shortcuts import render
+from django.urls import reverse
 
-from pages.models import ContactInfo
-from pages.models import PrivacyPolicy
-from pages.models import Disclaimer
-from pages.models import AboutUs
 from pages.forms import ContactForm
-from blog.models import Post
-from context_processors import contactinfo
+from pages.models import AboutUs, ContactInfo, Disclaimer, PrivacyPolicy
 
 
 def about(request):
     about = AboutUs.objects.all()
-    if len(about) is 0:
+    if len(about) == 0:
         about = "Our apologies, the About Us page is still work in progress."
     elif len(about) == 1:
         about = about[0]
     else:
         raise Http404
-    return render(request, "pages/aboutus.html",  {"info": about })
+    return render(request, "pages/aboutus.html", {"info": about})
 
 
 def contact(request):
@@ -65,7 +54,11 @@ def contact(request):
             msg += "-------------------------------------------------\n\n"
             msg += "From: {0}\n".format(name)
             msg += "Email Address: {0}\n\n".format(sender)
-            msg += "This message was automatically send from https://{0}/contact".format(site_name)
+            msg += (
+                "This message was automatically send from https://{0}/contact".format(
+                    site_name
+                )
+            )
 
             email = EmailMessage(
                 subject="Message from {0}/contact".format(site_name),
@@ -73,7 +66,9 @@ def contact(request):
                 # Caution, from_email must contain domain name!
                 from_email="no-reply@fairblogs.nl",
                 to=recipients,
-                bcc=["timohalbesma@gmail.com", ], #"marcellawijngaarden@hotmail.com" ],
+                bcc=[
+                    "timohalbesma@gmail.com",
+                ],  # "marcellawijngaarden@hotmail.com" ],
                 # Caution, reply_to header is already set by Postfix!
                 # reply_to=list(send_to),
                 # headers={"Message-ID": "foo"},
@@ -98,8 +93,12 @@ def privacy_policy(request):
     else:
         policy = "Our privacy policy is still work in progress."
         last_updated = None
-    return render(request, "pages/privacy_policy.html",
-        {"privacy_policy": policy, "last_updated": last_updated })
+    return render(
+        request,
+        "pages/privacy_policy.html",
+        {"privacy_policy": policy, "last_updated": last_updated},
+    )
+
 
 def disclaimer(request):
     disclaimer = Disclaimer.objects.all()
@@ -109,8 +108,11 @@ def disclaimer(request):
     else:
         policy = "Our disclaimer is still work in progress."
         last_updated = None
-    return render(request, "pages/disclaimer.html",
-        {"disclaimer_policy": policy, "last_updated": last_updated })
+    return render(
+        request,
+        "pages/disclaimer.html",
+        {"disclaimer_policy": policy, "last_updated": last_updated},
+    )
 
 
 def permission_denied(request, exception=None, template_name=None):
@@ -118,17 +120,20 @@ def permission_denied(request, exception=None, template_name=None):
 
 
 def page_not_found(request, exception=None, template_name=None):
-    return render(request, "404.html", {
-        "request_path": request.path,
-        "exception": exception.__class__.__name__
-    })
+    return render(
+        request,
+        "404.html",
+        {"request_path": request.path, "exception": exception.__class__.__name__},
+    )
 
 
 def handler500(request, *args, **argv):
     from django.conf import settings
     from sentry_sdk import last_event_id
 
-    return render(request, "500.html", {
-        'sentry_event_id': last_event_id(),
-        'sentry_dsn': settings.SENTRY_DSN_API
-    }, status=500)
+    return render(
+        request,
+        "500.html",
+        {"sentry_event_id": last_event_id(), "sentry_dsn": settings.SENTRY_DSN_API},
+        status=500,
+    )

@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
+{% load static %}
 {% load template_extras %}
 
 {% block title %} {{ block.super }} {% if current_tags %} | {% endif %} {% for tagname in current_tags %} {{ tagname }} {% if not forloop.last %} & {% endif %} {% endfor %} {% endblock title %}
@@ -35,7 +35,7 @@
             {% if blogs.has_previous %}
             <span id='blog-pager-newer-link'>
                <a class='blog-pager-newer-link' href='{% go_to_page blogs.previous_page_number %}' id='Blog1_blog-pager-newer-link' title='Newer Posts'><span class='pager-title'> Terug</span><span class='post-nav-icon'><i class='fa fa-chevron-left'></i></span></a>
-            </span> 
+            </span>
             {% endif %}
 
             <span class="pagination-text">

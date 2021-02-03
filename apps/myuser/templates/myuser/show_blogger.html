@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
+{% load static %}
 
-{% block stylesheets %}{{ block.super }} 
+{% block stylesheets %}{{ block.super }}
 <link href="{% static 'css/forms.css' %}" type="text/css" rel="stylesheet" />
 {% endblock %}
 
@@ -14,13 +14,13 @@
         <h1> Persoonlijk Profiel </h1> <h1 style="float: right;"></h1>
     </div>
 
-    <div style="margin-top: 20px; padding-bottom: 20px; padding-left: 20px; width: 75%;"> 
+    <div style="margin-top: 20px; padding-bottom: 20px; padding-left: 20px; width: 75%;">
         <h3 style="float: left;" ><a href="{% url 'update_blogger' %}" ><i class="fa fa-edit"></i> Profiel wijzigen (klik hier) </a></h3>
     </div>
-    <div style="margin-top: 20px; padding-bottom: 20px; padding-left: 20px; width: 75%;"> 
+    <div style="margin-top: 20px; padding-bottom: 20px; padding-left: 20px; width: 75%;">
         <h3 style="float: left;"><a href="{% url 'update_affiliation' %}" ><i class="fa fa-edit"></i> Blog wijzigen (klik hier) </a></h3>
     </div>
-    <div style="margin-top: 20px; padding-bottom: 20px; padding-left: 20px; width: 75%;"> 
+    <div style="margin-top: 20px; padding-bottom: 20px; padding-left: 20px; width: 75%;">
         <h3 style="float: left;"><a href="{% url 'blogs:select_post' %}" ><i class="fa fa-edit"></i> Blogpost wijzigen (klik hier) </a></h3>
     </div>
 
@@ -50,7 +50,7 @@
                 <th class="first-col"> Achternaam </td>
                 <td> {{ request.user.last_name }} </td>
             </tr>
-        </table> 
+        </table>
     </div>
 </div>
 {% endblock %}
