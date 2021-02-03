@@ -1,26 +1,24 @@
-from django.contrib.auth import login
-from django.contrib import messages
-from django.core.mail import EmailMessage
-from django.shortcuts import render, redirect, get_object_or_404
-from django.utils.encoding import force_bytes
-from django.utils.encoding import force_text
-from django.utils.http import urlsafe_base64_encode
-from django.utils.http import urlsafe_base64_decode
-from django.template.loader import render_to_string
+from django.contrib.admin.models import CHANGE, LogEntry
 from django.contrib.auth.decorators import login_required
-from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.admin.models import ADDITION, CHANGE, DELETION, LogEntry
+from django.contrib.sites.shortcuts import get_current_site
+from django.core.mail import EmailMessage
+from django.shortcuts import get_object_or_404, redirect, render
+from django.template.loader import render_to_string
+from django.utils.encoding import force_bytes, force_text
+from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 
-from myuser.forms import SignUpForm
-from myuser.forms import CreateAffiliationForm
-from myuser.forms import SelectAffiliationForm
-from myuser.forms import EditBloggerForm
-from myuser.forms import EditAffiliationForm
-from myuser.models import Blogger
-from myuser.models import AffiliatedBlog
-from myuser.tokens import account_activation_token
 from context_processors import contactinfo
+from myuser.forms import (
+    CreateAffiliationForm,
+    EditAffiliationForm,
+    EditBloggerForm,
+    SelectAffiliationForm,
+    SignUpForm,
+)
+from myuser.models import AffiliatedBlog, Blogger
+from myuser.tokens import account_activation_token
+
 
 def signup(request):
     if request.method == "POST":
@@ -31,20 +29,27 @@ def signup(request):
             user.save()
             current_site = get_current_site(request)
             subject = "Activeer jouw account op {0}".format(current_site.name)
-            message = render_to_string("myuser/account_activation_email.html", {
-                "user": user,
-                "protocol": request.scheme,
-                "domain": current_site.domain,
-                "uid": urlsafe_base64_encode(force_bytes(user.pk)),
-                "token": account_activation_token.make_token(user),
-            })
+            message = render_to_string(
+                "myuser/account_activation_email.html",
+                {
+                    "user": user,
+                    "protocol": request.scheme,
+                    "domain": current_site.domain,
+                    "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+                    "token": account_activation_token.make_token(user),
+                },
+            )
             user.email_user(subject, message, from_email="no-reply@fairblogs.nl")
 
             # Add record to LogEntry
             content_type_pk = ContentType.objects.get_for_model(Blogger).pk
             LogEntry.objects.log_action(
-                user.pk, content_type_pk, user.pk, str(user), CHANGE,
-                change_message="User signed up."
+                user.pk,
+                content_type_pk,
+                user.pk,
+                str(user),
+                CHANGE,
+                change_message="User signed up.",
             )
 
             # Redirect user to template
@@ -72,14 +77,22 @@ def new_affiliation(request):
             # Add record to LogEntry
             content_type_pk = ContentType.objects.get_for_model(AffiliatedBlog).pk
             LogEntry.objects.log_action(
-                user.pk, content_type_pk, affiliation.pk, str(affiliation), CHANGE,
-                change_message="New affiliation created via signup form."
+                user.pk,
+                content_type_pk,
+                affiliation.pk,
+                str(affiliation),
+                CHANGE,
+                change_message="New affiliation created via signup form.",
             )
 
             content_type_pk = ContentType.objects.get_for_model(Blogger).pk
             LogEntry.objects.log_action(
-                user.pk, content_type_pk, user.pk, str(user), CHANGE,
-                change_message="Added new affiliation: {0}.".format(affiliation)
+                user.pk,
+                content_type_pk,
+                user.pk,
+                str(user),
+                CHANGE,
+                change_message="Added new affiliation: {0}.".format(affiliation),
             )
 
             return redirect("activation_sent")
@@ -104,7 +117,7 @@ def set_affiliation(request):
     else:
         form = SelectAffiliationForm()
 
-    return render(request, "myuser/set_affiliation.html", { "form": form })
+    return render(request, "myuser/set_affiliation.html", {"form": form})
 
 
 def activation_sent(request):
@@ -121,33 +134,41 @@ def activate(request, uidb64, token):
     if user is not None and account_activation_token.check_token(user, token):
         # Only confirm email and inform user via message
         user.email_confirmed = True
-        # user.is_active = True
-        # login(request, user)
-        # messages.success(request, "Your account has succesfully been activated.")
         user.save()
 
         # Add record to LogEntry
         content_type_pk = ContentType.objects.get_for_model(Blogger).pk
         LogEntry.objects.log_action(
-            user.pk, content_type_pk, user.pk, str(user), CHANGE,
-            change_message="Email address confirmed by user."
+            user.pk,
+            content_type_pk,
+            user.pk,
+            str(user),
+            CHANGE,
+            change_message="Email address confirmed by user.",
         )
 
         # Inform site management that account now needs to be activated
         current_site = get_current_site(request)
-        message = render_to_string("myuser/admin_activation_email.html", {
-            "user": user,
-            "user_email": user.email,
-            "protocol": request.scheme,
-            "domain": current_site.domain,
-        })
+        message = render_to_string(
+            "myuser/admin_activation_email.html",
+            {
+                "user": user,
+                "user_email": user.email,
+                "protocol": request.scheme,
+                "domain": current_site.domain,
+            },
+        )
         email = EmailMessage(
             subject="Activeer nieuwe gebruiker op {0}".format(current_site.name),
             body=message,
             # Caution, from_email must contain domain name!
             from_email="no-reply@fairblogs.nl",
-            to=[ contactinfo(None)["contactinfo"].webmaster_email, ],
-            bcc=["timohalbesma@gmail.com", ]
+            to=[
+                contactinfo(None)["contactinfo"].webmaster_email,
+            ],
+            bcc=[
+                "timohalbesma@gmail.com",
+            ],
         )
         email.send(fail_silently=False)
 
@@ -164,15 +185,23 @@ def email_validated(request):
 @login_required
 def update_blogger(request):
     if request.method == "POST":
-        form = EditBloggerForm(data=request.POST, instance=get_object_or_404(Blogger, pk=request.user.pk), files=request.FILES)
+        form = EditBloggerForm(
+            data=request.POST,
+            instance=get_object_or_404(Blogger, pk=request.user.pk),
+            files=request.FILES,
+        )
         if form.is_valid():
             user = form.save()
 
             # Add record to LogEntry
             content_type_pk = ContentType.objects.get_for_model(Blogger).pk
             LogEntry.objects.log_action(
-                user.pk, content_type_pk, user.pk, str(user), CHANGE,
-                change_message="User updated profile via website."
+                user.pk,
+                content_type_pk,
+                user.pk,
+                str(user),
+                CHANGE,
+                change_message="User updated profile via website.",
             )
 
             return redirect("show_blogger")
@@ -189,20 +218,30 @@ def show_blogger(request):
 @login_required
 def update_affiliation(request):
     if request.method == "POST":
-        form = EditAffiliationForm(data=request.POST, instance=get_object_or_404(AffiliatedBlog, pk=request.user.affiliation.pk), files=request.FILES)
+        form = EditAffiliationForm(
+            data=request.POST,
+            instance=get_object_or_404(AffiliatedBlog, pk=request.user.affiliation.pk),
+            files=request.FILES,
+        )
         if form.is_valid():
             affiliation = form.save()
 
             # Add record to LogEntry
             content_type_pk = ContentType.objects.get_for_model(AffiliatedBlog).pk
             LogEntry.objects.log_action(
-                request.user.pk, content_type_pk, affiliation.pk, str(affiliation), CHANGE,
-                change_message="Affiliation updated profile via website."
+                request.user.pk,
+                content_type_pk,
+                affiliation.pk,
+                str(affiliation),
+                CHANGE,
+                change_message="Affiliation updated profile via website.",
             )
 
             return redirect("show_affiliation")
     else:
-        form = EditAffiliationForm(instance=get_object_or_404(AffiliatedBlog, pk=request.user.affiliation.pk))
+        form = EditAffiliationForm(
+            instance=get_object_or_404(AffiliatedBlog, pk=request.user.affiliation.pk)
+        )
     return render(request, "myuser/update_affiliation.html", {"form": form})
 
 
@@ -215,7 +254,14 @@ def all_bloggers(request):
     affiliation__bloggers = list()
 
     for blog in AffiliatedBlog.objects.all().order_by("blogname"):
-        affiliation__bloggers.append(Blogger.objects.filter(affiliation=blog)\
-            .exclude(show_blogger=False).order_by("last_name", "first_name"))
+        affiliation__bloggers.append(
+            Blogger.objects.filter(affiliation=blog)
+            .exclude(show_blogger=False)
+            .order_by("last_name", "first_name")
+        )
 
-    return render(request, "myuser/all_bloggers.html", { "affiliation__bloggers": affiliation__bloggers })
+    return render(
+        request,
+        "myuser/all_bloggers.html",
+        {"affiliation__bloggers": affiliation__bloggers},
+    )

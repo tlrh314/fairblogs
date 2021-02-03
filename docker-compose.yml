@@ -34,9 +34,8 @@ services:
     command: ['uwsgi', '--ini', 'uwsgi/fairblogs.ini']
     ports:
       - "8888:1337"
-  
 
 networks:
   default:
-    external: 
+    external:
       name: cecenet

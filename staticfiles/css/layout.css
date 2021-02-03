@@ -81,7 +81,7 @@ padding: 2px 5px;
 background-color: #233648;
 }
 
-.roundlogo { 
+.roundlogo {
 	border-radius: 100%;
 	border-image-source: initial;
 	border-image-slice: initial;

@@ -48,6 +48,6 @@ RUN set -ex && \
 COPY . /fairblogs
 RUN chown -R fairblogs:fairblogs /fairblogs
 
-USER fairblogs 
+USER fairblogs
 
 ENTRYPOINT ["/fairblogs/entrypoint.sh"]

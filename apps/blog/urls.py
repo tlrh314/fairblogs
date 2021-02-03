@@ -1,16 +1,17 @@
 from django.urls import path
 
-from blog.views import index
-from blog.views import submit
-from blog.views import post_detail
-from blog.views import select_post
-from blog.views import change_post
-from blog.views import update_post_counter
-from blog.views import TagAutocomplete
-from blog.views import PostsFeed
+from blog.views import (
+    PostsFeed,
+    TagAutocomplete,
+    change_post,
+    index,
+    post_detail,
+    select_post,
+    submit,
+    update_post_counter,
+)
 
-
-app_name="blogs"
+app_name = "blogs"
 urlpatterns = [
     path("submit/", submit, name="submit"),
     path("post/<slug>", post_detail, name="post_detail"),

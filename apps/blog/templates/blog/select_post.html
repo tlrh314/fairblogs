@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-{% block stylesheets %} {{ block.super }} 
+{% block stylesheets %} {{ block.super }}
     <link href="{% static 'css/forms.css' %}" type="text/css" rel="stylesheet" />
 {% endblock %}
 
@@ -12,7 +12,7 @@
     <h1> Selecteer Post </h1><br>
 
     Het is zowel mogelijk om jouw eigen posts alsmede eventuele posts geschreven door andere auteurs van jouw blog te selecteren om aan te passen. <br>
-    <br> 
+    <br>
 
     <form method="post" class="form-style-2">{% csrf_token %}
         <table class="form-text">
@@ -26,7 +26,7 @@
             </tr>
         </table>
 
-        {% for field in form %} 
+        {% for field in form %}
         <div class="form-style-2  {% if field.errors %} has-error {% endif %}">
             {{ field.label }} <div class="errorlist">{% for error in field.errors %} {{ error|escape }} {% endfor %}</div>
             {{ field }}

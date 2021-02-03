@@ -1,15 +1,12 @@
-from __future__ import unicode_literals, absolute_import, division
-
 import re
 
-from django.db.models import Q
 from django.contrib import messages
+from django.db.models import Q
 from django.shortcuts import render
 
-from search.forms import SearchForm
-from myuser.models import Blogger
-from myuser.models import AffiliatedBlog
 from blog.models import Post
+from myuser.models import AffiliatedBlog, Blogger
+
 
 def search(request):
     """
@@ -18,33 +15,41 @@ def search(request):
         - Blogger last_name
         - AffilatedBlog blogname
         - Exact matches if input is given between quotes ' or "
-    Return list of alumni with all thesis links """
+    Return list of alumni with all thesis links"""
 
     words = request.GET.get("terms", "")
     terms, posts, bloggers, affiliated_blogs = [], [], [], []
 
     if len(words) <= 2:
         messages.error(request, "Error: Please use at least 3 characters to search.")
-        messages.info(request, "Tip: you can use exact match by placing ' or \" around words!")
-        return render(request, "search/search_results.html",
+        messages.info(
+            request, "Tip: you can use exact match by placing ' or \" around words!"
+        )
+        return render(
+            request,
+            "search/search_results.html",
             {
                 "posts": posts,
                 "bloggers": bloggers,
                 "affiliated_blogs": affiliated_blogs,
-                "key_words": terms
-            }
+                "key_words": terms,
+            },
         )
 
     if len(words.split()) > 10:
         messages.error(request, "Error: Please limit your search to <10 words.")
-        messages.info(request, "Tip: you can use exact match by placing ' or \" around words!")
-        return render(request, "search/search_results.html",
+        messages.info(
+            request, "Tip: you can use exact match by placing ' or \" around words!"
+        )
+        return render(
+            request,
+            "search/search_results.html",
             {
                 "posts": posts,
                 "bloggers": bloggers,
                 "affiliated_blogs": affiliated_blogs,
-                "key_words": terms
-            }
+                "key_words": terms,
+            },
         )
 
     # Check if must be exact match (i.e. if between quotation marks)
@@ -71,38 +76,38 @@ def search(request):
     all_affiliated_blogs = AffiliatedBlog.objects.all()
 
     for term in terms:
-        posts_filter = (posts_filter |
-            Q(teaser__icontains=term) | Q(url__icontains=term) | Q(title__icontains=term)
+        posts_filter = (
+            posts_filter
+            | Q(teaser__icontains=term)
+            | Q(url__icontains=term)
+            | Q(title__icontains=term)
         )
 
-        bloggers_filter = (bloggers_filter |
-            Q(first_name__icontains=term) | Q(last_name__icontains=term) |
-            Q(affiliation__blogname__icontains=term)
+        bloggers_filter = (
+            bloggers_filter
+            | Q(first_name__icontains=term)
+            | Q(last_name__icontains=term)
+            | Q(affiliation__blogname__icontains=term)
         )
 
-        affiliated_blogs_filter = (affiliated_blogs_filter |
-            Q(blogname__icontains=term) | Q(url__icontains=term)
+        affiliated_blogs_filter = (
+            affiliated_blogs_filter
+            | Q(blogname__icontains=term)
+            | Q(url__icontains=term)
         )
 
-    # # Compute combined filter
-    # total_filter = time_filter & search_filter
-
-    # # Apply all filters
+    # Apply all filters
     posts = all_posts.filter(posts_filter).distinct()
     bloggers = all_bloggers.filter(bloggers_filter).distinct()
     affiliated_blogs = all_affiliated_blogs.filter(affiliated_blogs_filter).distinct()
 
-    # if len(results) > 10:
-    #     msg = "Search matched {0} items. Tip: you can use exact match by placing ' or \" around words!".format(len(results))
-    #     messages.warning(request, msg)
-
-
-    return render(request, "search/search_results.html",
+    return render(
+        request,
+        "search/search_results.html",
         {
             "posts": posts,
             "bloggers": bloggers,
             "affiliated_blogs": affiliated_blogs,
-            "key_words": terms
-        }
+            "key_words": terms,
+        },
     )
-

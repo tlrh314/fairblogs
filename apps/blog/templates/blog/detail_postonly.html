@@ -10,9 +10,9 @@
                            </div>
 
                            <div class='labels-post resumo'>
-                              {% for tag in blog.tags.all %}   
-                              <p class='post-tag'>                    
-                                 <i class='fa fa-hashtag'></i>                        
+                              {% for tag in blog.tags.all %}
+                              <p class='post-tag'>
+                                 <i class='fa fa-hashtag'></i>
                                  <a href='#' class='resumo' rel='tag' style="margin-right:5px;">{{ tag }}</a>
                               </p>
                               {% endfor %}
@@ -35,8 +35,8 @@
                                  <i class='fa fa-calendar-o'></i>
                                  <abbr class='published timeago' title='{{ blog.date_created }}'>{{ blog.date_created }}</abbr>
                               </div>
-                              <div class='resumo'><span><p>{% autoescape off %}{{ blog.teaser }}{% endautoescape %} 
-                              <a href='/viewpost/{{blog.slug}}/?next={{ blog.url }}' target='_blank' style="float: right;"><strong>Lees verder</strong></a> 
+                              <div class='resumo'><span><p>{% autoescape off %}{{ blog.teaser }}{% endautoescape %}
+                              <a href='/viewpost/{{blog.slug}}/?next={{ blog.url }}' target='_blank' style="float: right;"><strong>Lees verder</strong></a>
                               </p>
                               <a href='{{ blog.author.affiliation.first.url }}' class='blogthumb' target='_blank'><img src='/{{ blog.author.affiliation.logo.url}}'/></a>
                               </span></div>

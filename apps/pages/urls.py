@@ -1,16 +1,14 @@
-from __future__ import unicode_literals, absolute_import, division
+from django.urls import path
 
-from django.urls import path, include, reverse, reverse_lazy
-from django.contrib.auth import views as auth_views
-
-from pages.views import about
-from pages.views import contact
-from pages.views import contact_success
-from pages.views import privacy_policy
-from pages.views import disclaimer
-from pages.views import page_not_found
-from pages.views import permission_denied
-
+from pages.views import (
+    about,
+    contact,
+    contact_success,
+    disclaimer,
+    page_not_found,
+    permission_denied,
+    privacy_policy,
+)
 
 app_name = "pages"
 urlpatterns = [

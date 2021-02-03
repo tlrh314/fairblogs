@@ -1,25 +1,23 @@
 from django.contrib import admin
-from django.urls import reverse
+from django.contrib.admin.models import CHANGE, LogEntry
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.admin.models import ADDITION, CHANGE, DELETION, LogEntry
+from django.urls import reverse
 
-from .models import Tag
-from .models import Post
-# from .models import Category
+from .models import Post, Tag
 
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
-    readonly_fields = ( "date_created", "date_updated", "last_updated_by" )
+    readonly_fields = ("date_created", "date_updated", "last_updated_by")
 
     fieldsets = [
-        ( "Tags", {
-                "fields": [ "tag_name" ]
-            }
-        ), ( "Meta", {
+        ("Tags", {"fields": ["tag_name"]}),
+        (
+            "Meta",
+            {
                 "classes": ["collapse"],
-                "fields": ["date_created", "date_updated", "last_updated_by"]
-            }
+                "fields": ["date_created", "date_updated", "last_updated_by"],
+            },
         ),
     ]
 
@@ -28,46 +26,34 @@ class TagAdmin(admin.ModelAdmin):
         obj.save()
 
 
-# @admin.register(Category)
-# class CategoryAdmin(admin.ModelAdmin):
-#     readonly_fields = ( "date_created", "date_updated", "last_updated_by" )
-#
-#    fieldsets = [
-#        ( "Categories", {
-#                "fields": [ "category_name" ]
-#            }
-#        ), ( "Meta", {
-#                "classes": ["collapse"],
-#                "fields": ["date_created", "date_updated", "last_updated_by"]
-#            }
-#        ),
-#    ]
-#
-#    def save_model(self, request, obj, form, change):
-#        obj.last_updated_by = request.user
-#        obj.save()
-
-
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    readonly_fields = ( "slug", "date_updated", "last_updated_by", "popularity" )
-    list_display = ("title", "author", "get_affiliation", "date_created", "date_updated", "popularity" )
+    readonly_fields = ("slug", "date_updated", "last_updated_by", "popularity")
+    list_display = (
+        "title",
+        "author",
+        "get_affiliation",
+        "date_created",
+        "date_updated",
+        "popularity",
+    )
     search_fields = ("title", "author", "teaser")
     list_filter = ("is_published",)
     filter_horizontal = ("tags",)
-    actions = ("publish", "unpublish" )
+    actions = ("publish", "unpublish")
 
     fieldsets = [
-        ( "Blog Info", {
-                "fields": [ "author", "title", "url", "teaser", "image", "date_created"]
-            }
-        ), ( "Publication Status", {
-                "fields": [ "is_published", "featured", "tags"]
-            }
-        ), ( "Meta", {
+        (
+            "Blog Info",
+            {"fields": ["author", "title", "url", "teaser", "image", "date_created"]},
+        ),
+        ("Publication Status", {"fields": ["is_published", "featured", "tags"]}),
+        (
+            "Meta",
+            {
                 "classes": ["collapse"],
-                "fields": ["slug", "date_updated", "last_updated_by", "popularity"]
-            }
+                "fields": ["slug", "date_updated", "last_updated_by", "popularity"],
+            },
         ),
     ]
 
@@ -80,6 +66,7 @@ class PostAdmin(admin.ModelAdmin):
 
     def get_affiliation(self, obj):
         return obj.author.affiliation
+
     get_affiliation.short_description = "Affiliation"
 
     def publish(self, request, queryset):
@@ -88,10 +75,15 @@ class PostAdmin(admin.ModelAdmin):
 
             content_type_pk = ContentType.objects.get_for_model(Post).pk
             LogEntry.objects.log_action(
-                request.user.pk, content_type_pk, post.pk, str(post), CHANGE,
-                change_message="Set status to 'Published'"
+                request.user.pk,
+                content_type_pk,
+                post.pk,
+                str(post),
+                CHANGE,
+                change_message="Set status to 'Published'",
             )
         self.message_user(request, "Post successfully published.")
+
     publish.short_description = "Publish selected post"
 
     def unpublish(self, request, queryset):
@@ -100,8 +92,13 @@ class PostAdmin(admin.ModelAdmin):
 
             content_type_pk = ContentType.objects.get_for_model(Post).pk
             LogEntry.objects.log_action(
-                request.user.pk, content_type_pk, post.pk, str(post), CHANGE,
-                change_message="Set status to 'Unpublisheded'"
+                request.user.pk,
+                content_type_pk,
+                post.pk,
+                str(post),
+                CHANGE,
+                change_message="Set status to 'Unpublisheded'",
             )
         self.message_user(request, "Post successfully unpublished.")
+
     unpublish.short_description = "Unpublish selected post"

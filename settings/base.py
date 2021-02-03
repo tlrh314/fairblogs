@@ -1,25 +1,23 @@
 import os
 import sys
+
 import environ
 
 env = environ.Env()
-env.read_env(
-    str((environ.Path(__file__) - 1).path(".env"))
-)
+env.read_env(str((environ.Path(__file__) - 1).path(".env")))
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Use the 'apps' folder for our project apps
-sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
+sys.path.insert(0, os.path.join(BASE_DIR, "apps"))
 
 INSTALLED_APPS = [
-    #Filebrowser should be listed before django.contrib.admin
+    # Filebrowser should be listed before django.contrib.admin
     "dal",
     "dal_select2",
     "tinymce",
     "filebrowser",
-
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -29,7 +27,6 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "django.forms",
     "django.contrib.syndication",
-
     "myuser",
     "blog",
     "pages",
@@ -51,7 +48,9 @@ MIDDLEWARE = [
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, "templates")],  # Additional directory for base templates
+        "DIRS": [
+            os.path.join(BASE_DIR, "templates")
+        ],  # Additional directory for base templates
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -71,8 +70,7 @@ BASE_URL = env("BASE_URL")
 SITE_ID = env("SITE_ID", default=1)
 
 SECRET_KEY = env("SECRET_KEY")
-DEBUG = TEMPLATE_DEBUG = TEMPLATES[0]["OPTIONS"]["debug"] = env(
-    "DEBUG", default=False)
+DEBUG = TEMPLATE_DEBUG = TEMPLATES[0]["OPTIONS"]["debug"] = env("DEBUG", default=False)
 ROOT_URLCONF = "settings.urls"
 WSGI_APPLICATION = "settings.wsgi.application"
 
@@ -84,7 +82,11 @@ STATICFILES_DIRS = [
 # STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 ALLOWED_HOSTS = [
-    "localhost", "127.0.0.1", "testserver", "fairblogs.nl", "www.fairblogs.nl",
+    "localhost",
+    "127.0.0.1",
+    "testserver",
+    "fairblogs.nl",
+    "www.fairblogs.nl",
 ]
 
 
@@ -109,7 +111,7 @@ LOGIN_REDIRECT_URL = "/"
 
 
 # Internationalization
-# https://docs.djangoproject.com/en/1.11/topics/i18n/
+# https://docs.djangoproject.com/en/3.1/topics/i18n/
 
 LANGUAGE_CODE = env("LANGUAGE_CODE")
 
@@ -125,9 +127,7 @@ DATABASES = {
     "default": env.db("DATABASE_URL"),
 }
 
-CACHES = {
-    'default': env.cache()
-}
+CACHES = {"default": env.cache()}
 
 
 EMAIL_CONFIG = env.email_url("EMAIL_URL", default="consolemail://")
@@ -135,16 +135,17 @@ vars().update(EMAIL_CONFIG)
 DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
 SERVER_EMAIL = env("SERVER_EMAIL")
 
-from settings.logsetup import *
+from settings.logsetup import *  # noqa E402 F403 F401
 
 SENTRY_DSN_API = env("SENTRY_DSN_API", default="")
 DJANGO_ENVIRONMENT = env("DJANGO_ENVIRONMENT")
-import sentry_sdk
-from sentry_sdk.integrations.django import DjangoIntegration
+import sentry_sdk  # noqa E402
+from sentry_sdk.integrations.django import DjangoIntegration  # noqa E402
+
 sentry_sdk.init(
     dsn=SENTRY_DSN_API,
     integrations=[DjangoIntegration()],
-    environment=DJANGO_ENVIRONMENT
+    environment=DJANGO_ENVIRONMENT,
 )
 
 if DEBUG:
@@ -164,7 +165,8 @@ if DEBUG_TOOLBAR_ON:
     ]
 
     MIDDLEWARE = [
-        "debug_toolbar.middleware.DebugToolbarMiddleware", ] + MIDDLEWARE
+        "debug_toolbar.middleware.DebugToolbarMiddleware",
+    ] + MIDDLEWARE
 
     INTERNAL_IPS = ["127.0.0.1", "localhost"]
 
