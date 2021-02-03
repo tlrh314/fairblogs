@@ -1,3 +1,4 @@
+from captcha.fields import CaptchaField
 from django import forms
 
 
@@ -26,3 +27,5 @@ class ContactForm(forms.Form):
         required=False,
         widget=forms.CheckboxInput(),
     )
+
+    captcha = CaptchaField()

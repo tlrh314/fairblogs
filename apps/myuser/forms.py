@@ -1,3 +1,4 @@
+from captcha.fields import CaptchaField
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 
@@ -19,6 +20,7 @@ class SignUpForm(UserCreationForm):
     avatar = forms.FileField(
         required=True, label="Avatar", help_text="Upload hier een foto van jezelf."
     )
+    captcha = CaptchaField()
 
     class Meta:
         model = Blogger

@@ -26,6 +26,7 @@ urlpatterns = [
     path("", include("apps.blog.urls")),
     path("", include("apps.pages.urls")),
     path("search/", include("apps.search.urls")),
+    path("captcha/", include("captcha.urls")),
 ]
 
 if settings.DEBUG:

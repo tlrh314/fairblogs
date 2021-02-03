@@ -1,5 +1,6 @@
 import logging
 import os
+from logging import handlers  # noqa F401
 
 import environ
 
