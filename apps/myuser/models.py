@@ -11,7 +11,7 @@ from myuser.managers import BloggerManager
 
 
 def get_blog_logo(instance, filename):
-    """ Logo of the blog (website) """
+    """Logo of the blog (website)"""
 
     fnamesplit = filename.split(".")
     filename = "".join(fnamesplit[:-1])
@@ -25,7 +25,7 @@ def get_blog_logo(instance, filename):
 
 
 def get_blogger_logo(instance, filename):
-    """ Logo of the blogger (person) """
+    """Logo of the blogger (person)"""
     fnamesplit = filename.split(".")
     filename = "".join(fnamesplit[:-1])
     extension = fnamesplit[-1]
@@ -68,7 +68,7 @@ class AffiliatedBlog(models.Model):
 
 
 class Blogger(AbstractBaseUser, PermissionsMixin):
-    """ When referencing users, use: 'settings.AUTH_USER_MODEL' or 'get_user_model()' """
+    """When referencing users, use: 'settings.AUTH_USER_MODEL' or 'get_user_model()'"""
 
     email = models.EmailField(_("Email"), unique=True)
     first_name = models.CharField(_("Voornaam"), max_length=30)

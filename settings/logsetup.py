@@ -6,7 +6,7 @@ import environ
 
 
 class GroupWriteRotatingFileHandler(logging.handlers.RotatingFileHandler):
-    """ https://stackoverflow.com/questions/1407474 """
+    """https://stackoverflow.com/questions/1407474"""
 
     def _open(self):
         prevumask = os.umask(0o002)

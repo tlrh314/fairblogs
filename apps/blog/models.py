@@ -10,7 +10,7 @@ from tinymce.models import HTMLField
 
 
 def get_post_image(instance, filename):
-    """ Logo of the blog (website) """
+    """Logo of the blog (website)"""
 
     fnamesplit = filename.split(".")
     filename = "".join(fnamesplit[:-1])
